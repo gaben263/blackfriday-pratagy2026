@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Black Friday Pratagy 2026">
 <meta property="og:description" content="27 de novembro de 2026. Faça seu cadastro e entre para o grupo.">
-<link rel="icon" type="image/png" href="Assets/Selo-BlackFriday.png">
+<link rel="icon" type="image/webp" href="Assets/Selo-BlackFriday.webp">
 <link rel="preload" href="Fonte/Fibra-One-Heavy.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="Fonte/Fibra-One-Regular.otf" as="font" type="font/otf" crossorigin>
 <script>document.documentElement.classList.add('bf-js');</script>
@@ -66,6 +66,54 @@ body {
   position: absolute; left: 50%; top: 50%;
   width: max(125vmin, 720px); max-width: none; height: auto;
   opacity: .05; transform: translate3d(-50%, -50%, 0); will-change: transform;
+}
+
+/* Textura de água sutil sobre o preto (CSS puro, sem imagem). Fica atrás de todo o conteúdo, não
+   recebe cliques e surge junto com os ícones de % quando a bolha cobre a tela. Usa opacidade simples
+   (máx. .08): mix-blend-mode: overlay sobre preto puro resultaria em preto, ou seja, invisível. */
+.bf-water {
+  --w: 200, 232, 255;
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  opacity: 0; transition: opacity 1.6s var(--bf-ease-out);
+}
+.bf-water.is-on { opacity: .07; }
+.bf-water::before, .bf-water::after {
+  content: ""; position: absolute; inset: -20%; will-change: transform;
+  animation: bf-water-a 34s ease-in-out infinite alternate;
+}
+/* Luz difusa: manchas amplas e irregulares, como sol atravessando a água (sem ladrilho, sem repetição) */
+.bf-water::before {
+  background:
+    radial-gradient(ellipse 34% 20% at 22% 26%, rgba(var(--w), .5), rgba(var(--w), 0) 70%),
+    radial-gradient(ellipse 26% 16% at 74% 62%, rgba(var(--w), .42), rgba(var(--w), 0) 70%),
+    radial-gradient(ellipse 22% 14% at 48% 88%, rgba(var(--w), .34), rgba(var(--w), 0) 70%),
+    radial-gradient(ellipse 18% 12% at 84% 16%, rgba(var(--w), .3), rgba(var(--w), 0) 70%);
+}
+/* Cáusticas: três ondas de fontes distantes, com períodos diferentes, que se cruzam formando a teia de
+   luz do fundo de piscina; a máscara faz elas surgirem só em manchas soltas, nunca como uma malha */
+.bf-water::after {
+  --mask:
+    radial-gradient(ellipse 38% 26% at 24% 30%, #000, transparent 70%),
+    radial-gradient(ellipse 30% 24% at 76% 64%, #000, transparent 70%),
+    radial-gradient(ellipse 26% 20% at 46% 92%, #000, transparent 70%),
+    radial-gradient(ellipse 22% 18% at 86% 14%, #000, transparent 70%),
+    radial-gradient(ellipse 20% 16% at 10% 76%, #000, transparent 70%);
+  background:
+    repeating-radial-gradient(circle at 30% -80%, rgba(var(--w), 0) 0 22px, rgba(var(--w), .6) 30px, rgba(var(--w), 0) 38px 58px),
+    repeating-radial-gradient(circle at 115% 140%, rgba(var(--w), 0) 0 30px, rgba(var(--w), .45) 40px, rgba(var(--w), 0) 50px 86px),
+    repeating-radial-gradient(circle at -30% 60%, rgba(var(--w), 0) 0 40px, rgba(var(--w), .3) 52px, rgba(var(--w), 0) 64px 122px);
+  -webkit-mask-image: var(--mask); mask-image: var(--mask);
+  filter: blur(2.5px);
+  animation-name: bf-water-b; animation-duration: 26s;
+}
+.bf-water:not(.is-on)::before, .bf-water:not(.is-on)::after { animation-play-state: paused; }
+@keyframes bf-water-a {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to   { transform: translate3d(-5%, 3%, 0) rotate(2deg); }
+}
+@keyframes bf-water-b {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(4%, -5%, 0) scale(1.08); }
 }
 
 /* =========================================================
@@ -216,7 +264,7 @@ body {
 }
 .bf-intro__text { margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; }
 
-/* Botão — recriação em CSS do Assets/botao-entre-para-o-grupo.png */
+/* Botão — recriação em CSS do Assets/botao-entre-para-o-grupo.webp */
 .bf-btn {
   position: relative; isolation: isolate; overflow: hidden;
   display: inline-flex; align-items: center; justify-content: center; gap: .6em;
@@ -372,7 +420,7 @@ body {
 }
 
 /* =========================================================
-   5. FORMULÁRIO (card laranja — ref. Assets/Cadastro-box.png)
+   5. FORMULÁRIO (card laranja — ref. Assets/Cadastro-box.webp)
    ========================================================= */
 .bf-form { position: relative; padding: 0 0 clamp(40px, 8vh, 96px); scroll-margin-top: 3vh; }
 .bf-form__rise { max-width: 840px; margin: 0 auto; }
@@ -462,14 +510,17 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
-  .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after { animation: none !important; }
+  .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after,
+  .bf-water::before, .bf-water::after { animation: none !important; }
 }
 </style>
 </head>
 <body>
 
 <!-- Selo gigante fixo no fundo (opacidade 5%) -->
-<div class="bf-watermark" aria-hidden="true"><img src="Assets/Selo-BlackFriday.png" alt="" decoding="async"></div>
+<div class="bf-watermark" aria-hidden="true"><img src="Assets/Selo-BlackFriday.webp" alt="" decoding="async"></div>
+<!-- Textura de água (CSS puro), visível quando o preto cobre a tela -->
+<div class="bf-water" aria-hidden="true"></div>
 
 <main class="bf">
 
@@ -477,7 +528,7 @@ body {
   <section class="bf-hero" aria-label="Black Friday Pratagy 2026">
     <div class="bf-hero__pin">
       <div class="bf-hero__backdrop">
-        <img class="bf-hero__photo" src="Fotos/bg-topo.jpg" alt="" fetchpriority="high" decoding="async">
+        <img class="bf-hero__photo" src="Fotos/bg-topo.webp" alt="" fetchpriority="high" decoding="async">
         <div class="bf-hero__shade"></div>
         <div class="bf-bubble-glow"></div>
         <div class="bf-bubble"></div>
@@ -487,8 +538,8 @@ body {
           <div class="bf-hero__halo"></div>
           <h1 class="bf-hero__seal">
             <div class="bf-par"><div class="bf-pop"><div class="bf-float bf-seal-stack">
-              <img class="bf-seal-img bf-seal-img--color" src="Assets/Selo-BlackFriday.png" alt="Black Friday Pratagy 2026 — 27 de novembro de 2026" width="598" height="591" fetchpriority="high">
-              <img class="bf-seal-img bf-seal-img--white" src="Assets/Selo-BlackFriday-white.png" alt="" width="604" height="596" decoding="async" fetchpriority="low">
+              <img class="bf-seal-img bf-seal-img--color" src="Assets/Selo-BlackFriday.webp" alt="Black Friday Pratagy 2026 — 27 de novembro de 2026" width="598" height="591" fetchpriority="high">
+              <img class="bf-seal-img bf-seal-img--white" src="Assets/Selo-BlackFriday-white.webp" alt="" width="604" height="596" decoding="async" fetchpriority="low">
             </div></div></div>
           </h1>
         </div>
@@ -499,22 +550,22 @@ body {
 
   <!-- Ícones de % (16, em 3 camadas de profundidade): surgem quando a bolha cobre a tela; parallax de scroll + mouse -->
   <div class="bf-pcts" aria-hidden="true">
-    <span class="bf-pct bf-pct--l" style="--t:4;--s:170;--x:0;--xs:-0.42;--r:-14;--o:0.9;--i:0" data-speed="-.26"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r" style="--t:9;--s:110;--x:1.5;--xs:0;--r:12;--o:0.6;--i:1" data-speed=".18"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:14;--s:64;--x:17;--xs:0;--r:20;--o:0.35;--i:2" data-speed="-.08"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r" style="--t:19;--s:190;--x:0;--xs:-0.42;--r:-10;--o:0.9;--i:3" data-speed=".3"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l" style="--t:25;--s:120;--x:2;--xs:0;--r:8;--o:0.6;--i:4" data-speed=".16"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r bf-pct--far" style="--t:30;--s:72;--x:21;--xs:0;--r:-18;--o:0.35;--i:5" data-speed="-.1"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l" style="--t:36;--s:180;--x:0;--xs:-0.42;--r:16;--o:0.9;--i:6" data-speed=".28"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r" style="--t:41;--s:100;--x:1.5;--xs:0;--r:-6;--o:0.6;--i:7" data-speed="-.16"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:47;--s:58;--x:24;--xs:0;--r:-12;--o:0.35;--i:8" data-speed=".07"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r" style="--t:52;--s:165;--x:0;--xs:-0.42;--r:14;--o:0.9;--i:9" data-speed="-.3"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l" style="--t:58;--s:115;--x:1.5;--xs:0;--r:-16;--o:0.6;--i:10" data-speed=".2"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r bf-pct--far" style="--t:63;--s:66;--x:17;--xs:0;--r:10;--o:0.35;--i:11" data-speed="-.09"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l" style="--t:69;--s:185;--x:0;--xs:-0.42;--r:-8;--o:0.9;--i:12" data-speed="-.24"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r" style="--t:74;--s:105;--x:2;--xs:0;--r:18;--o:0.6;--i:13" data-speed=".15"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:80;--s:60;--x:19;--xs:0;--r:6;--o:0.35;--i:14" data-speed=".08"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
-    <span class="bf-pct bf-pct--r" style="--t:86;--s:160;--x:0;--xs:-0.42;--r:-14;--o:0.9;--i:15" data-speed=".26"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:4;--s:170;--x:0;--xs:-0.42;--r:-14;--o:0.9;--i:0" data-speed="-.26"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:9;--s:110;--x:1.5;--xs:0;--r:12;--o:0.6;--i:1" data-speed=".18"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:14;--s:64;--x:17;--xs:0;--r:20;--o:0.35;--i:2" data-speed="-.08"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:19;--s:190;--x:0;--xs:-0.42;--r:-10;--o:0.9;--i:3" data-speed=".3"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:25;--s:120;--x:2;--xs:0;--r:8;--o:0.6;--i:4" data-speed=".16"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r bf-pct--far" style="--t:30;--s:72;--x:21;--xs:0;--r:-18;--o:0.35;--i:5" data-speed="-.1"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:36;--s:180;--x:0;--xs:-0.42;--r:16;--o:0.9;--i:6" data-speed=".28"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:41;--s:100;--x:1.5;--xs:0;--r:-6;--o:0.6;--i:7" data-speed="-.16"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:47;--s:58;--x:24;--xs:0;--r:-12;--o:0.35;--i:8" data-speed=".07"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:52;--s:165;--x:0;--xs:-0.42;--r:14;--o:0.9;--i:9" data-speed="-.3"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:58;--s:115;--x:1.5;--xs:0;--r:-16;--o:0.6;--i:10" data-speed=".2"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r bf-pct--far" style="--t:63;--s:66;--x:17;--xs:0;--r:10;--o:0.35;--i:11" data-speed="-.09"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:69;--s:185;--x:0;--xs:-0.42;--r:-8;--o:0.9;--i:12" data-speed="-.24"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:74;--s:105;--x:2;--xs:0;--r:18;--o:0.6;--i:13" data-speed=".15"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:80;--s:60;--x:19;--xs:0;--r:6;--o:0.35;--i:14" data-speed=".08"><img class="bf-float" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:86;--s:160;--x:0;--xs:-0.42;--r:-14;--o:0.9;--i:15" data-speed=".26"><img class="bf-float bf-float--b" src="Assets/percentage-icon.webp" alt="" width="415" height="414" decoding="async"></span>
   </div>
 
   <!-- Zona do botão sticky: seções 3 e 4 -->
@@ -550,14 +601,14 @@ body {
             </div>
             <div class="bf-attr__hub">
               <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-1" aria-label="Ver fotos: All Inclusive">
-                <img src="Assets/All-inclusive.png" alt="" width="224" height="229">
+                <img src="Assets/All-inclusive.webp" alt="" width="224" height="229">
               </button>
               <div class="bf-attr__card" id="bf-card-1">
                 <div class="bf-carousel" data-carousel>
                   <div class="bf-carousel__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
-                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto1.jpg" alt="Prato de costela glaceada servido ao ar livre" decoding="async">
-                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto2.jpg" alt="Brinde com drinks coloridos entre coqueiros" decoding="async">
-                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto3.jpg" alt="Camarões com limão e petiscos servidos à mesa" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto1.webp" alt="Prato de costela glaceada servido ao ar livre" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto2.webp" alt="Brinde com drinks coloridos entre coqueiros" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto3.webp" alt="Camarões com limão e petiscos servidos à mesa" decoding="async">
                   <span class="bf-carousel__tag">All Inclusive</span>
                 </div>
               </div>
@@ -572,14 +623,14 @@ body {
             </div>
             <div class="bf-attr__hub">
               <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-2" aria-label="Ver fotos: 2 crianças grátis de até 15 anos">
-                <img src="Assets/2-criancas.png" alt="" width="218" height="224">
+                <img src="Assets/2-criancas.webp" alt="" width="218" height="224">
               </button>
               <div class="bf-attr__card" id="bf-card-2">
                 <div class="bf-carousel" data-carousel>
                   <div class="bf-carousel__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
-                  <img class="bf-slide" data-src="Fotos/criancas-foto1.jpg" alt="Família brincando no parquinho entre coqueiros" decoding="async">
-                  <img class="bf-slide" data-src="Fotos/criancas-foto2.jpg" alt="Família passeando pelos jardins do resort" decoding="async">
-                  <img class="bf-slide" data-src="Fotos/criancas-foto3.jpg" alt="Família caminhando à beira-mar" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/criancas-foto1.webp" alt="Família brincando no parquinho entre coqueiros" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/criancas-foto2.webp" alt="Família passeando pelos jardins do resort" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/criancas-foto3.webp" alt="Família caminhando à beira-mar" decoding="async">
                   <span class="bf-carousel__tag">Crianças grátis</span>
                 </div>
               </div>
@@ -594,14 +645,14 @@ body {
             </div>
             <div class="bf-attr__hub">
               <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-3" aria-label="Ver fotos: Entrada Acqua Park inclusa">
-                <img src="Assets/Acqua-Park.png" alt="" width="222" height="229">
+                <img src="Assets/Acqua-Park.webp" alt="" width="222" height="229">
               </button>
               <div class="bf-attr__card" id="bf-card-3">
                 <div class="bf-carousel" data-carousel>
                   <div class="bf-carousel__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
-                  <img class="bf-slide" data-src="Fotos/acqua-park-foto1.jpg" alt="Toboáguas coloridos do Acqua Park" decoding="async">
-                  <img class="bf-slide" data-src="Fotos/acqua-park-foto2.jpg" alt="Amigas em boias no rio lento do Acqua Park" decoding="async">
-                  <img class="bf-slide" data-src="Fotos/acqua-park-foto3.jpg" alt="Vista aérea dos toboáguas do Acqua Park" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/acqua-park-foto1.webp" alt="Toboáguas coloridos do Acqua Park" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/acqua-park-foto2.webp" alt="Amigas em boias no rio lento do Acqua Park" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/acqua-park-foto3.webp" alt="Vista aérea dos toboáguas do Acqua Park" decoding="async">
                   <span class="bf-carousel__tag">Acqua Park</span>
                 </div>
               </div>
@@ -611,7 +662,7 @@ body {
       </div>
     </section>
 
-    <!-- Botão sticky (CSS puro — ref. Assets/botao-entre-para-o-grupo.png) -->
+    <!-- Botão sticky (CSS puro — ref. Assets/botao-entre-para-o-grupo.webp) -->
     <div class="bf-dock">
       <a class="bf-btn bf-btn--cta" href="#cadastro" data-cta><span>Entre para o grupo</span></a>
     </div>
@@ -671,7 +722,7 @@ body {
 
   <footer class="bf-footer">
     <div class="bf-wrap">
-      <img src="Assets/Marca-grupo-pratagy.png" alt="Grupo Pratagy" width="201" height="58" loading="lazy" decoding="async">
+      <img src="Assets/Marca-grupo-pratagy.webp" alt="Grupo Pratagy" width="201" height="58" loading="lazy" decoding="async">
       <p>© 2026 Grupo Pratagy. Todos os direitos reservados.</p>
     </div>
   </footer>
@@ -715,7 +766,7 @@ body {
   const E = {
     hero: $('.bf-hero'), pin: $('.bf-hero__pin'), backdrop: $('.bf-hero__backdrop'), photo: $('.bf-hero__photo'),
     bubble: $('.bf-bubble'), glow: $('.bf-bubble-glow'), anchor: $('.bf-hero__anchor'), halo: $('.bf-hero__halo'),
-    seal: $('.bf-hero__seal'), sealPar: $('.bf-hero__seal .bf-par'), hint: $('.bf-hero__hint'), pcts: $('.bf-pcts'),
+    seal: $('.bf-hero__seal'), sealPar: $('.bf-hero__seal .bf-par'), hint: $('.bf-hero__hint'), pcts: $('.bf-pcts'), water: $('.bf-water'),
     mark: $('.bf-watermark img'), attrs: $('.bf-attrs'), list: $('.bf-attrs__list'), line: $('.bf-attrs__line'),
     lineFill: $('.bf-attrs__line-fill'), rise: $('.bf-form__rise'), card: $('.bf-card'), wrap: $('.bf-intro .bf-wrap')
   };
@@ -882,13 +933,14 @@ body {
     css(E.card, 'opacity', clamp(p / .55).toFixed(3));
   }
 
-  /* Gatilho único do fim da bolha: ícones de % aparecem e o selo faz crossfade para a versão white
-     (e volta para a colorida quando a bolha recua ao rolar para cima) */
+  /* Gatilho único do fim da bolha: ícones de % e textura de água aparecem e o selo faz crossfade para
+     a versão white (e tudo volta quando a bolha recua ao rolar para cima) */
   function renderCover() {
     const on = sy >= M.heroTop + M.heroRange * GROW_END - 1;
     if (on === M.covered) return;
     M.covered = on;
     if (E.pcts) E.pcts.classList.toggle('is-on', on);
+    if (E.water) E.water.classList.toggle('is-on', on);
     if (E.hero) E.hero.classList.toggle('is-white', on);
   }
 

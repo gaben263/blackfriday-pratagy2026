@@ -1,6 +1,9 @@
 # Clone/backup local do repositório — não versionar
 blackfriday-pratagy2026/
 
+# Backup local das imagens originais (já versionadas no primeiro commit)
+Fotos_Originais/
+
 # Temporários e arquivos de sistema
 *.tmp
 *.bak
