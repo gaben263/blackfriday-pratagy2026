@@ -153,7 +153,9 @@ body {
 
 /* Ícones de % nas laterais da página (parallax no scroll).
    Começam com opacity 0 e surgem quando a bolha termina de cobrir a tela (.is-on via JS).
-   Ficam acima do hero e abaixo do conteúdo das seções, para não atrapalhar a leitura. */
+   Ficam acima do hero e abaixo do conteúdo das seções, para não atrapalhar a leitura.
+   bottom: 0 dá a altura inicial; depois o JS trava essa altura em px (ver measure), para que conteúdo
+   carregado depois (ex.: o formulário da SharpSpring) não reposicione os ícones. */
 .bf-pcts {
   --pct-o: 1; --pct-k: 1.4;
   position: absolute; left: 0; right: 0; top: calc(var(--bf-hero-h) - 100vh); bottom: 0; z-index: 0;
@@ -413,8 +415,12 @@ body {
    #sharpspring-form; por segurança do navegador, o CSS desta página não alcança os campos lá dentro.
    Cores e fontes dos campos ficam no CSS personalizado do formulário, no editor da SharpSpring.
    Aqui: largura total do card, fundo transparente (o laranja do card aparece) e aviso de carregamento. */
-#sharpspring-form { width: 100%; margin: 0 auto; text-align: center; }
-#sharpspring-form:empty { min-height: 420px; display: grid; place-items: center; }
+/* Espaço reservado com a altura aproximada do formulário. Vale também depois que o iframe entra (ele
+   nasce com 200px até a SharpSpring informar a altura real), para a página não encolher e crescer de novo.
+   Quando a altura real chega, o form.js da SharpSpring fixa o min-height inline com o valor exato. */
+#sharpspring-form { width: 100%; min-height: 500px; margin: 0 auto; text-align: center; }
+#sharpspring-form:empty { display: grid; place-items: center; }
+@media (max-width: 480px) { #sharpspring-form { min-height: 570px; } }
 #sharpspring-form:empty::before {
   content: "Carregando formulário..."; color: var(--bf-gold); opacity: .85;
   font: 600 14px/1.2 var(--bf-font); letter-spacing: .28em; text-transform: uppercase;
@@ -717,7 +723,7 @@ body {
   /* =========================================================
      MEDIÇÕES (cacheadas; refeitas só em resize/load/fonts)
      ========================================================= */
-  const M = { vw: 1, vh: 1, heroTop: 0, heroRange: 1, heroEnd: 0, pinW: 1, pinH: 1, cx: 0, cy: 0, r0: 0, rCover: 1, riseFrom: 0, docMax: 1, formTop: 0, lineTop: 0, lineH: 1, linked: false, covered: false };
+  const M = { vw: 1, vh: 1, heroTop: 0, heroRange: 1, heroEnd: 0, pinW: 1, pinH: 1, cx: 0, cy: 0, r0: 0, rCover: 1, riseFrom: 0, docMax: 1, markMax: 1, pctW: 0, pctH: 0, formTop: 0, lineTop: 0, lineH: 1, linked: false, covered: false };
   const splits = [];
   let rows = [];
   let needMeasure = true;
@@ -749,7 +755,17 @@ body {
     }
     for (let i = 0; i < splits.length; i++) splits[i].top = splits[i].el.getBoundingClientRect().top + sy;
     if (E.rise) M.formTop = E.rise.getBoundingClientRect().top + sy;
+    M.docMax = Math.max(1, root.scrollHeight - M.vh);
+    // Régua travada dos ícones de % e do selo de fundo: só é refeita quando a largura muda (resize de
+    // verdade, girar o celular) ou enquanto os ícones ainda estão escondidos (antes da bolha cobrir a tela).
+    // Conteúdo que chega depois, como o formulário da SharpSpring, muda a altura da página sem fazê-los pular.
+    // Largura via clientWidth: não muda com zoom de pinça nem com a barra de endereço do celular.
+    const relock = !M.pctH || root.clientWidth !== M.pctW || !M.covered;
+    if (relock) M.markMax = M.docMax;
     if (E.pcts) {
+      const avail = E.pcts.offsetParent ? E.pcts.offsetParent.clientHeight - E.pcts.offsetTop : 0; // até o fim da página
+      if (relock) { M.pctH = avail; M.pctW = root.clientWidth; }
+      css(E.pcts, 'height', Math.max(0, Math.min(M.pctH, avail)) + 'px');                           // nunca além do fim
       const pr = E.pcts.getBoundingClientRect(), pt = pr.top + sy, wr = E.wrap && E.wrap.getBoundingClientRect();
       const cl = wr ? wr.left - pr.left : 0, cr = wr ? wr.right - pr.left : pr.width;
       for (let i = 0; i < pcts.length; i++) {
@@ -760,7 +776,6 @@ body {
         el.style.setProperty('--m', (1 - .6 * clamp(ov / .35)).toFixed(3));
       }
     }
-    M.docMax = Math.max(1, root.scrollHeight - M.vh);
     measureLine(sy);
   }
 
@@ -831,7 +846,7 @@ body {
   /* Selo gigante do fundo: desliza e gira devagar ao longo da página */
   function renderWatermark() {
     if (reduced) return;
-    const q = clamp(sy / M.docMax);
+    const q = clamp(sy / M.markMax);
     css(E.mark, 'transform', 'translate3d(-50%,calc(-50% + ' + ((.5 - q) * .36 * M.vh).toFixed(1) + 'px),0) rotate(' + ((q - .5) * 28).toFixed(2) + 'deg)');
   }
 
