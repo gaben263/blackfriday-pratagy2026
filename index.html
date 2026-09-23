@@ -68,30 +68,6 @@ body {
   opacity: .05; transform: translate3d(-50%, -50%, 0); will-change: transform;
 }
 
-/* Textura de água (foto real) sobre o preto: fica atrás de todo o conteúdo, não recebe cliques e surge
-   junto com os ícones de % quando a bolha cobre a tela. A foto é quase branca; o filtro leva o cinza de
-   base ao preto e deixa só as linhas de luz, que aparecem a 7% de opacidade. A imagem só é baixada depois
-   do load da página (.is-ready) ou quando o gatilho acontece antes disso (.is-on). */
-.bf-water {
-  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
-  opacity: 0; transition: opacity 1.6s var(--bf-ease-out);
-}
-.bf-water.is-on { opacity: .07; }
-.bf-water::before {
-  content: ""; position: absolute; inset: -6%;
-  background: center / cover no-repeat;
-  filter: brightness(.55) contrast(10.5);
-  will-change: transform;
-  animation: bf-water-flow 60s ease-in-out infinite alternate;
-}
-.bf-water.is-ready::before, .bf-water.is-on::before { background-image: url("Assets/agua-textura-1.webp"); }
-.bf-water:not(.is-on)::before { animation-play-state: paused; }
-/* Deriva lenta (transform, sem repintar a cada quadro); vai e volta porque a foto não tem emenda contínua */
-@keyframes bf-water-flow {
-  from { transform: translate3d(-2.5%, -2%, 0) scale(1.02); }
-  to   { transform: translate3d(2.5%, 2%, 0) scale(1.06); }
-}
-
 /* =========================================================
    1. HERO (pin + bolha/eclipse)
    ========================================================= */
@@ -486,8 +462,7 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
-  .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after,
-  .bf-water::before { animation: none !important; }
+  .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after { animation: none !important; }
 }
 </style>
 </head>
@@ -495,8 +470,6 @@ body {
 
 <!-- Selo gigante fixo no fundo (opacidade 5%) -->
 <div class="bf-watermark" aria-hidden="true"><img src="Assets/Selo-BlackFriday.webp" alt="" decoding="async"></div>
-<!-- Textura de água (foto), visível quando o preto cobre a tela -->
-<div class="bf-water" aria-hidden="true"></div>
 
 <main class="bf">
 
@@ -742,7 +715,7 @@ body {
   const E = {
     hero: $('.bf-hero'), pin: $('.bf-hero__pin'), backdrop: $('.bf-hero__backdrop'), photo: $('.bf-hero__photo'),
     bubble: $('.bf-bubble'), glow: $('.bf-bubble-glow'), anchor: $('.bf-hero__anchor'), halo: $('.bf-hero__halo'),
-    seal: $('.bf-hero__seal'), sealPar: $('.bf-hero__seal .bf-par'), hint: $('.bf-hero__hint'), pcts: $('.bf-pcts'), water: $('.bf-water'),
+    seal: $('.bf-hero__seal'), sealPar: $('.bf-hero__seal .bf-par'), hint: $('.bf-hero__hint'), pcts: $('.bf-pcts'),
     mark: $('.bf-watermark img'), attrs: $('.bf-attrs'), list: $('.bf-attrs__list'), line: $('.bf-attrs__line'),
     lineFill: $('.bf-attrs__line-fill'), rise: $('.bf-form__rise'), card: $('.bf-card'), wrap: $('.bf-intro .bf-wrap')
   };
@@ -909,14 +882,13 @@ body {
     css(E.card, 'opacity', clamp(p / .55).toFixed(3));
   }
 
-  /* Gatilho único do fim da bolha: ícones de % e textura de água aparecem e o selo faz crossfade para
-     a versão white (e tudo volta quando a bolha recua ao rolar para cima) */
+  /* Gatilho único do fim da bolha: ícones de % aparecem e o selo faz crossfade para a versão white
+     (e volta para a colorida quando a bolha recua ao rolar para cima) */
   function renderCover() {
     const on = sy >= M.heroTop + M.heroRange * GROW_END - 1;
     if (on === M.covered) return;
     M.covered = on;
     if (E.pcts) E.pcts.classList.toggle('is-on', on);
-    if (E.water) E.water.classList.toggle('is-on', on);
     if (E.hero) E.hero.classList.toggle('is-white', on);
   }
 
@@ -1210,7 +1182,6 @@ body {
     win.addEventListener('scroll', kick, { passive: true });
     win.addEventListener('resize', remeasure, { passive: true });
     win.addEventListener('load', remeasure);
-    win.addEventListener('load', () => (win.requestIdleCallback || setTimeout)(() => E.water && E.water.classList.add('is-ready')), { once: true });
     win.addEventListener('pageshow', e => { if (e.persisted) { sy = -1; remeasure(); } });
     win.addEventListener('pointermove', onPointerMove, { passive: true });
     win.addEventListener('blur', hideGlow);
