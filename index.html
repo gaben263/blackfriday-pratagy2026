@@ -216,6 +216,33 @@ body {
 }
 .bf-intro__text { margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; }
 
+/* Contagem regressiva */
+.bf-countdown { position: relative; padding: 0 0 clamp(24px, 5vh, 64px); text-align: center; }
+.bf-cd__title {
+  margin: 0 0 clamp(18px, 3vh, 30px); color: var(--bf-white); opacity: .85;
+  font-weight: 600; font-size: clamp(13px, 1.3vw, 16px); letter-spacing: .32em; text-transform: uppercase;
+}
+.bf-cd__grid { display: flex; justify-content: center; align-items: flex-start; gap: clamp(8px, 2vw, 28px); }
+.bf-cd__unit { display: flex; flex-direction: column; align-items: center; min-width: clamp(72px, 11vw, 132px); }
+.bf-cd__num, .bf-cd__sep { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; font-weight: 700; }
+.bf-cd__num { display: inline-flex; color: var(--bf-gold); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+/* A Fibra One não traz algarismos tabulares (o "1" é bem mais estreito que o "0"): cada dígito ganha
+   uma casa fixa da largura do mais largo, para os números não "pularem" quando mudam */
+.bf-cd__num > span { display: inline-block; width: .77em; text-align: center; }
+.bf-cd__sep { color: rgba(255, 215, 0, .4); }
+.bf-cd__label {
+  margin-top: clamp(8px, 1.2vw, 14px); color: var(--bf-white); opacity: .85;
+  font-weight: 400; font-size: clamp(.7rem, 1.5vw, .9rem); letter-spacing: 2px; text-transform: uppercase;
+}
+.bf-cd__done { margin: 0; color: var(--bf-gold); font-weight: 900; font-size: clamp(30px, 5.4vw, 64px); line-height: 1.05; text-transform: uppercase; }
+.bf-cd.is-done .bf-cd__title, .bf-cd.is-done .bf-cd__grid { display: none; }
+@media (max-width: 480px) {
+  .bf-cd__grid { gap: 4px; }
+  .bf-cd__unit { min-width: 0; flex: 1 1 0; }
+  .bf-cd__num, .bf-cd__sep { font-size: clamp(1.9rem, 10vw, 2.5rem); }
+  .bf-cd__label { font-size: .62rem; letter-spacing: 1px; }
+}
+
 /* Botão — recriação em CSS do Assets/botao-entre-para-o-grupo.webp */
 .bf-btn {
   position: relative; isolation: isolate; overflow: hidden;
@@ -498,6 +525,25 @@ body {
         <h2 class="bf-intro__title" data-split>Lorem ipsum dolor sit <em>consectetur</em> adipiscing</h2>
         <p class="bf-intro__text" data-split>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <p class="bf-intro__text" data-split>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 3b. CONTAGEM REGRESSIVA ===================== -->
+    <section class="bf-countdown" aria-labelledby="bf-cd-title">
+      <div class="bf-wrap">
+        <div class="bf-cd bf-reveal" id="countdown">
+          <p class="bf-cd__title" id="bf-cd-title">A oferta começa em:</p>
+          <div class="bf-cd__grid" role="timer">
+            <div class="bf-cd__unit"><span class="bf-cd__num" data-cd="d"><span>0</span><span>0</span></span><span class="bf-cd__label">Dias</span></div>
+            <span class="bf-cd__sep" aria-hidden="true">:</span>
+            <div class="bf-cd__unit"><span class="bf-cd__num" data-cd="h"><span>0</span><span>0</span></span><span class="bf-cd__label">Horas</span></div>
+            <span class="bf-cd__sep" aria-hidden="true">:</span>
+            <div class="bf-cd__unit"><span class="bf-cd__num" data-cd="m"><span>0</span><span>0</span></span><span class="bf-cd__label">Minutos</span></div>
+            <span class="bf-cd__sep" aria-hidden="true">:</span>
+            <div class="bf-cd__unit"><span class="bf-cd__num" data-cd="s"><span>0</span><span>0</span></span><span class="bf-cd__label">Segundos</span></div>
+          </div>
+          <p class="bf-cd__done" hidden>A Black Friday chegou!</p>
+        </div>
       </div>
     </section>
 
@@ -1009,6 +1055,51 @@ body {
     }), { threshold: .2, rootMargin: '0px 0px -8% 0px' });
     revealEls.forEach(el => io.observe(el));
   } else revealEls.forEach(el => el.classList.add('is-in'));
+
+  /* =========================================================
+     CONTAGEM REGRESSIVA — 27/11/2026 00:00 em Brasília (UTC-3) = 03:00 UTC
+     ========================================================= */
+  const countdown = doc.getElementById('countdown');
+  if (countdown) {
+    const target = new Date('2026-11-27T03:00:00Z').getTime();
+    const cells = { d: $('[data-cd="d"]', countdown), h: $('[data-cd="h"]', countdown), m: $('[data-cd="m"]', countdown), s: $('[data-cd="s"]', countdown) };
+    const shown = {};
+    const pad = n => (n < 10 ? '0' + n : '' + n);
+    // Só toca no DOM quando o valor muda, e só no dígito que mudou
+    const put = (k, v) => {
+      if (shown[k] === v) return;
+      const el = cells[k];
+      if (!shown[k] || shown[k].length !== v.length) el.innerHTML = '<span></span>'.repeat(v.length);
+      const prev = shown[k] && shown[k].length === v.length ? shown[k] : '';
+      for (let i = 0; i < v.length; i++) if (prev[i] !== v[i]) el.children[i].textContent = v[i];
+      shown[k] = v;
+    };
+    let timer = 0;
+
+    function updateCountdown() {
+      const diff = target - new Date().getTime();
+      if (diff <= 0) {
+        clearInterval(timer); timer = 0;
+        countdown.classList.add('is-done');
+        $('.bf-cd__done', countdown).hidden = false;
+        return false;
+      }
+      const t = Math.floor(diff / 1000);
+      put('d', pad(Math.floor(t / 86400)));
+      put('h', pad(Math.floor((t % 86400) / 3600)));
+      put('m', pad(Math.floor((t % 3600) / 60)));
+      put('s', pad(t % 60));
+      return true;
+    }
+
+    // Primeira atualização imediata; depois, a cada segundo, alinhado à virada do segundo
+    // (evita que um segundo "pule" ou se repita por desvio do timer)
+    if (updateCountdown()) {
+      setTimeout(() => {
+        if (updateCountdown()) timer = setInterval(updateCountdown, 1000);
+      }, (target - new Date().getTime()) % 1000 + 20);
+    }
+  }
 
   /* =========================================================
      5. FORMULÁRIO — SharpSpring (CRM oficial)
