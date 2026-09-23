@@ -4,6 +4,9 @@ blackfriday-pratagy2026/
 # Backup local das imagens originais (já versionadas no primeiro commit)
 Fotos_Originais/
 
+# Pasta de entrada das texturas originais (as otimizadas ficam em Assets/)
+Texturas/
+
 # Temporários e arquivos de sistema
 *.tmp
 *.bak
