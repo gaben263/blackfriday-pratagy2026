@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Black Friday 2026 | Pratagy Resort</title>
-<meta name="description" content="Black Friday Pratagy 2026 — 27 de novembro. Faça seu cadastro e entre para o grupo.">
+<title>Lista VIP Black Friday 2026 | Pratagy Resort</title>
+<meta name="description" content="Entre para a lista VIP da Black Friday Pratagy 2026 e tenha acesso antecipado ao preço especial de novembro. Faça seu cadastro.">
 <meta name="theme-color" content="#0A0A0A">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Black Friday Pratagy 2026">
-<meta property="og:description" content="27 de novembro de 2026. Faça seu cadastro e entre para o grupo.">
+<meta property="og:title" content="Lista VIP · Black Friday Pratagy 2026">
+<meta property="og:description" content="Cadastre-se, entre para o grupo VIP e receba o preço especial da Black Friday do Pratagy antes de todo mundo.">
 <link rel="icon" type="image/webp" href="Assets/Selo-BlackFriday.webp">
 <link rel="preload" href="Fonte/Fibra-One-Heavy.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="Fonte/Fibra-One-Regular.otf" as="font" type="font/otf" crossorigin>
@@ -104,8 +104,8 @@ body {
   position: absolute; left: 0; right: 0; top: 0; height: 100vh; height: 100svh;
   display: grid; place-items: center; pointer-events: none;
 }
-.bf-hero__anchor { position: relative; top: 6vh; top: 6svh; width: var(--bf-seal); aspect-ratio: 598 / 591; }
-/* Retroiluminação do selo no preto (mantém legível a data do arco) */
+.bf-hero__anchor { position: relative; top: 6vh; top: 6svh; width: var(--bf-seal); aspect-ratio: 604 / 596; }
+/* Retroiluminação laranja do selo: destaca o arco contra o fundo preto */
 .bf-hero__halo {
   position: absolute; inset: -22%; z-index: 1; border-radius: 50%; opacity: 0;
   background: radial-gradient(closest-side,
@@ -115,16 +115,6 @@ body {
 }
 .bf-hero__seal { position: absolute; inset: 0; z-index: 3; margin: 0; perspective: 900px; will-change: transform; }
 .bf-hero__seal img { width: 100%; }
-/* Selo colorido ↔ versão white. Crossfade sem "piscar": a imagem que entra aparece por cima e a
-   de baixo só some ao final. A white (604×596) tem a mesma arte 2px deslocada — compensado aqui. */
-.bf-seal-stack { position: relative; }
-.bf-hero__seal .bf-seal-img--white {
-  position: absolute; left: -.334%; top: 0; width: 101.003%; max-width: none;
-  opacity: 0; transition: opacity .8s var(--bf-ease-out);
-}
-.bf-seal-img--color { transition: opacity 0s linear 0s; }
-.bf-hero.is-white .bf-seal-img--white { opacity: 1; }
-.bf-hero.is-white .bf-seal-img--color { opacity: 0; transition: opacity 0s linear .8s; }
 .bf-par { will-change: transform; }
 
 .bf-js .bf-pop { opacity: 0; transform: scale(.55) rotate(-8deg); }
@@ -155,9 +145,11 @@ body {
    Começam com opacity 0 e surgem quando a bolha termina de cobrir a tela (.is-on via JS).
    Ficam acima do hero e abaixo do conteúdo das seções, para não atrapalhar a leitura.
    bottom: 0 dá a altura inicial; depois o JS trava essa altura em px (ver measure), para que conteúdo
-   carregado depois (ex.: o formulário da SharpSpring) não reposicione os ícones. */
+   carregado depois (ex.: o formulário da SharpSpring) não reposicione os ícones. O topo de cada ícone usa
+   a mesma régua travada (--pct-u = 1% dela), então eles também não se mexem quando a página encolhe
+   (ex.: plano B do formulário no celular). */
 .bf-pcts {
-  --pct-o: 1; --pct-k: 1.4;
+  --pct-o: 1; --pct-k: 1.4; --pct-u: 1%;
   position: absolute; left: 0; right: 0; top: calc(var(--bf-hero-h) - 100vh); bottom: 0; z-index: 0;
   overflow: hidden; pointer-events: none;
 }
@@ -166,7 +158,7 @@ body {
    --o opacidade da camada (perto/meio/longe) · --m atenuação automática (JS) quando o ícone
    fica atrás da coluna de conteúdo, para nunca atrapalhar a leitura */
 .bf-pct {
-  position: absolute; top: calc(var(--t) * 1%); width: calc(var(--s) * var(--pct-k) * 1px);
+  position: absolute; top: calc(var(--t) * var(--pct-u)); width: calc(var(--s) * var(--pct-k) * 1px);
   opacity: 0; transform: rotate(calc(var(--r) * 1deg)); will-change: transform, opacity;
   transition: opacity .9s var(--bf-ease-out);
 }
@@ -273,6 +265,14 @@ body {
 .bf-btn:hover::after { transform: translateX(520%) skewX(-18deg); transition: transform .85s var(--bf-ease-out); }
 .bf-btn:active { transform: translateY(1px); }
 .bf-btn--cta::after { animation: bf-shine 4.2s ease-in-out infinite; }
+.bf-btn--gold {
+  color: #7A1A00; text-shadow: 0 1px 0 rgba(255,255,255,.35);
+  background:
+    linear-gradient(180deg, #FFEF7A 0%, var(--bf-gold) 45%, #F2A900 100%) padding-box,
+    linear-gradient(180deg, #FFF6B0, #C98400) border-box;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55), inset 0 -4px 10px rgba(170,90,0,.35), 0 10px 22px rgba(110,15,0,.45);
+}
+.bf-btn--gold:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.6), inset 0 -4px 10px rgba(170,90,0,.35), 0 14px 28px rgba(110,15,0,.5), 0 0 26px rgba(255,215,0,.5); }
 @keyframes bf-shine { 0%, 62% { transform: translateX(-160%) skewX(-18deg); } 100% { transform: translateX(520%) skewX(-18deg); } }
 
 /* Dock: fica preso no rodapé da tela durante as seções 3 e 4 e "pousa" no fim delas */
@@ -396,7 +396,7 @@ body {
    ========================================================= */
 .bf-form { position: relative; padding: 0 0 clamp(40px, 8vh, 96px); scroll-margin-top: 3vh; }
 .bf-form__rise { max-width: 840px; margin: 0 auto; }
-/* Card plano: mesma linguagem do botão "Entre para o grupo" com as cores invertidas —
+/* Card plano: mesma linguagem do botão "Cadastre-se agora" com as cores invertidas —
    fundo laranja escuro/translúcido + borda dourada fina, sem sombras nem relevo */
 .bf-card {
   position: relative; border: 2px solid var(--bf-gold); border-radius: 24px;
@@ -429,6 +429,22 @@ body {
   display: block; width: 100% !important; max-width: 100%; margin: 0 auto;
   border: 0 !important; background: transparent !important; color-scheme: normal;
 }
+/* Plano B: se o formulário não aparecer em até 3 s (bloqueador de anúncios, rede muito lenta), o card mostra
+   o link direto para o grupo VIP. No desktop ocupa o mesmo espaço reservado, então nada na página pula; no
+   celular fica só com a altura do conteúdo, sem sobra de laranja no card. O iframe fica com altura 0 (mas
+   mantém a largura), pronto para voltar se o formulário chegar depois. */
+.bf-card.is-fallback #sharpspring-form { height: 0 !important; min-height: 0 !important; overflow: hidden; visibility: hidden; }
+.bf-ssf-fallback {
+  min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; text-align: center;
+}
+@media (max-width: 480px) { .bf-ssf-fallback { min-height: 0; padding: 12px 0 8px; } }
+.bf-ssf-fallback__icon { width: 68px; height: 68px; display: grid; place-items: center; margin-bottom: 4px; border-radius: 50%; background: var(--bf-gold); box-shadow: 0 8px 22px rgba(110,15,0,.35); }
+.bf-ssf-fallback__icon svg { width: 34px; height: 34px; fill: none; stroke: #C92E07; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bf-ssf-fallback__title { margin: 0; max-width: 22ch; color: var(--bf-gold); font-weight: 900; font-size: clamp(21px, 2.4vw, 28px); line-height: 1.1; text-transform: uppercase; }
+.bf-ssf-fallback__text { margin: 0; max-width: 40ch; color: var(--bf-white); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.5; }
+.bf-ssf-fallback .bf-btn { margin-top: 10px; }
+.bf-ssf-fallback__note { margin: 6px 0 0; max-width: 46ch; color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.45; }
 
 /* Texto final + rodapé */
 .bf-final { max-width: 760px; margin: clamp(56px, 10vh, 110px) auto 0; text-align: center; }
@@ -490,9 +506,8 @@ body {
         <div class="bf-hero__anchor">
           <div class="bf-hero__halo"></div>
           <h1 class="bf-hero__seal">
-            <div class="bf-par"><div class="bf-pop"><div class="bf-float bf-seal-stack">
-              <img class="bf-seal-img bf-seal-img--color" src="Assets/Selo-BlackFriday.webp" alt="Black Friday Pratagy 2026 — 27 de novembro de 2026" width="598" height="591" fetchpriority="high">
-              <img class="bf-seal-img bf-seal-img--white" src="Assets/Selo-BlackFriday-white.webp" alt="" width="604" height="596" decoding="async" fetchpriority="low">
+            <div class="bf-par"><div class="bf-pop"><div class="bf-float">
+              <img class="bf-seal-img" src="Assets/Selo-BlackFriday.webp" alt="Black Friday Pratagy 2026" width="604" height="596" fetchpriority="high">
             </div></div></div>
           </h1>
         </div>
@@ -527,10 +542,10 @@ body {
     <!-- ===================== 3. TEXTO ===================== -->
     <section class="bf-intro" id="bf-intro">
       <div class="bf-wrap">
-        <p class="bf-eyebrow"><span data-split>27 de novembro de 2026</span></p>
-        <h2 class="bf-intro__title" data-split>A <em>Black Friday</em> do Pratagy chegou</h2>
-        <p class="bf-intro__text" data-split>Chegou a hora de garantir aquela viagem dos sonhos com condições que só o Pratagy oferece. No dia 27 de novembro de 2026, abrimos as portas para a maior Black Friday do ano — com ofertas exclusivas, parcelamento facilitado e benefícios únicos para você viver o paraíso de Maceió.</p>
-        <p class="bf-intro__text" data-split>São 24 horas de condições imperdíveis para você aproveitar tudo o que o Pratagy tem de melhor: gastronomia premiada, praias paradisíacas, Acqua Park e uma estrutura completa para toda a família. As vagas são limitadas — e o paraíso não espera.</p>
+        <p class="bf-eyebrow"><span data-split>novembro de 2026</span></p>
+        <h2 class="bf-intro__title" data-split>Seja <em>VIP</em> na Black Friday do Pratagy</h2>
+        <p class="bf-intro__text" data-split>Em novembro de 2026, o Pratagy abre a maior Black Friday do ano — e você pode sair na frente. Cadastre-se na lista VIP e receba em primeira mão o preço especial, com parcelamento facilitado e benefícios únicos para viver o paraíso de Maceió.</p>
+        <p class="bf-intro__text" data-split>Quem está no grupo VIP recebe a oferta antes de todo mundo e aproveita primeiro tudo o que o Pratagy tem de melhor: gastronomia premiada, praias paradisíacas, Acqua Park e uma estrutura completa para toda a família. As vagas são limitadas — e o paraíso não espera.</p>
       </div>
     </section>
 
@@ -538,7 +553,7 @@ body {
     <section class="bf-countdown" aria-labelledby="bf-cd-title">
       <div class="bf-wrap">
         <div class="bf-cd bf-reveal" id="countdown">
-          <p class="bf-cd__title" id="bf-cd-title">A oferta começa em:</p>
+          <p class="bf-cd__title" id="bf-cd-title">O acesso VIP abre em:</p>
           <div class="bf-cd__grid" role="timer">
             <div class="bf-cd__unit"><span class="bf-cd__num" data-cd="d"><span>0</span><span>0</span></span><span class="bf-cd__label">Dias</span></div>
             <span class="bf-cd__sep" aria-hidden="true">:</span>
@@ -548,7 +563,7 @@ body {
             <span class="bf-cd__sep" aria-hidden="true">:</span>
             <div class="bf-cd__unit"><span class="bf-cd__num" data-cd="s"><span>0</span><span>0</span></span><span class="bf-cd__label">Segundos</span></div>
           </div>
-          <p class="bf-cd__done" hidden>A Black Friday chegou!</p>
+          <p class="bf-cd__done" hidden>O acesso VIP foi liberado!</p>
         </div>
       </div>
     </section>
@@ -636,7 +651,7 @@ body {
 
     <!-- Botão sticky (CSS puro — ref. Assets/botao-entre-para-o-grupo.webp) -->
     <div class="bf-dock">
-      <a class="bf-btn bf-btn--cta" href="#cadastro" data-cta><span>Entre para o grupo</span></a>
+      <a class="bf-btn bf-btn--cta" href="#cadastro" data-cta><span>Cadastre-se agora</span></a>
     </div>
   </div>
 
@@ -649,13 +664,21 @@ body {
             <h2 class="bf-card__title" id="bf-form-title">Faça seu cadastro</h2>
             <!-- Formulário oficial da SharpSpring (CRM): injetado aqui pelo JS quando o card se aproxima -->
             <div id="sharpspring-form"></div>
+            <!-- Plano B: aparece se o formulário não carregar em até 3 s. TROQUE O LINK pelo link real do grupo VIP. -->
+            <div class="bf-ssf-fallback" role="status" hidden>
+              <span class="bf-ssf-fallback__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke-width="3"/></svg></span>
+              <p class="bf-ssf-fallback__title">O formulário não carregou por aqui</p>
+              <p class="bf-ssf-fallback__text">Sem problema: entre direto no grupo VIP pelo WhatsApp e receba o acesso antecipado à Black Friday do Pratagy.</p>
+              <a class="bf-btn bf-btn--gold" href="https://wa.me/55XXXXXXXXXXX" target="_blank" rel="noopener"><span>Entrar no grupo VIP</span></a>
+              <p class="bf-ssf-fallback__note">Usa bloqueador de anúncios? Desative nesta página e recarregue para se cadastrar pelo formulário.</p>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="bf-final bf-reveal">
-        <p class="bf-final__lead">Nos vemos em <span>27 de novembro</span></p>
-        <p class="bf-final__text">Não deixe para depois. As melhores condições da Black Friday são por tempo limitado e as vagas se esgotam rápido. Faça seu cadastro agora e garanta seu lugar no paraíso.</p>
+        <p class="bf-final__lead">Seu lugar na <span>lista VIP</span> te espera</p>
+        <p class="bf-final__text">Não deixe para depois: o acesso antecipado é exclusivo para quem estiver na lista VIP. Faça seu cadastro agora e garanta seu lugar no paraíso.</p>
       </div>
     </div>
   </section>
@@ -766,6 +789,7 @@ body {
       const avail = E.pcts.offsetParent ? E.pcts.offsetParent.clientHeight - E.pcts.offsetTop : 0; // até o fim da página
       if (relock) { M.pctH = avail; M.pctW = root.clientWidth; }
       css(E.pcts, 'height', Math.max(0, Math.min(M.pctH, avail)) + 'px');                           // nunca além do fim
+      css(E.pcts, '--pct-u', (M.pctH / 100).toFixed(3) + 'px');                                     // topo dos ícones pela régua travada
       const pr = E.pcts.getBoundingClientRect(), pt = pr.top + sy, wr = E.wrap && E.wrap.getBoundingClientRect();
       const cl = wr ? wr.left - pr.left : 0, cr = wr ? wr.right - pr.left : pr.width;
       for (let i = 0; i < pcts.length; i++) {
@@ -880,14 +904,12 @@ body {
     css(E.card, 'opacity', clamp(p / .55).toFixed(3));
   }
 
-  /* Gatilho único do fim da bolha: ícones de % aparecem e o selo faz crossfade para a versão white
-     (e volta para a colorida quando a bolha recua ao rolar para cima) */
+  /* Gatilho único do fim da bolha: os ícones de % aparecem (e somem quando a bolha recua ao rolar para cima) */
   function renderCover() {
     const on = sy >= M.heroTop + M.heroRange * GROW_END - 1;
     if (on === M.covered) return;
     M.covered = on;
     if (E.pcts) E.pcts.classList.toggle('is-on', on);
-    if (E.hero) E.hero.classList.toggle('is-white', on);
   }
 
   /* Ícones de %: parallax de scroll (Y) + parallax de mouse (X/Y) somados num único translate3d.
@@ -1072,11 +1094,11 @@ body {
   } else revealEls.forEach(el => el.classList.add('is-in'));
 
   /* =========================================================
-     CONTAGEM REGRESSIVA — 27/11/2026 00:00 em Brasília (UTC-3) = 03:00 UTC
+     CONTAGEM REGRESSIVA — abertura do acesso VIP: 01/11/2026 00:00 em Brasília (UTC-3) = 03:00 UTC
      ========================================================= */
   const countdown = doc.getElementById('countdown');
   if (countdown) {
-    const target = new Date('2026-11-27T03:00:00Z').getTime();
+    const target = new Date('2026-11-01T03:00:00Z').getTime();
     const cells = { d: $('[data-cd="d"]', countdown), h: $('[data-cd="h"]', countdown), m: $('[data-cd="m"]', countdown), s: $('[data-cd="s"]', countdown) };
     const shown = {};
     const pad = n => (n < 10 ? '0' + n : '' + n);
@@ -1121,13 +1143,35 @@ body {
      O script externo só é baixado quando o card se aproxima da tela, para não
      atrasar o carregamento inicial. Script oficial: "BFP 26 - Formulário de Captação".
      ========================================================= */
+  const SS_FORM_ID = 'S0w0Nk0ySDHQNbWwNNQ1MTcy0LU0SjLQNTRMNrBITklJTrFIBgA';
+
+  /* Plano B: se o formulário não aparecer em até 3 s (bloqueador de anúncios, rede muito lenta, SharpSpring
+     fora do ar), o card mostra o link direto para o grupo VIP. "Apareceu" = o iframe avisou a própria altura
+     (mensagem 'resize' que a SharpSpring manda à página). Se o formulário chegar depois, ele volta ao lugar. */
+  const formCard = $('.bf-card'), formFallback = $('.bf-ssf-fallback');
+  let formReady = false, formTimer = 0;
+  function showFormFallback() {
+    if (formReady || !formCard || !formFallback) return;
+    clearTimeout(formTimer);
+    formCard.classList.add('is-fallback');
+    formFallback.hidden = false;
+  }
+  win.addEventListener('message', e => {
+    const d = e.data;
+    if (formReady || !d || d.formID !== SS_FORM_ID || !/^https:\/\/[a-z0-9-]+\.marketingautomation\.services$/i.test(e.origin)) return;
+    formReady = true;
+    clearTimeout(formTimer);
+    if (formCard) formCard.classList.remove('is-fallback');
+    if (formFallback) formFallback.hidden = true;
+  });
+
   let sharpSpringLoaded = false;
   function loadSharpSpringForm() {
     if (sharpSpringLoaded || !doc.getElementById('sharpspring-form')) return;
     const cfg = doc.createElement('script');
     cfg.type = 'text/javascript';
     cfg.text =
-      "var ss_form = {'account': 'MzY0Mjc1NDQwAQA', 'formID': 'S0w0Nk0ySDHQNbWwNNQ1MTcy0LU0SjLQNTRMNrBITklJTrFIBgA'};\n" +
+      "var ss_form = {'account': 'MzY0Mjc1NDQwAQA', 'formID': '" + SS_FORM_ID + "'};\n" +
       "ss_form.width = '100%';\n" +
       "ss_form.domain = 'app-3SIPNPBO2C.marketingautomation.services';\n" +
       "ss_form.title = 'BFP 26 - Formulário de Captação';\n" +
@@ -1135,8 +1179,10 @@ body {
     const lib = doc.createElement('script');
     lib.type = 'text/javascript';
     lib.src = 'https://koi-3SIPNPBO2C.marketingautomation.services/client/form.js?ver=2.0.1';
+    lib.onerror = showFormFallback;                  // script bloqueado: plano B na hora
     doc.body.appendChild(cfg);
     doc.body.appendChild(lib);
+    formTimer = setTimeout(showFormFallback, 3000);  // não apareceu em 3 s: plano B
     sharpSpringLoaded = true;
   }
   const formSection = doc.getElementById('cadastro');
@@ -1197,8 +1243,6 @@ body {
       const ok = () => ph.classList.add('is-loaded');
       if (ph.complete) ok(); else { ph.addEventListener('load', ok, { once: true }); ph.addEventListener('error', ok, { once: true }); }
     }
-    const whiteSeal = $('.bf-seal-img--white');
-    if (whiteSeal && whiteSeal.decode) whiteSeal.decode().catch(() => {});
     const sealImg = $('.bf-hero__seal img'), ready = () => root.classList.add('bf-ready');
     if (!sealImg || sealImg.complete) ready();
     else { sealImg.addEventListener('load', ready, { once: true }); sealImg.addEventListener('error', ready, { once: true }); setTimeout(ready, 2500); }
