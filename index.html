@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Black Friday 2026 | Pratagy Resort</title>
+<meta name="description" content="Black Friday Pratagy 2026 — 27 de novembro. Faça seu cadastro e entre para o grupo.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Black Friday Pratagy 2026">
+<meta property="og:description" content="27 de novembro de 2026. Faça seu cadastro e entre para o grupo.">
+<link rel="icon" type="image/png" href="Assets/Selo-BlackFriday.png">
+<link rel="preload" href="Fonte/Fibra-One-Heavy.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="Fonte/Fibra-One-Regular.otf" as="font" type="font/otf" crossorigin>
+<script>document.documentElement.classList.add('bf-js');</script>
+<style>
+/* =========================================================
+   FONTES — Fibra One (arquivos locais em Fonte/)
+   ========================================================= */
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-Heavy.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+:root {
+  --bf-black: #0A0A0A;
+  --bf-orange: #FF4500;
+  --bf-orange-deep: #D8340A;
+  --bf-gold: #FFD700;
+  --bf-gold-deep: #E89B00;
+  --bf-white: #FFFFFF;
+  --bf-muted: rgba(255, 255, 255, .72);
+  --bf-font: 'Fibra One', 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --bf-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --bf-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --bf-gutter: clamp(16px, 5vw, 48px);
+  --bf-seal: min(80vw, 62vh, 580px);
+  --bf-seal: min(80vw, 62svh, 580px);
+  --bf-hero-h: 260vh;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bf-black); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0; background: var(--bf-black); color: var(--bf-white);
+  font-family: var(--bf-font); font-weight: 400; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.bf { position: relative; z-index: 1; overflow-x: clip; }
+:where(.bf) img { display: block; max-width: 100%; height: auto; }
+.bf-wrap { width: min(1180px, 100% - var(--bf-gutter) * 2); margin-inline: auto; }
+.bf-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.bf :focus-visible { outline: 3px solid var(--bf-gold); outline-offset: 4px; }
+.bf [hidden] { display: none !important; }
+
+/* Selo gigante fixo no fundo (5%) — parallax via JS */
+.bf-watermark { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.bf-watermark img {
+  position: absolute; left: 50%; top: 50%;
+  width: max(125vmin, 720px); max-width: none; height: auto;
+  opacity: .05; transform: translate3d(-50%, -50%, 0); will-change: transform;
+}
+
+/* =========================================================
+   1. HERO (pin + bolha/eclipse)
+   ========================================================= */
+.bf-hero { position: relative; height: var(--bf-hero-h); }
+.bf-hero__pin { position: sticky; top: 0; height: 100vh; overflow: hidden; isolation: isolate; }
+.bf-hero__backdrop {
+  position: absolute; inset: 0; will-change: opacity;
+  background: linear-gradient(180deg, #0B7FE0 0%, #37A9F5 55%, #BFE6FF 100%);
+}
+.bf-hero__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; object-position: 50% 52%;
+  transform-origin: 50% 62%; will-change: transform;
+}
+.bf-js .bf-hero__photo { opacity: 0; transition: opacity .9s ease; }
+.bf-js .bf-hero__photo.is-loaded { opacity: 1; }
+.bf-hero__shade {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 42%, rgba(0,0,0,0) 55%, rgba(0,0,0,.32) 100%),
+    linear-gradient(180deg, rgba(10,10,10,.22) 0%, rgba(10,10,10,0) 20%, rgba(10,10,10,0) 68%, rgba(10,10,10,.5) 100%);
+}
+/* Bolha preta: clip-path circle() controlado pelo scroll */
+.bf-bubble { position: absolute; inset: 0; background: var(--bf-black); clip-path: circle(0px at 50% 150%); }
+/* Coroa de luz (eclipse) que acompanha a borda da bolha */
+.bf-bubble-glow {
+  position: absolute; left: 0; top: 0; width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgba(255,215,0,0) 75%, rgba(255,236,140,1) 79%, rgba(255,150,20,.8) 82.5%,
+    rgba(255,69,0,.32) 89%, rgba(255,69,0,0) 100%);
+  opacity: 0; will-change: transform, opacity; pointer-events: none;
+}
+.bf-hero__stage {
+  position: absolute; left: 0; right: 0; top: 0; height: 100vh; height: 100svh;
+  display: grid; place-items: center; pointer-events: none;
+}
+.bf-hero__anchor { position: relative; top: 6vh; top: 6svh; width: var(--bf-seal); aspect-ratio: 598 / 591; }
+/* Retroiluminação do selo no preto (mantém legível a data do arco) */
+.bf-hero__halo {
+  position: absolute; inset: -22%; z-index: 1; border-radius: 50%; opacity: 0;
+  background: radial-gradient(closest-side,
+    rgba(255,140,40,.6) 0%, rgba(255,110,25,.55) 50%, rgba(255,80,10,.45) 62%,
+    rgba(255,69,0,.18) 74%, rgba(255,69,0,0) 88%);
+  animation: bf-breathe 4.5s ease-in-out infinite;
+}
+.bf-hero__seal { position: absolute; inset: 0; z-index: 3; margin: 0; perspective: 900px; will-change: transform; }
+.bf-hero__seal img { width: 100%; }
+/* Selo colorido ↔ versão white. Crossfade sem "piscar": a imagem que entra aparece por cima e a
+   de baixo só some ao final. A white (604×596) tem a mesma arte 2px deslocada — compensado aqui. */
+.bf-seal-stack { position: relative; }
+.bf-hero__seal .bf-seal-img--white {
+  position: absolute; left: -.334%; top: 0; width: 101.003%; max-width: none;
+  opacity: 0; transition: opacity .8s var(--bf-ease-out);
+}
+.bf-seal-img--color { transition: opacity 0s linear 0s; }
+.bf-hero.is-white .bf-seal-img--white { opacity: 1; }
+.bf-hero.is-white .bf-seal-img--color { opacity: 0; transition: opacity 0s linear .8s; }
+.bf-par { will-change: transform; }
+
+.bf-js .bf-pop { opacity: 0; transform: scale(.55) rotate(-8deg); }
+.bf-ready .bf-pop { animation: bf-pop 1.2s var(--bf-spring) both; }
+.bf-float { animation: bf-float 6s ease-in-out infinite; }
+.bf-float--b { animation-duration: 7.5s; animation-direction: reverse; }
+
+.bf-hero__hint {
+  position: absolute; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); z-index: 5;
+  transform: translateX(-50%); pointer-events: auto;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: #fff; text-decoration: none; font-weight: 700; font-size: 12px;
+  letter-spacing: .28em; text-transform: uppercase; white-space: nowrap;
+  text-shadow: 0 2px 12px rgba(0,0,0,.55);
+}
+.bf-mouse { position: relative; width: 24px; height: 38px; border: 2px solid rgba(255,255,255,.92); border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,.3); }
+.bf-mouse::after {
+  content: ''; position: absolute; left: 50%; top: 7px; width: 4px; height: 8px; margin-left: -2px;
+  border-radius: 2px; background: var(--bf-gold); animation: bf-wheel 1.6s ease-in-out infinite;
+}
+
+@keyframes bf-pop { from { opacity: 0; transform: scale(.55) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes bf-float { 0%, 100% { transform: translate3d(0, 0, 0) rotate(0); } 50% { transform: translate3d(0, -10px, 0) rotate(-1.2deg); } }
+@keyframes bf-breathe { 0%, 100% { transform: scale(.94); } 50% { transform: scale(1.05); } }
+@keyframes bf-wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+
+/* Ícones de % nas laterais da página (parallax no scroll).
+   Começam com opacity 0 e surgem quando a bolha termina de cobrir a tela (.is-on via JS).
+   Ficam acima do hero e abaixo do conteúdo das seções, para não atrapalhar a leitura. */
+.bf-pcts {
+  --pct-o: 1; --pct-k: 1.4;
+  position: absolute; left: 0; right: 0; top: calc(var(--bf-hero-h) - 100vh); bottom: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+/* Por ícone: --t topo (% da página) · --s tamanho base (px) · --x recuo da lateral (vw) ·
+   --xs recuo em frações do próprio ícone (negativo = parcialmente fora da tela) · --r rotação ·
+   --o opacidade da camada (perto/meio/longe) · --m atenuação automática (JS) quando o ícone
+   fica atrás da coluna de conteúdo, para nunca atrapalhar a leitura */
+.bf-pct {
+  position: absolute; top: calc(var(--t) * 1%); width: calc(var(--s) * var(--pct-k) * 1px);
+  opacity: 0; transform: rotate(calc(var(--r) * 1deg)); will-change: transform, opacity;
+  transition: opacity .9s var(--bf-ease-out);
+}
+.bf-pct--l { left: calc(var(--x, 0) * 1vw + var(--xs, 0) * var(--s) * var(--pct-k) * 1px); }
+.bf-pct--r { right: calc(var(--x, 0) * 1vw + var(--xs, 0) * var(--s) * var(--pct-k) * 1px); }
+.bf-pct img { width: 100%; scale: .6; transition: scale 1.1s var(--bf-spring); }
+.bf-pct--far img { filter: blur(1.2px); }
+.bf-pcts:not(.is-on) .bf-pct img { animation-play-state: paused; }
+.bf-pcts.is-on .bf-pct { opacity: calc(var(--o, .8) * var(--pct-o) * var(--m, 1)); transition-delay: calc(var(--i) * 70ms); }
+.bf-pcts.is-on .bf-pct img { scale: 1; transition-delay: calc(var(--i) * 70ms); }
+@media (max-width: 1199px) { .bf-pcts { --pct-o: .9; --pct-k: 1.1; } }
+@media (max-width: 768px) {
+  .bf-pcts { --pct-o: .8; --pct-k: .75; }
+  .bf-pct--far img { filter: none; }
+}
+
+/* =========================================================
+   TIPOGRAFIA COMPARTILHADA
+   ========================================================= */
+.bf-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px; margin: 0 0 22px;
+  color: var(--bf-gold); font-weight: 700; font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: .32em; text-transform: uppercase;
+}
+.bf-eyebrow::before, .bf-eyebrow::after { content: ''; width: 34px; height: 2px; background: linear-gradient(90deg, rgba(255,69,0,0), var(--bf-orange)); }
+.bf-eyebrow::after { transform: scaleX(-1); }
+.bf-h2 { margin: 0 0 .35em; font-weight: 900; font-size: clamp(32px, 4.6vw, 64px); line-height: 1; text-transform: uppercase; }
+
+/* Palavras animadas pelo scroll (JS divide o texto e controla --p) */
+.bf-w { display: inline-block; opacity: var(--o, 1); transform: translate3d(0, calc((1 - var(--o, 1)) * .6em), 0); }
+.bf-split .bf-w { --o: clamp(0, (var(--p, 0) * (var(--n, 1) + 5) - var(--i, 0)) / 5, 1); }
+
+/* Revelação única (IntersectionObserver) */
+.bf-js .bf-reveal { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity .9s var(--bf-ease-out), transform 1.1s var(--bf-ease-out); }
+.bf-js .bf-reveal.is-in { opacity: 1; transform: none; }
+
+/* =========================================================
+   3. TEXTO + BOTÃO STICKY
+   ========================================================= */
+.bf-intro { position: relative; padding: clamp(32px, 6vh, 72px) 0 clamp(56px, 10vh, 120px); text-align: center; }
+.bf-intro__title {
+  margin: 0 auto .55em; max-width: 15ch;
+  font-weight: 900; font-size: clamp(38px, 6.4vw, 92px); line-height: .98; letter-spacing: -.01em; text-transform: uppercase;
+}
+.bf-intro__title em {
+  font-style: normal; color: var(--bf-orange);
+  background: linear-gradient(92deg, var(--bf-orange) 10%, var(--bf-gold) 90%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.bf-intro__text { margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; }
+
+/* Botão — recriação em CSS do Assets/botao-entre-para-o-grupo.png */
+.bf-btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6em;
+  min-height: 64px; padding: 0 clamp(26px, 3.2vw, 46px);
+  border: 3px solid transparent; border-radius: 14px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, #FF6A2E 0%, var(--bf-orange) 42%, var(--bf-orange-deep) 100%) padding-box,
+    linear-gradient(180deg, #FFE45C 0%, var(--bf-gold) 38%, var(--bf-gold-deep) 100%) border-box;
+  color: var(--bf-gold); font: 900 clamp(17px, 1.7vw, 23px)/1 var(--bf-font);
+  letter-spacing: .02em; text-transform: uppercase; text-decoration: none; white-space: nowrap;
+  text-shadow: 0 2px 0 rgba(122, 26, 0, .45);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 -5px 12px rgba(120,20,0,.35), 0 12px 24px rgba(0,0,0,.45);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .25s var(--bf-ease-out), box-shadow .25s ease, filter .25s ease;
+}
+.bf-btn::after {
+  content: ''; position: absolute; z-index: -1; top: -30%; bottom: -30%; left: -10%; width: 26%;
+  background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.5), rgba(255,255,255,0));
+  transform: translateX(-160%) skewX(-18deg); pointer-events: none;
+}
+.bf-btn:hover {
+  transform: translateY(-2px); filter: saturate(1.1);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.32), inset 0 -5px 12px rgba(120,20,0,.35), 0 16px 30px rgba(0,0,0,.5), 0 0 28px rgba(255,69,0,.55);
+}
+.bf-btn:hover::after { transform: translateX(520%) skewX(-18deg); transition: transform .85s var(--bf-ease-out); }
+.bf-btn:active { transform: translateY(1px); }
+.bf-btn[disabled] { cursor: progress; filter: grayscale(.2) brightness(.95); }
+.bf-btn--cta::after { animation: bf-shine 4.2s ease-in-out infinite; }
+.bf-btn--gold {
+  color: #7A1A00; text-shadow: 0 1px 0 rgba(255,255,255,.35);
+  background:
+    linear-gradient(180deg, #FFEF7A 0%, var(--bf-gold) 45%, #F2A900 100%) padding-box,
+    linear-gradient(180deg, #FFF6B0, #C98400) border-box;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55), inset 0 -4px 10px rgba(170,90,0,.35), 0 10px 22px rgba(110,15,0,.45);
+}
+.bf-btn--gold:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.6), inset 0 -4px 10px rgba(170,90,0,.35), 0 14px 28px rgba(110,15,0,.5), 0 0 26px rgba(255,215,0,.5); }
+@keyframes bf-shine { 0%, 62% { transform: translateX(-160%) skewX(-18deg); } 100% { transform: translateX(520%) skewX(-18deg); } }
+
+/* Dock: fica preso no rodapé da tela durante as seções 3 e 4 e "pousa" no fim delas */
+.bf-dock {
+  position: sticky; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40;
+  display: flex; justify-content: center; padding: 0 var(--bf-gutter);
+  margin: clamp(28px, 6vh, 64px) 0 clamp(40px, 8vh, 96px); pointer-events: none;
+}
+.bf-dock .bf-btn { pointer-events: auto; }
+
+/* =========================================================
+   4. ATRIBUTOS (selos + card com mini-carrossel)
+   Mobile/touch primeiro: cards sempre visíveis.
+   ========================================================= */
+.bf-attrs { position: relative; padding: clamp(40px, 8vh, 100px) 0 clamp(8px, 3vh, 40px); }
+.bf-attrs__head { text-align: center; margin-bottom: clamp(44px, 8vh, 96px); }
+.bf-attrs__hint { display: inline-flex; align-items: center; gap: 10px; margin: 0; color: var(--bf-muted); font-size: 15px; }
+.bf-attrs__hint::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--bf-orange); box-shadow: 0 0 0 0 rgba(255,69,0,.6); animation: bf-ping 1.8s ease-out infinite; }
+.bf-only-hover { display: none; }
+.bf-attrs__list { position: relative; display: grid; gap: clamp(64px, 10vh, 110px); }
+.bf-attrs__line { display: none; }
+.bf-attr { display: grid; justify-items: center; gap: 22px; width: 100%; max-width: 520px; margin: 0 auto; text-align: center; }
+.bf-attr__hub { display: contents; }
+.bf-attr__seal {
+  order: 0; position: relative; z-index: 2; width: clamp(160px, 42vw, 220px); aspect-ratio: 1;
+  display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .6s var(--bf-spring), scale .9s var(--bf-spring), rotate .9s var(--bf-spring), opacity .5s ease;
+}
+.bf-attr__seal img { width: 100%; transition: filter .6s ease; }
+.bf-attr__seal::before {
+  content: ''; position: absolute; inset: -16%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255,69,0,.55), rgba(255,69,0,0));
+  opacity: 0; transform: scale(.8); transition: opacity .5s ease, transform .6s var(--bf-ease-out);
+}
+.bf-js .bf-attr:not(.is-in) .bf-attr__seal { opacity: 0; scale: .4; rotate: -30deg; }
+.bf-attr__info { order: 1; }
+.bf-attr__num { display: block; margin-bottom: 8px; color: var(--bf-gold); font-weight: 700; font-size: 13px; letter-spacing: .3em; }
+.bf-attr__title { margin: 0 0 10px; font-weight: 900; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.02; text-transform: uppercase; }
+.bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; }
+.bf-attr__card {
+  order: 2; position: relative; width: 100%; padding: 5px; border-radius: 22px;
+  background: linear-gradient(145deg, #FFE45C, var(--bf-gold) 30%, #F2A900 65%, #C97A00);
+  box-shadow: 0 30px 60px rgba(0,0,0,.55), 0 0 60px rgba(255,69,0,.18);
+}
+
+/* Mini-carrossel */
+.bf-carousel {
+  position: relative; overflow: hidden; isolation: isolate; aspect-ratio: 4 / 3; border-radius: 17px; cursor: pointer;
+  background: #161616 linear-gradient(110deg, #161616 30%, #232323 50%, #161616 70%) 0 0 / 220% 100%;
+  animation: bf-shimmer 1.6s linear infinite;
+}
+.bf-carousel.is-loaded { animation: none; }
+.bf-carousel::after { content: ''; position: absolute; inset: auto 0 0 0; z-index: 2; height: 42%; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5)); pointer-events: none; }
+.bf-slide { position: absolute; inset: 0; width: 100%; height: 100% !important; max-width: none !important; object-fit: cover; transform: translate3d(100%, 0, 0); }
+.bf-slide:not([src]) { visibility: hidden; }
+.bf-slide.is-active { z-index: 1; transform: translate3d(0, 0, 0); transition: transform .8s var(--bf-ease-out); animation: bf-kenburns 2.4s var(--bf-ease-out) both; }
+.bf-slide.is-leaving { transform: translate3d(-100%, 0, 0); transition: transform .8s var(--bf-ease-out); }
+.bf-carousel__bars { position: absolute; z-index: 3; left: 12px; right: 12px; top: 12px; display: flex; gap: 6px; }
+.bf-carousel__bars i { flex: 1; height: 3px; overflow: hidden; border-radius: 3px; background: rgba(255,255,255,.35); }
+.bf-carousel__bars b { display: block; height: 100%; background: #fff; transform: scaleX(0); transform-origin: 0 50%; }
+.bf-carousel__bars i.is-done b { transform: scaleX(1); }
+.bf-carousel__tag {
+  position: absolute; z-index: 3; left: 12px; bottom: 12px; padding: 7px 12px; border-radius: 999px;
+  background: rgba(10,10,10,.72); color: var(--bf-gold); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+}
+
+@keyframes bf-kenburns { from { scale: 1.12; } to { scale: 1; } }
+@keyframes bf-shimmer { to { background-position: -220% 0; } }
+@keyframes bf-ping { 0% { box-shadow: 0 0 0 0 rgba(255,69,0,.6); } 100% { box-shadow: 0 0 0 12px rgba(255,69,0,0); } }
+@keyframes bf-ring { 0% { transform: scale(.95); opacity: .8; } 100% { transform: scale(1.35); opacity: 0; } }
+
+/* Desktop com mouse: selos no eixo central, card surge no hover */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .bf-only-hover { display: inline; }
+  .bf-only-touch { display: none; }
+  .bf-attrs__list { gap: clamp(80px, 13vh, 150px); }
+  .bf-attrs__line {
+    display: block; position: absolute; left: 50%; top: 0; width: 2px; height: 0; margin-left: -1px;
+    border-radius: 2px; background: rgba(255,255,255,.08); pointer-events: none;
+  }
+  .bf-attrs__line-fill {
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(180deg, var(--bf-orange), var(--bf-gold));
+    box-shadow: 0 0 14px rgba(255,69,0,.65); transform: scaleY(0); transform-origin: 50% 0; will-change: transform;
+  }
+  .bf-attr { max-width: none; grid-template-columns: 1fr auto 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: center; justify-items: stretch; }
+  .bf-attr__hub { display: block; position: relative; grid-column: 2; grid-row: 1; }
+  .bf-attr__info { grid-row: 1; max-width: 360px; }
+  .bf-attr[data-side="right"] .bf-attr__info { grid-column: 1; justify-self: end; text-align: right; }
+  .bf-attr[data-side="left"] .bf-attr__info { grid-column: 3; justify-self: start; text-align: left; }
+  .bf-attr__seal { width: clamp(190px, 17vw, 250px); }
+  .bf-attr__seal::after {
+    content: ''; position: absolute; inset: 3%; border-radius: 50%; border: 2px solid rgba(255,215,0,.55);
+    animation: bf-ring 2.4s ease-out infinite; pointer-events: none;
+  }
+  .bf-attrs.is-linked .bf-attr:not(.is-lit) .bf-attr__seal img { filter: grayscale(.85) brightness(.5); }
+  .bf-attrs.is-linked .bf-attr:not(.is-lit) .bf-attr__seal::after { opacity: 0; animation: none; }
+  .bf-attr.is-lit .bf-attr__seal::before { opacity: .55; transform: scale(1); }
+  .bf-attr__card {
+    position: absolute; top: 50%; z-index: 1; width: clamp(300px, 30vw, 440px);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .3s ease, transform .7s var(--bf-spring), visibility 0s linear .7s;
+  }
+  .bf-attr[data-side="right"] .bf-attr__card { left: calc(100% + clamp(24px, 3vw, 44px)); transform-origin: 0 50%; transform: translate3d(-55%, -50%, 0) scale(.5) rotate(-10deg); }
+  .bf-attr[data-side="left"] .bf-attr__card { right: calc(100% + clamp(24px, 3vw, 44px)); transform-origin: 100% 50%; transform: translate3d(55%, -50%, 0) scale(.5) rotate(10deg); }
+  /* "ponte" invisível entre selo e card para o hover não cair no vão */
+  .bf-attr__card::before { content: ''; position: absolute; top: 0; bottom: 0; width: clamp(40px, 4vw, 60px); }
+  .bf-attr[data-side="right"] .bf-attr__card::before { right: 100%; }
+  .bf-attr[data-side="left"] .bf-attr__card::before { left: 100%; }
+  .bf-attr.is-open .bf-attr__card { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .25s ease, transform .7s var(--bf-spring), visibility 0s; }
+  .bf-attr[data-side="right"].is-open .bf-attr__card { transform: translate3d(0, -50%, 0) rotate(-2deg); }
+  .bf-attr[data-side="left"].is-open .bf-attr__card { transform: translate3d(0, -50%, 0) rotate(2deg); }
+  .bf-attr.is-open .bf-attr__seal { transform: scale(1.08) rotate(-6deg); }
+  .bf-attr.is-open .bf-attr__seal img { filter: none; }
+  .bf-attr.is-open .bf-attr__seal::before { opacity: 1; transform: scale(1.05); }
+}
+
+/* =========================================================
+   5. FORMULÁRIO (card laranja — ref. Assets/Cadastro-box.png)
+   ========================================================= */
+.bf-form { position: relative; padding: 0 0 clamp(40px, 8vh, 96px); scroll-margin-top: 3vh; }
+.bf-form__rise { max-width: 840px; margin: 0 auto; }
+/* Card plano: mesma linguagem do botão "Entre para o grupo" com as cores invertidas —
+   fundo laranja escuro/translúcido + borda dourada fina, sem sombras nem relevo */
+.bf-card {
+  position: relative; border: 2px solid var(--bf-gold); border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255,69,0,.58) 0%, rgba(255,69,0,.38) 100%), var(--bf-black);
+  transform-origin: 50% 100%; will-change: transform, opacity;
+}
+.bf-card__inner {
+  position: relative; overflow: hidden; border-radius: 22px;
+  padding: clamp(28px, 4.5vw, 52px) clamp(20px, 5vw, 64px) clamp(28px, 4vw, 44px);
+}
+.bf-card__title {
+  margin: 0 0 clamp(24px, 3.4vw, 36px); text-align: center; color: var(--bf-gold);
+  font-weight: 900; font-size: clamp(26px, 3.4vw, 40px); line-height: 1; text-transform: uppercase;
+}
+.bf-field { display: grid; gap: 8px; margin-bottom: 16px; }
+.bf-field label { color: var(--bf-gold); font-weight: 600; font-size: 14px; letter-spacing: .28em; text-transform: uppercase; cursor: pointer; }
+.bf-field input {
+  width: 100%; height: 52px; padding: 0 16px; border: 1.5px solid rgba(255,244,230,.85); border-radius: 9px;
+  background: rgba(255,255,255,.06); color: #fff; font: 400 17px/1.2 var(--bf-font);
+  outline: none; -webkit-appearance: none; appearance: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.bf-field input::placeholder { color: rgba(255,255,255,.62); }
+.bf-field input:hover { background: rgba(255,255,255,.1); }
+.bf-field input:focus { border-color: var(--bf-gold); background: rgba(0,0,0,.1); box-shadow: 0 0 0 4px rgba(255,215,0,.28); }
+.bf-field input:-webkit-autofill { -webkit-text-fill-color: #fff; -webkit-box-shadow: 0 0 0 100px #8E3210 inset; caret-color: #fff; }
+.bf-field.is-invalid input { border-color: #FFF3B0; box-shadow: 0 0 0 4px rgba(90,10,0,.3); }
+.bf-field__err { display: block; margin-top: 7px; color: #FFF3B0; font-size: 13px; font-weight: 600; }
+.bf-field__err:empty { display: none; }
+.bf-form__actions { display: flex; justify-content: center; margin-top: 26px; }
+.bf-form__status { min-height: 1.3em; margin: 14px 0 0; text-align: center; color: #FFF3B0; font-size: 14px; font-weight: 600; }
+.bf-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+@media (min-width: 640px) {
+  .bf-field { grid-template-columns: 150px 1fr; column-gap: 18px; align-items: start; }
+  .bf-field label { padding-top: 17px; text-align: right; }
+}
+.bf-success { padding: 8px 0; text-align: center; }
+.bf-success[hidden] { display: none; }
+.bf-success__icon {
+  width: 84px; height: 84px; margin: 0 auto 18px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--bf-gold); animation: bf-pop .8s var(--bf-spring) both;
+}
+.bf-success__icon svg { width: 44px; height: 44px; fill: none; stroke: #C92E07; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 60; stroke-dashoffset: 60; animation: bf-draw .6s .35s ease forwards; }
+.bf-success h3 { margin: 0 0 10px; color: var(--bf-gold); font-weight: 900; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.05; text-transform: uppercase; }
+.bf-success h3:focus { outline: none; }
+.bf-success p { max-width: 40ch; margin: 0 auto; font-size: 17px; }
+.bf-success__cta { margin-top: 24px; }
+@keyframes bf-draw { to { stroke-dashoffset: 0; } }
+
+/* Texto final + rodapé */
+.bf-final { max-width: 760px; margin: clamp(56px, 10vh, 110px) auto 0; text-align: center; }
+.bf-final__lead { margin: 0 0 .6em; font-weight: 900; font-size: clamp(24px, 3vw, 38px); line-height: 1.1; text-transform: uppercase; }
+.bf-final__lead span { color: var(--bf-gold); }
+.bf-final__text { margin: 0; color: var(--bf-muted); font-size: clamp(16px, 1.4vw, 19px); }
+.bf-footer { position: relative; padding: 56px 0 calc(40px + env(safe-area-inset-bottom)); text-align: center; }
+.bf-footer::before { content: ''; position: absolute; top: 0; left: 50%; width: min(760px, 86%); height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, rgba(255,215,0,0), rgba(255,215,0,.45), rgba(255,215,0,0)); }
+.bf-footer img { width: 201px; margin: 0 auto 18px; }
+.bf-footer p { margin: 0; color: rgba(255,255,255,.5); font-size: 13px; letter-spacing: .04em; }
+
+/* =========================================================
+   6. GLOW AMARELO QUE SEGUE O CURSOR (somente desktop com mouse)
+   ========================================================= */
+.bf-cursor-glow {
+  --glow: 320px;
+  position: fixed; left: 0; top: 0; z-index: 2147483000;
+  width: var(--glow); height: var(--glow); margin: calc(var(--glow) / -2) 0 0 calc(var(--glow) / -2);
+  border-radius: 50%; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgba(255,215,0,.15), rgba(255,215,0,.06) 45%, rgba(255,215,0,0) 100%);
+  mix-blend-mode: screen; will-change: transform;
+  transition: opacity .4s ease;
+}
+.bf-cursor-glow.is-visible { opacity: 1; }
+@media (max-width: 768px), (hover: none), (pointer: coarse) { .bf-cursor-glow { display: none !important; } }
+
+/* =========================================================
+   RESPONSIVO + MOVIMENTO REDUZIDO
+   ========================================================= */
+@media (max-width: 768px) {
+  :root { --bf-hero-h: 220vh; }
+  .bf-hero__anchor { top: 11vh; top: 11svh; }
+  .bf-hero__hint { font-size: 11px; letter-spacing: .24em; }
+  .bf-btn { min-height: 58px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after { animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Selo gigante fixo no fundo (opacidade 5%) -->
+<div class="bf-watermark" aria-hidden="true"><img src="Assets/Selo-BlackFriday.png" alt="" decoding="async"></div>
+
+<main class="bf">
+
+  <!-- ===================== 1. HERO ===================== -->
+  <section class="bf-hero" aria-label="Black Friday Pratagy 2026">
+    <div class="bf-hero__pin">
+      <div class="bf-hero__backdrop">
+        <img class="bf-hero__photo" src="Fotos/bg-topo.jpg" alt="" fetchpriority="high" decoding="async">
+        <div class="bf-hero__shade"></div>
+        <div class="bf-bubble-glow"></div>
+        <div class="bf-bubble"></div>
+      </div>
+      <div class="bf-hero__stage">
+        <div class="bf-hero__anchor">
+          <div class="bf-hero__halo"></div>
+          <h1 class="bf-hero__seal">
+            <div class="bf-par"><div class="bf-pop"><div class="bf-float bf-seal-stack">
+              <img class="bf-seal-img bf-seal-img--color" src="Assets/Selo-BlackFriday.png" alt="Black Friday Pratagy 2026 — 27 de novembro de 2026" width="598" height="591" fetchpriority="high">
+              <img class="bf-seal-img bf-seal-img--white" src="Assets/Selo-BlackFriday-white.png" alt="" width="604" height="596" decoding="async" fetchpriority="low">
+            </div></div></div>
+          </h1>
+        </div>
+        <a class="bf-hero__hint" href="#bf-intro"><span>Role para descobrir</span><span class="bf-mouse" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ícones de % (16, em 3 camadas de profundidade): surgem quando a bolha cobre a tela; parallax de scroll + mouse -->
+  <div class="bf-pcts" aria-hidden="true">
+    <span class="bf-pct bf-pct--l" style="--t:4;--s:170;--x:0;--xs:-0.42;--r:-14;--o:0.9;--i:0" data-speed="-.26"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:9;--s:110;--x:1.5;--xs:0;--r:12;--o:0.6;--i:1" data-speed=".18"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:14;--s:64;--x:17;--xs:0;--r:20;--o:0.35;--i:2" data-speed="-.08"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:19;--s:190;--x:0;--xs:-0.42;--r:-10;--o:0.9;--i:3" data-speed=".3"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:25;--s:120;--x:2;--xs:0;--r:8;--o:0.6;--i:4" data-speed=".16"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r bf-pct--far" style="--t:30;--s:72;--x:21;--xs:0;--r:-18;--o:0.35;--i:5" data-speed="-.1"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:36;--s:180;--x:0;--xs:-0.42;--r:16;--o:0.9;--i:6" data-speed=".28"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:41;--s:100;--x:1.5;--xs:0;--r:-6;--o:0.6;--i:7" data-speed="-.16"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:47;--s:58;--x:24;--xs:0;--r:-12;--o:0.35;--i:8" data-speed=".07"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:52;--s:165;--x:0;--xs:-0.42;--r:14;--o:0.9;--i:9" data-speed="-.3"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:58;--s:115;--x:1.5;--xs:0;--r:-16;--o:0.6;--i:10" data-speed=".2"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r bf-pct--far" style="--t:63;--s:66;--x:17;--xs:0;--r:10;--o:0.35;--i:11" data-speed="-.09"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l" style="--t:69;--s:185;--x:0;--xs:-0.42;--r:-8;--o:0.9;--i:12" data-speed="-.24"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:74;--s:105;--x:2;--xs:0;--r:18;--o:0.6;--i:13" data-speed=".15"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--l bf-pct--far" style="--t:80;--s:60;--x:19;--xs:0;--r:6;--o:0.35;--i:14" data-speed=".08"><img class="bf-float" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+    <span class="bf-pct bf-pct--r" style="--t:86;--s:160;--x:0;--xs:-0.42;--r:-14;--o:0.9;--i:15" data-speed=".26"><img class="bf-float bf-float--b" src="Assets/percentage-icon.png" alt="" width="415" height="414" decoding="async"></span>
+  </div>
+
+  <!-- Zona do botão sticky: seções 3 e 4 -->
+  <div class="bf-zone">
+
+    <!-- ===================== 3. TEXTO ===================== -->
+    <section class="bf-intro" id="bf-intro">
+      <div class="bf-wrap">
+        <p class="bf-eyebrow"><span data-split>27 de novembro de 2026</span></p>
+        <h2 class="bf-intro__title" data-split>Lorem ipsum dolor sit <em>consectetur</em> adipiscing</h2>
+        <p class="bf-intro__text" data-split>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="bf-intro__text" data-split>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 4. ATRIBUTOS ===================== -->
+    <section class="bf-attrs" aria-labelledby="bf-attrs-title">
+      <div class="bf-wrap">
+        <header class="bf-attrs__head bf-reveal">
+          <p class="bf-eyebrow">Vantagens</p>
+          <h2 class="bf-h2" id="bf-attrs-title">Lorem ipsum dolor</h2>
+          <p class="bf-attrs__hint"><span class="bf-only-hover">Passe o mouse sobre os selos</span><span class="bf-only-touch">Toque nas fotos para avançar</span></p>
+        </header>
+
+        <div class="bf-attrs__list">
+          <span class="bf-attrs__line" aria-hidden="true"><span class="bf-attrs__line-fill"></span></span>
+
+          <article class="bf-attr" data-side="right">
+            <div class="bf-attr__info bf-reveal">
+              <span class="bf-attr__num">01</span>
+              <h3 class="bf-attr__title">All Inclusive</h3>
+              <p class="bf-attr__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div class="bf-attr__hub">
+              <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-1" aria-label="Ver fotos: All Inclusive">
+                <img src="Assets/All-inclusive.png" alt="" width="224" height="229">
+              </button>
+              <div class="bf-attr__card" id="bf-card-1">
+                <div class="bf-carousel" data-carousel>
+                  <div class="bf-carousel__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto1.jpg" alt="Prato de costela glaceada servido ao ar livre" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto2.jpg" alt="Brinde com drinks coloridos entre coqueiros" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/all-inclusive-foto3.jpg" alt="Camarões com limão e petiscos servidos à mesa" decoding="async">
+                  <span class="bf-carousel__tag">All Inclusive</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="bf-attr" data-side="left">
+            <div class="bf-attr__info bf-reveal">
+              <span class="bf-attr__num">02</span>
+              <h3 class="bf-attr__title">2 crianças grátis de até 15 anos</h3>
+              <p class="bf-attr__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div class="bf-attr__hub">
+              <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-2" aria-label="Ver fotos: 2 crianças grátis de até 15 anos">
+                <img src="Assets/2-criancas.png" alt="" width="218" height="224">
+              </button>
+              <div class="bf-attr__card" id="bf-card-2">
+                <div class="bf-carousel" data-carousel>
+                  <div class="bf-carousel__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+                  <img class="bf-slide" data-src="Fotos/criancas-foto1.jpg" alt="Família brincando no parquinho entre coqueiros" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/criancas-foto2.jpg" alt="Família passeando pelos jardins do resort" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/criancas-foto3.jpg" alt="Família caminhando à beira-mar" decoding="async">
+                  <span class="bf-carousel__tag">Crianças grátis</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="bf-attr" data-side="right">
+            <div class="bf-attr__info bf-reveal">
+              <span class="bf-attr__num">03</span>
+              <h3 class="bf-attr__title">Entrada Acqua Park inclusa</h3>
+              <p class="bf-attr__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div class="bf-attr__hub">
+              <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-3" aria-label="Ver fotos: Entrada Acqua Park inclusa">
+                <img src="Assets/Acqua-Park.png" alt="" width="222" height="229">
+              </button>
+              <div class="bf-attr__card" id="bf-card-3">
+                <div class="bf-carousel" data-carousel>
+                  <div class="bf-carousel__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+                  <img class="bf-slide" data-src="Fotos/acqua-park-foto1.jpg" alt="Toboáguas coloridos do Acqua Park" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/acqua-park-foto2.jpg" alt="Amigas em boias no rio lento do Acqua Park" decoding="async">
+                  <img class="bf-slide" data-src="Fotos/acqua-park-foto3.jpg" alt="Vista aérea dos toboáguas do Acqua Park" decoding="async">
+                  <span class="bf-carousel__tag">Acqua Park</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Botão sticky (CSS puro — ref. Assets/botao-entre-para-o-grupo.png) -->
+    <div class="bf-dock">
+      <a class="bf-btn bf-btn--cta" href="#cadastro" data-cta><span>Entre para o grupo</span></a>
+    </div>
+  </div>
+
+  <!-- ===================== 5. FORMULÁRIO ===================== -->
+  <section class="bf-form" id="cadastro" aria-labelledby="bf-form-title">
+    <div class="bf-wrap">
+      <div class="bf-form__rise">
+        <div class="bf-card">
+          <div class="bf-card__inner">
+            <form class="bf-form__el" action="#" method="post" novalidate>
+              <h2 class="bf-card__title" id="bf-form-title">Faça seu cadastro</h2>
+              <div class="bf-field">
+                <label for="bf-nome">Nome:</label>
+                <div>
+                  <input id="bf-nome" name="nome" type="text" autocomplete="name" maxlength="80" required aria-describedby="bf-nome-err">
+                  <span class="bf-field__err" id="bf-nome-err"></span>
+                </div>
+              </div>
+              <div class="bf-field">
+                <label for="bf-email">Email:</label>
+                <div>
+                  <input id="bf-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" required aria-describedby="bf-email-err">
+                  <span class="bf-field__err" id="bf-email-err"></span>
+                </div>
+              </div>
+              <div class="bf-field">
+                <label for="bf-whats">WhatsApp:</label>
+                <div>
+                  <input id="bf-whats" name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" maxlength="15" placeholder="(00) 00000-0000" required aria-describedby="bf-whats-err">
+                  <span class="bf-field__err" id="bf-whats-err"></span>
+                </div>
+              </div>
+              <input class="bf-hp" type="text" name="empresa" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div class="bf-form__actions">
+                <button class="bf-btn bf-btn--gold" type="submit"><span>Quero participar</span></button>
+              </div>
+              <p class="bf-form__status" role="status" aria-live="polite"></p>
+            </form>
+            <div class="bf-success" hidden>
+              <div class="bf-success__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M12 25l8 8 16-17"/></svg></div>
+              <h3 tabindex="-1">Cadastro realizado!</h3>
+              <p class="bf-success__msg">Obrigado! Seu cadastro foi recebido com sucesso.</p>
+              <a class="bf-btn bf-btn--gold bf-success__cta" href="#" target="_blank" rel="noopener" hidden><span>Entrar no grupo</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bf-final bf-reveal">
+        <p class="bf-final__lead">Nos vemos em <span>27 de novembro</span></p>
+        <p class="bf-final__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bf-footer">
+    <div class="bf-wrap">
+      <img src="Assets/Marca-grupo-pratagy.png" alt="Grupo Pratagy" width="201" height="58" loading="lazy" decoding="async">
+      <p>© 2026 Grupo Pratagy. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</main>
+
+<!-- Glow amarelo que segue o cursor -->
+<div class="bf-cursor-glow" aria-hidden="true"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     CONFIGURAÇÃO
+     ========================================================= */
+  var CONFIG = {
+    formEndpoint: '',     // URL que recebe o POST do formulário (webhook RD Station, Zapier, CRM...). Vazio = modo demonstração.
+    groupUrl: '',         // Link do grupo (ex.: https://chat.whatsapp.com/XXXX). Se preenchido, aparece "Entrar no grupo" após o cadastro.
+    slideInterval: 2000   // Tempo de cada foto do mini-carrossel (ms)
+  };
+
+  /* =========================================================
+     UTILITÁRIOS
+     ========================================================= */
+  const doc = document, root = doc.documentElement, win = window;
+  const $ = (s, c) => (c || doc).querySelector(s);
+  const $$ = (s, c) => Array.from((c || doc).querySelectorAll(s));
+  const clamp = (v, a = 0, b = 1) => (v < a ? a : v > b ? b : v);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const outCubic = t => 1 - Math.pow(1 - t, 3);
+  const inOutCubic = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const mq = q => (win.matchMedia ? win.matchMedia(q) : { matches: false });
+  const onMQ = (m, fn) => { if (m.addEventListener) m.addEventListener('change', fn); else if (m.addListener) m.addListener(fn); };
+  const scrollY = () => win.scrollY || win.pageYOffset || 0;
+
+  const reduceMQ = mq('(prefers-reduced-motion: reduce)');
+  const interactiveMQ = mq('(hover: hover) and (pointer: fine) and (min-width: 900px)');
+  const fineMQ = mq('(min-width: 769px) and (hover: hover) and (pointer: fine)'); // desktop com mouse
+  let reduced = reduceMQ.matches;
+
+  const E = {
+    hero: $('.bf-hero'), pin: $('.bf-hero__pin'), backdrop: $('.bf-hero__backdrop'), photo: $('.bf-hero__photo'),
+    bubble: $('.bf-bubble'), glow: $('.bf-bubble-glow'), anchor: $('.bf-hero__anchor'), halo: $('.bf-hero__halo'),
+    seal: $('.bf-hero__seal'), sealPar: $('.bf-hero__seal .bf-par'), hint: $('.bf-hero__hint'), pcts: $('.bf-pcts'),
+    mark: $('.bf-watermark img'), attrs: $('.bf-attrs'), list: $('.bf-attrs__list'), line: $('.bf-attrs__line'),
+    lineFill: $('.bf-attrs__line-fill'), rise: $('.bf-form__rise'), card: $('.bf-card'), wrap: $('.bf-intro .bf-wrap')
+  };
+
+  /* Escrita de estilo com cache: só toca no DOM quando o valor muda */
+  const styleCache = new WeakMap();
+  function css(el, prop, val) {
+    if (!el) return;
+    let c = styleCache.get(el);
+    if (!c) { c = {}; styleCache.set(el, c); }
+    if (c[prop] === val) return;
+    c[prop] = val;
+    if (prop.charCodeAt(0) === 45) el.style.setProperty(prop, val); else el.style[prop] = val;
+  }
+
+  /* =========================================================
+     MEDIÇÕES (cacheadas; refeitas só em resize/load/fonts)
+     ========================================================= */
+  const M = { vw: 1, vh: 1, heroTop: 0, heroRange: 1, heroEnd: 0, pinW: 1, pinH: 1, cx: 0, cy: 0, r0: 0, rCover: 1, riseFrom: 0, docMax: 1, formTop: 0, lineTop: 0, lineH: 1, linked: false, covered: false };
+  const splits = [];
+  let rows = [];
+  let needMeasure = true;
+  // Fases da bolha (fração do scroll do hero) — compartilhadas com o gatilho dos ícones de %
+  const GROW_START = .36, GROW_END = .86;
+  // Parallax de mouse dos ícones: amplitude em px = data-mouse (opcional) ou data-speed × 110.
+  // O sinal do data-speed define a direção: ícones "perto" e "longe" se movem em sentidos opostos.
+  const pcts = $$('.bf-pct').map(el => {
+    const speed = parseFloat(el.getAttribute('data-speed')) || 0, dm = el.getAttribute('data-mouse');
+    return { el: el, speed: speed, mouse: dm !== null ? parseFloat(dm) || 0 : speed * 110, rot: parseFloat(el.style.getPropertyValue('--r')) || 0, cy: 0 };
+  });
+
+  function measure() {
+    needMeasure = false;
+    const sy = scrollY();
+    M.vw = win.innerWidth || 1;
+    M.vh = win.innerHeight || 1;
+    if (E.hero && E.pin && E.anchor) {
+      const hr = E.hero.getBoundingClientRect(), pr = E.pin.getBoundingClientRect(), ar = E.anchor.getBoundingClientRect();
+      M.heroTop = hr.top + sy;
+      M.heroRange = Math.max(1, hr.height - pr.height);
+      M.heroEnd = M.heroTop + hr.height;
+      M.pinW = pr.width; M.pinH = pr.height;
+      M.cx = ar.left - pr.left + ar.width / 2;
+      M.cy = ar.top - pr.top + ar.height / 2;
+      M.r0 = ar.width * .36;                                  // bolha escondida atrás do selo (a coroa aparece em volta)
+      M.rCover = Math.hypot(Math.max(M.cx, M.pinW - M.cx), Math.max(M.cy, M.pinH - M.cy)) + 6;
+      M.riseFrom = M.pinH + M.r0 * 1.45;                      // nasce abaixo da tela
+    }
+    for (let i = 0; i < splits.length; i++) splits[i].top = splits[i].el.getBoundingClientRect().top + sy;
+    if (E.rise) M.formTop = E.rise.getBoundingClientRect().top + sy;
+    if (E.pcts) {
+      const pr = E.pcts.getBoundingClientRect(), pt = pr.top + sy, wr = E.wrap && E.wrap.getBoundingClientRect();
+      const cl = wr ? wr.left - pr.left : 0, cr = wr ? wr.right - pr.left : pr.width;
+      for (let i = 0; i < pcts.length; i++) {
+        const el = pcts[i].el, l = el.offsetLeft, w = el.offsetWidth || 1;
+        pcts[i].cy = pt + el.offsetTop + el.offsetHeight / 2;
+        // Quanto mais o ícone invade a coluna de conteúdo, mais apagado fica (legibilidade em qualquer largura)
+        const ov = Math.max(0, Math.min(l + w, cr) - Math.max(l, cl)) / w;
+        el.style.setProperty('--m', (1 - .6 * clamp(ov / .35)).toFixed(3));
+      }
+    }
+    M.docMax = Math.max(1, root.scrollHeight - M.vh);
+    measureLine(sy);
+  }
+
+  function measureLine(sy) {
+    M.linked = !!(E.list && E.line && rows.length > 1 && interactiveMQ.matches);
+    if (E.attrs) E.attrs.classList.toggle('is-linked', M.linked);
+    if (!M.linked) return;
+    const lr = E.list.getBoundingClientRect();
+    const centers = rows.map(r => { const b = r.seal.getBoundingClientRect(); return b.top + b.height / 2 - lr.top; });
+    const top = centers[0], h = Math.max(1, centers[centers.length - 1] - top);
+    E.line.style.top = top + 'px';
+    E.line.style.height = h + 'px';
+    M.lineTop = lr.top + sy + top;
+    M.lineH = h;
+    rows.forEach((r, i) => { r.frac = (centers[i] - top) / h; });
+  }
+
+  /* =========================================================
+     LOOP ÚNICO DE ANIMAÇÃO (rAF) — dorme quando nada muda
+     ========================================================= */
+  let raf = 0, lastT = 0, sy = -1;
+  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+  function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+
+  function frame(now) {
+    raf = 0;
+    if (needMeasure) measure();
+    const dt = lastT ? Math.min(.05, (now - lastT) / 1000) : 1 / 60;
+    lastT = now;
+    const target = scrollY();
+    // scroll suavizado (inércia leve); saltos grandes = snap imediato
+    if (sy < 0 || reduced || Math.abs(target - sy) > M.vh * 1.5) sy = target;
+    else { sy += (target - sy) * (1 - Math.exp(-dt * 13)); if (Math.abs(target - sy) < .4) sy = target; }
+    const km = 1 - Math.exp(-dt * 6);
+    mouse.x += (mouse.tx - mouse.x) * km;
+    mouse.y += (mouse.ty - mouse.y) * km;
+    if (Math.abs(mouse.tx - mouse.x) < 1e-3) mouse.x = mouse.tx;
+    if (Math.abs(mouse.ty - mouse.y) < 1e-3) mouse.y = mouse.ty;
+
+    renderHero(); renderWatermark(); renderSplits(); renderLine(); renderForm(); renderCover(); renderPcts();
+
+    if (sy !== target || mouse.x !== mouse.tx || mouse.y !== mouse.ty) kick(); else lastT = 0;
+  }
+
+  /* 1 + 2. Hero: bolha sobe por trás do selo e expande (clip-path) */
+  function renderHero() {
+    if (!E.hero || sy > M.heroEnd + 50) return;
+    const p = clamp((sy - M.heroTop) / M.heroRange);
+    const rt = clamp(p / .32), rise = rt * (2 - rt);  // 0 → .32  subida
+    const grow = inOutCubic(clamp((p - GROW_START) / (GROW_END - GROW_START))); // .36 → .86 expansão
+    const fade = clamp((p - .88) / .12);              // .88 → 1   revela o fundo global
+    const cy = lerp(M.riseFrom, M.cy, rise);
+    const r = lerp(M.r0, M.rCover, grow);
+    css(E.bubble, 'clipPath', 'circle(' + r.toFixed(1) + 'px at ' + M.cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px)');
+    css(E.glow, 'transform', 'translate3d(' + (M.cx - 200).toFixed(1) + 'px,' + (cy - 200).toFixed(1) + 'px,0) scale(' + (r / 156).toFixed(4) + ')');
+    css(E.glow, 'opacity', (clamp(p / .04) * (1 - clamp((grow - .7) / .3))).toFixed(3));
+    css(E.photo, 'transform', 'scale(' + (1 + .12 * p).toFixed(4) + ')');
+    css(E.backdrop, 'opacity', (1 - fade).toFixed(3));
+    css(E.seal, 'transform', 'scale(' + (1 - .12 * grow).toFixed(4) + ')');
+    css(E.halo, 'opacity', grow.toFixed(3));
+    css(E.hint, 'opacity', (1 - clamp(p / .08)).toFixed(3));
+    css(E.hint, 'visibility', p > .1 ? 'hidden' : 'visible');
+    // Parallax do mouse no selo
+    const mx = mouse.x, my = mouse.y;
+    css(E.sealPar, 'transform', 'translate3d(' + (mx * 16).toFixed(2) + 'px,' + (my * 12).toFixed(2) + 'px,0) rotateY(' + (mx * 8).toFixed(2) + 'deg) rotateX(' + (-my * 8).toFixed(2) + 'deg)');
+  }
+
+  /* Selo gigante do fundo: desliza e gira devagar ao longo da página */
+  function renderWatermark() {
+    if (reduced) return;
+    const q = clamp(sy / M.docMax);
+    css(E.mark, 'transform', 'translate3d(-50%,calc(-50% + ' + ((.5 - q) * .36 * M.vh).toFixed(1) + 'px),0) rotate(' + ((q - .5) * 28).toFixed(2) + 'deg)');
+  }
+
+  /* 3. Texto: fade-in + translateY progressivo, palavra a palavra */
+  function renderSplits() {
+    for (let i = 0; i < splits.length; i++) {
+      const s = splits[i];
+      const v = Math.round(clamp((M.vh * .92 - (s.top - sy)) / (M.vh * .5)) * 1000) / 1000;
+      if (v !== s.p) { s.p = v; s.el.style.setProperty('--p', v); }
+    }
+  }
+
+  /* 4. Linha que conecta os selos e "acende" cada um */
+  function renderLine() {
+    if (!M.linked) return;
+    const q = clamp((M.vh * .58 - (M.lineTop - sy)) / M.lineH);
+    css(E.lineFill, 'transform', 'scaleY(' + q.toFixed(4) + ')');
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i], lit = q > 0 && q >= r.frac - .001;
+      if (lit !== r.lit) { r.lit = lit; r.el.classList.toggle('is-lit', lit); }
+    }
+  }
+
+  /* 5. Card do formulário subindo suavemente */
+  function renderForm() {
+    if (!E.card || reduced) return;
+    let p = clamp((M.vh - (M.formTop - sy)) / (M.vh * .62));
+    if (sy >= M.docMax - 2) p = 1;
+    const e = outCubic(p);
+    css(E.card, 'transform', 'translate3d(0,' + ((1 - e) * 160).toFixed(1) + 'px,0) scale(' + (.92 + .08 * e).toFixed(4) + ')');
+    css(E.card, 'opacity', clamp(p / .55).toFixed(3));
+  }
+
+  /* Gatilho único do fim da bolha: ícones de % aparecem e o selo faz crossfade para a versão white
+     (e volta para a colorida quando a bolha recua ao rolar para cima) */
+  function renderCover() {
+    const on = sy >= M.heroTop + M.heroRange * GROW_END - 1;
+    if (on === M.covered) return;
+    M.covered = on;
+    if (E.pcts) E.pcts.classList.toggle('is-on', on);
+    if (E.hero) E.hero.classList.toggle('is-white', on);
+  }
+
+  /* Ícones de %: parallax de scroll (Y) + parallax de mouse (X/Y) somados num único translate3d.
+     Os dois valores vêm suavizados do loop (scroll e mouse), então não há saltos. */
+  function renderPcts() {
+    if (!E.pcts || reduced) return;
+    const mid = sy + M.vh / 2, lim = M.vh * .75, mx = mouse.x, my = mouse.y;
+    for (let i = 0; i < pcts.length; i++) {
+      const p = pcts[i], d = clamp(p.cy - mid, -lim, lim) * p.speed;
+      const ox = mx * p.mouse, oy = my * p.mouse * .7;
+      css(p.el, 'transform', 'translate3d(' + ox.toFixed(1) + 'px,' + (d + oy).toFixed(1) + 'px,0) rotate(' + (p.rot + d * .05 + mx * p.speed * 12).toFixed(2) + 'deg)');
+    }
+  }
+
+  /* Divide o texto em palavras (mantém uma cópia acessível para leitores de tela) */
+  function splitWords(el) {
+    const text = el.textContent.replace(/\s+/g, ' ').trim();
+    let n = 0;
+    Array.from(el.childNodes).forEach(ch => {
+      if (ch.nodeType === 3) {
+        const frag = doc.createDocumentFragment();
+        ch.nodeValue.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(doc.createTextNode(' ')); return; }
+          const w = doc.createElement('span');
+          w.className = 'bf-w'; w.style.setProperty('--i', n++); w.textContent = part;
+          frag.appendChild(w);
+        });
+        el.replaceChild(frag, ch);
+      } else if (ch.nodeType === 1 && ch.tagName !== 'BR') {
+        ch.classList.add('bf-w'); ch.style.setProperty('--i', n++);
+      }
+    });
+    const vis = doc.createElement('span');
+    vis.setAttribute('aria-hidden', 'true');
+    while (el.firstChild) vis.appendChild(el.firstChild);
+    const sr = doc.createElement('span');
+    sr.className = 'bf-sr'; sr.textContent = text;
+    el.appendChild(sr); el.appendChild(vis);
+    el.style.setProperty('--n', n);
+    el.style.setProperty('--p', 0);
+    el.classList.add('bf-split');
+    splits.push({ el: el, top: 0, p: 0 });
+  }
+
+  /* Parallax do mouse + glow (o glow segue o cursor sem delay) */
+  function onPointerMove(e) {
+    if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+    moveGlow(e.clientX, e.clientY);
+    if (reduced) return;
+    mouse.tx = (e.clientX / M.vw - .5) * 2;
+    mouse.ty = (e.clientY / M.vh - .5) * 2;
+    kick();
+  }
+
+  /* =========================================================
+     4. MINI-CARROSSEL — barra de progresso (WAAPI) dita o ritmo
+     ========================================================= */
+  function Carousel(el) {
+    this.el = el;
+    this.slides = $$('.bf-slide', el);
+    this.fills = $$('.bf-carousel__bars b', el);
+    this.i = 0; this.anim = null; this.timer = 0; this.playing = false; this.loaded = false;
+    if (this.slides[0]) this.slides[0].classList.add('is-active');
+    el.addEventListener('click', () => this.step());
+  }
+  Carousel.prototype.load = function () {
+    if (this.loaded) return;
+    this.loaded = true;
+    this.slides.forEach((img, k) => {
+      const src = img.getAttribute('data-src');
+      if (!src) return;
+      if (k === 0) {
+        const ok = () => this.el.classList.add('is-loaded');
+        img.addEventListener('load', ok, { once: true });
+        img.addEventListener('error', ok, { once: true });
+      }
+      img.src = src;
+      img.removeAttribute('data-src');
+    });
+  };
+  Carousel.prototype.play = function () {
+    if (this.playing || reduced || this.slides.length < 2) return;
+    this.playing = true;
+    this.load();
+    if (this.anim) this.anim.play(); else this.run();
+  };
+  Carousel.prototype.pause = function () {
+    this.playing = false;
+    if (this.anim) this.anim.pause();
+    clearTimeout(this.timer); this.timer = 0;
+  };
+  Carousel.prototype.run = function () {
+    const fill = this.fills[this.i];
+    if (fill && fill.animate) {
+      const a = fill.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: CONFIG.slideInterval, easing: 'linear', fill: 'forwards' });
+      a.onfinish = () => { if (this.anim !== a) return; this.anim = null; a.cancel(); this.next(); };
+      this.anim = a;
+    } else {
+      this.timer = setTimeout(() => { this.timer = 0; this.next(); }, CONFIG.slideInterval);
+    }
+  };
+  Carousel.prototype.next = function () {
+    this.go((this.i + 1) % this.slides.length);
+    if (this.playing) this.run();
+  };
+  Carousel.prototype.step = function () { // clique/toque avança manualmente
+    if (this.anim) { const a = this.anim; this.anim = null; a.cancel(); }
+    clearTimeout(this.timer); this.timer = 0;
+    this.load();
+    this.next();
+  };
+  Carousel.prototype.go = function (n) {
+    const cur = this.slides[this.i], nxt = this.slides[n];
+    if (!cur || !nxt || cur === nxt) return;
+    this.slides.forEach(s => s.classList.remove('is-leaving'));
+    cur.classList.remove('is-active');
+    cur.classList.add('is-leaving');
+    nxt.classList.add('is-active');
+    this.i = n;
+    this.fills.forEach((f, k) => f.parentNode.classList.toggle('is-done', k < n));
+  };
+
+  /* =========================================================
+     4. SELOS — hover (desktop) / sempre visível (touch)
+     ========================================================= */
+  let interactive = false, playIO = null;
+  rows = $$('.bf-attr').map(el => ({
+    el: el, seal: $('.bf-attr__seal', el), hub: $('.bf-attr__hub', el),
+    car: new Carousel($('[data-carousel]', el)), open: false, lit: false, frac: 0, t: 0
+  }));
+
+  function setOpen(r, on) {
+    if (r.open === on) return;
+    r.open = on;
+    r.el.classList.toggle('is-open', on);
+    r.seal.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (on) r.car.play(); else r.car.pause();
+  }
+
+  rows.forEach(r => {
+    r.hub.addEventListener('mouseenter', () => { if (!interactive) return; clearTimeout(r.t); setOpen(r, true); });
+    r.hub.addEventListener('mouseleave', () => { if (!interactive) return; clearTimeout(r.t); r.t = setTimeout(() => setOpen(r, false), 160); });
+    r.hub.addEventListener('focusin', () => { if (!interactive) return; clearTimeout(r.t); setOpen(r, true); });
+    r.hub.addEventListener('focusout', e => { if (interactive && !r.hub.contains(e.relatedTarget)) setOpen(r, false); });
+    r.seal.addEventListener('click', e => {
+      if (interactive) { if (e.detail === 0) setOpen(r, !r.open); } // Enter/Espaço
+      else r.car.step();
+    });
+  });
+
+  function applyMode() {
+    interactive = interactiveMQ.matches;
+    rows.forEach(r => { clearTimeout(r.t); setOpen(r, false); r.car.pause(); });
+    if (playIO) { playIO.disconnect(); playIO = null; }
+    if (!interactive && 'IntersectionObserver' in win) {
+      // Touch: carrossel toca sozinho apenas enquanto está visível
+      playIO = new IntersectionObserver(entries => entries.forEach(en => {
+        const r = rows.find(x => x.car.el === en.target);
+        if (r) { if (en.isIntersecting) r.car.play(); else r.car.pause(); }
+      }), { threshold: .45 });
+      rows.forEach(r => playIO.observe(r.car.el));
+    }
+    needMeasure = true; kick();
+  }
+
+  /* Carrega as fotos do carrossel só quando a seção se aproxima */
+  if ('IntersectionObserver' in win && E.attrs) {
+    const loadIO = new IntersectionObserver((entries, obs) => {
+      if (entries.some(en => en.isIntersecting)) { rows.forEach(r => r.car.load()); obs.disconnect(); }
+    }, { rootMargin: '900px 0px' });
+    loadIO.observe(E.attrs);
+  } else rows.forEach(r => r.car.load());
+
+  /* Revelação única de blocos */
+  const revealEls = $$('.bf-reveal, .bf-attr');
+  if ('IntersectionObserver' in win && !reduced) {
+    const io = new IntersectionObserver((entries, obs) => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('is-in'); obs.unobserve(en.target); }
+    }), { threshold: .2, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else revealEls.forEach(el => el.classList.add('is-in'));
+
+  /* =========================================================
+     5. FORMULÁRIO — validação, máscara de WhatsApp e envio
+     ========================================================= */
+  const form = $('.bf-form__el');
+  if (form) {
+    const success = $('.bf-success'), status = $('.bf-form__status', form);
+    const btn = $('button[type="submit"]', form), hp = $('.bf-hp', form);
+    const F = { nome: $('#bf-nome'), email: $('#bf-email'), whats: $('#bf-whats') };
+    const rules = {
+      nome: v => (v.trim().length >= 2 ? '' : 'Informe seu nome.'),
+      email: v => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Informe um e-mail válido.'),
+      whats: v => { const d = v.replace(/\D/g, ''); return (d.length === 10 || d.length === 11) && +d.slice(0, 2) >= 11 ? '' : 'Informe um WhatsApp válido com DDD.'; }
+    };
+    const setErr = (k, msg) => {
+      const input = F[k];
+      input.closest('.bf-field').classList.toggle('is-invalid', !!msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      doc.getElementById(input.id + '-err').textContent = msg;
+    };
+    const check = k => { const msg = rules[k](F[k].value); setErr(k, msg); return !msg; };
+    const maskPhone = v => {
+      const d = v.replace(/\D/g, '').slice(0, 11);
+      if (d.length <= 2) return d.length ? '(' + d : '';
+      if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+      if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+      return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+    };
+
+    F.whats.addEventListener('input', () => { F.whats.value = maskPhone(F.whats.value); });
+    Object.keys(F).forEach(k => {
+      F[k].addEventListener('blur', () => { if (F[k].value) check(k); });
+      F[k].addEventListener('input', () => { if (F[k].closest('.bf-field').classList.contains('is-invalid')) check(k); });
+    });
+
+    const done = data => {
+      $('.bf-success__msg', success).textContent = 'Obrigado, ' + data.nome.split(/\s+/)[0] + '! Seu cadastro foi recebido com sucesso.';
+      const cta = $('.bf-success__cta', success);
+      if (CONFIG.groupUrl && cta) { cta.href = CONFIG.groupUrl; cta.hidden = false; }
+      form.hidden = true;
+      success.hidden = false;
+      const h = $('h3', success);
+      if (h) h.focus({ preventScroll: true });
+      if (Array.isArray(win.dataLayer)) win.dataLayer.push({ event: 'bf2026_cadastro' });
+      doc.dispatchEvent(new CustomEvent('bf:cadastro', { detail: data }));
+      needMeasure = true; kick();
+    };
+
+    let sending = false;
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (sending) return;
+      const bad = Object.keys(F).filter(k => !check(k));
+      if (bad.length) { F[bad[0]].focus(); status.textContent = 'Confira os campos destacados.'; return; }
+      status.textContent = '';
+      const data = { nome: F.nome.value.trim(), email: F.email.value.trim(), whatsapp: F.whats.value.replace(/\D/g, ''), origem: 'lp-black-friday-2026' };
+      if (hp && hp.value) { done(data); return; } // honeypot: robô
+      sending = true;
+      btn.disabled = true;
+      const label = btn.firstElementChild.textContent;
+      btn.firstElementChild.textContent = 'Enviando...';
+      const req = CONFIG.formEndpoint
+        ? fetch(CONFIG.formEndpoint, { method: 'POST', body: new URLSearchParams(data), headers: { Accept: 'application/json' } })
+            .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); })
+        : new Promise(res => setTimeout(res, 700));
+      req.then(() => done(data))
+        .catch(() => { status.textContent = 'Não foi possível enviar agora. Tente novamente.'; })
+        .then(() => { sending = false; btn.disabled = false; btn.firstElementChild.textContent = label; });
+    });
+  }
+
+  /* Botão "Entre para o grupo" → rola até o cadastro */
+  $$('[data-cta]').forEach(a => a.addEventListener('click', e => {
+    const target = doc.getElementById('cadastro');
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    if (fineMQ.matches) setTimeout(() => { const i = $('#bf-nome'); if (i && form && !form.hidden) i.focus({ preventScroll: true }); }, 900);
+  }));
+
+  /* =========================================================
+     6. GLOW AMARELO QUE SEGUE O CURSOR
+     ========================================================= */
+  const glow = $('.bf-cursor-glow');
+  let glowOn = false, glowShown = false;
+
+  function moveGlow(x, y) {
+    if (!glowOn) return;
+    glow.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    if (!glowShown) { glowShown = true; glow.classList.add('is-visible'); }
+  }
+  function hideGlow() { if (glowShown) { glowShown = false; glow.classList.remove('is-visible'); } }
+  function setupGlow() { glowOn = !!glow && fineMQ.matches; if (!glowOn) hideGlow(); }
+
+  /* =========================================================
+     INICIALIZAÇÃO
+     ========================================================= */
+  function init() {
+    if (!reduced) $$('[data-split]').forEach(splitWords);
+    applyMode();
+    setupGlow();
+
+    onMQ(interactiveMQ, applyMode);
+    onMQ(fineMQ, setupGlow);
+    onMQ(reduceMQ, () => { reduced = reduceMQ.matches; needMeasure = true; kick(); });
+
+    const remeasure = () => { needMeasure = true; kick(); };
+    win.addEventListener('scroll', kick, { passive: true });
+    win.addEventListener('resize', remeasure, { passive: true });
+    win.addEventListener('load', remeasure);
+    win.addEventListener('pageshow', e => { if (e.persisted) { sy = -1; remeasure(); } });
+    win.addEventListener('pointermove', onPointerMove, { passive: true });
+    win.addEventListener('blur', hideGlow);
+    doc.addEventListener('mouseout', e => { if (!e.relatedTarget) { hideGlow(); mouse.tx = mouse.ty = 0; kick(); } });
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(remeasure);
+    if ('ResizeObserver' in win) new ResizeObserver(remeasure).observe(doc.body);
+
+    const ph = E.photo;
+    if (ph) {
+      const ok = () => ph.classList.add('is-loaded');
+      if (ph.complete) ok(); else { ph.addEventListener('load', ok, { once: true }); ph.addEventListener('error', ok, { once: true }); }
+    }
+    const whiteSeal = $('.bf-seal-img--white');
+    if (whiteSeal && whiteSeal.decode) whiteSeal.decode().catch(() => {});
+    const sealImg = $('.bf-hero__seal img'), ready = () => root.classList.add('bf-ready');
+    if (!sealImg || sealImg.complete) ready();
+    else { sealImg.addEventListener('load', ready, { once: true }); sealImg.addEventListener('error', ready, { once: true }); setTimeout(ready, 2500); }
+
+    kick();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Clone/backup local do repositório — não versionar
+blackfriday-pratagy2026/
+
+# Temporários e arquivos de sistema
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
