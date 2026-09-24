@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cadastro Concluído | Black Friday Pratagy 2026</title>
+<meta name="description" content="Seu cadastro foi concluído com sucesso. Entre no grupo VIP do WhatsApp para receber o link de compra primeiro.">
+<!-- Página privada (destino do formulário da SharpSpring): fora do Google -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" type="image/webp" href="Assets/Selo-BlackFriday.webp">
+<link rel="preload" href="Fonte/Fibra-One-Heavy.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="Fonte/Fibra-One-Regular.otf" as="font" type="font/otf" crossorigin>
+<style>
+/* =========================================================
+   FONTES — Fibra One (arquivos locais em Fonte/), iguais à landing page
+   ========================================================= */
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('Fonte/Fibra-One-Heavy.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* =========================================================
+   DESIGN TOKENS (mesmos da landing page)
+   ========================================================= */
+:root {
+  --bf-black: #0A0A0A;
+  --bf-orange: #FF4500;
+  --bf-orange-deep: #D8340A;
+  --bf-gold: #FFD700;
+  --bf-gold-deep: #E89B00;
+  --bf-white: #FFFFFF;
+  --bf-muted: rgba(255, 255, 255, .72);
+  --bf-green: #25D366;
+  --bf-green-deep: #128C4A;
+  --bf-font: 'Fibra One', 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --bf-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --bf-gutter: clamp(16px, 5vw, 48px);
+  --ty-icon: 48px;   /* diâmetro dos ícones das redes (56px no desktop) */
+}
+
+/* =========================================================
+   BASE (mobile-first)
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bf-black); }
+body {
+  margin: 0; min-height: 100vh; min-height: 100svh; background: var(--bf-black); color: var(--bf-white);
+  font-family: var(--bf-font); font-weight: 400; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.bf { position: relative; z-index: 1; overflow-x: clip; display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+.bf img { display: block; max-width: 100%; height: auto; }
+.bf-wrap { width: min(760px, 100% - var(--bf-gutter) * 2); margin-inline: auto; }
+.bf-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.bf :focus-visible { outline: 3px solid var(--bf-gold); outline-offset: 4px; }
+
+/* Selo gigante fixo no fundo (5%), como na landing — aqui parado, sem parallax */
+.bf-watermark { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.bf-watermark img {
+  position: absolute; left: 50%; top: 50%;
+  width: max(125vmin, 720px); max-width: none; height: auto;
+  opacity: .05; transform: translate(-50%, -50%) rotate(-8deg);
+}
+
+/* Fade-in ao carregar: CSS puro, em sequência (--d = atraso de cada bloco) */
+.ty-in { animation: ty-in .9s var(--bf-ease-out) both; animation-delay: calc(var(--d, 0) * 110ms + 80ms); }
+@keyframes ty-in { from { opacity: 0; transform: translate3d(0, 22px, 0); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ty-in, .ty-check::before, .ty-check img { animation: none !important; } }
+
+/* =========================================================
+   1. CONFIRMAÇÃO
+   ========================================================= */
+.ty-hero { flex: 1 0 auto; padding: clamp(56px, 12vh, 120px) 0 clamp(64px, 11vh, 104px); text-align: center; }
+/* Check (Assets/check-obrigado.webp) com pulso verde atrás — mesma técnica do ::before dos selos de
+   atributos da landing, aqui em loop. O check entra com o mesmo "pop" do selo do hero. */
+.ty-check { position: relative; isolation: isolate; width: 124px; aspect-ratio: 1; margin: 0 auto 30px; }
+.ty-check::before {
+  content: ''; position: absolute; inset: -24%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(37, 211, 102, .55), rgba(37, 211, 102, 0));
+  animation: ty-pulse 2.6s ease-in-out infinite;
+}
+.ty-check img { width: 100%; animation: bf-pop 1.2s var(--bf-spring) .1s both; }
+@keyframes ty-pulse { 0%, 100% { opacity: .45; transform: scale(.86); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes bf-pop { from { opacity: 0; transform: scale(.55) rotate(-8deg); } to { opacity: 1; transform: none; } }
+
+/* Mesmo peso do título principal da landing (.bf-intro__title): Fibra One Heavy (900) */
+.ty-title {
+  margin: 0 0 .5em; color: var(--bf-gold); font-weight: 900;
+  font-size: clamp(34px, 7vw, 64px); line-height: 1; letter-spacing: .06em; text-transform: uppercase;
+}
+/* Justificado com a última linha centralizada, sem hifenização */
+.ty-text {
+  max-width: 620px; margin: 0 auto; color: var(--bf-muted); font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6;
+  text-align: justify; text-align-last: center; -webkit-hyphens: none; hyphens: none; word-spacing: normal;
+}
+.ty-text strong { color: var(--bf-white); font-weight: 600; }
+.ty-nw { white-space: nowrap; }   /* "e-mails" não quebra no hífen */
+/* Celular: centralizado, sem justificar — em coluna estreita o justificado abre espaços grandes entre as palavras */
+@media (max-width: 479px) { .ty-text { text-align: center; text-align-last: auto; } }
+
+/* Botões: mesma linguagem do "Cadastre-se agora" da landing (degradês, borda dourada, Fibra One 900),
+   em tamanho menor para não dominar a tela */
+.ty-actions { display: flex; flex-direction: column; align-items: stretch; gap: 12px; width: min(300px, 100%); margin: 34px auto 0; }
+.bf-btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6em;
+  min-height: 44px; padding: 0 20px;
+  border: 2px solid transparent; border-radius: 12px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, #FF6A2E 0%, var(--bf-orange) 42%, var(--bf-orange-deep) 100%) padding-box,
+    linear-gradient(180deg, #FFE45C 0%, var(--bf-gold) 38%, var(--bf-gold-deep) 100%) border-box;
+  color: var(--bf-gold); font: 900 clamp(14px, 1.4vw, 17px)/1 var(--bf-font);
+  letter-spacing: .04em; text-transform: uppercase; text-decoration: none; white-space: nowrap;
+  text-shadow: 0 2px 0 rgba(122, 26, 0, .45);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 -5px 12px rgba(120,20,0,.35), 0 12px 24px rgba(0,0,0,.45);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .25s var(--bf-ease-out), box-shadow .25s ease, filter .25s ease;
+}
+.bf-btn::after {
+  content: ''; position: absolute; z-index: -1; top: -30%; bottom: -30%; left: -10%; width: 26%;
+  background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.5), rgba(255,255,255,0));
+  transform: translateX(-160%) skewX(-18deg); pointer-events: none;
+}
+.bf-btn:hover {
+  transform: translateY(-2px); filter: saturate(1.1);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.32), inset 0 -5px 12px rgba(120,20,0,.35), 0 16px 30px rgba(0,0,0,.5), 0 0 28px rgba(255,69,0,.55);
+}
+.bf-btn:hover::after { transform: translateX(520%) skewX(-18deg); transition: transform .85s var(--bf-ease-out); }
+.bf-btn:active { transform: translateY(1px); }
+.bf-btn svg { width: 1.35em; height: 1.35em; flex: none; }
+/* Verde WhatsApp: mesmo formato, com a borda em degradê verde para manter a altura igual */
+.bf-btn--wa {
+  color: var(--bf-white); text-shadow: 0 1px 0 rgba(0, 70, 30, .45);
+  background:
+    radial-gradient(120% 140% at 50% 0%, #4BE483 0%, var(--bf-green) 45%, #1DA851 100%) padding-box,
+    linear-gradient(180deg, #7CF0A6 0%, var(--bf-green) 45%, var(--bf-green-deep) 100%) border-box;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.3), inset 0 -5px 12px rgba(0,90,40,.3), 0 12px 24px rgba(0,0,0,.45);
+}
+.bf-btn--wa:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.35), inset 0 -5px 12px rgba(0,90,40,.3), 0 16px 30px rgba(0,0,0,.5), 0 0 28px rgba(37,211,102,.5); }
+.bf-btn--wa svg { fill: currentColor; }
+
+/* =========================================================
+   2. REDES SOCIAIS
+   ========================================================= */
+.ty-social { padding: 0 0 clamp(56px, 9vh, 96px); text-align: center; }
+.bf-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px; margin: 0 0 14px;
+  color: var(--bf-gold); font-weight: 700; font-size: 12px; letter-spacing: .32em; text-transform: uppercase;
+}
+.bf-eyebrow::before, .bf-eyebrow::after { content: ''; width: 34px; height: 2px; background: linear-gradient(90deg, rgba(255,69,0,0), var(--bf-orange)); }
+.bf-eyebrow::after { transform: scaleX(-1); }
+.ty-h2 { margin: 0 0 28px; color: var(--bf-gold); font-weight: 700; font-size: clamp(26px, 4.4vw, 40px); line-height: 1.05; letter-spacing: .03em; text-transform: uppercase; }
+.ty-icons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ty-icons a {
+  display: grid; place-items: center; width: var(--ty-icon); height: var(--ty-icon); border-radius: 50%;
+  border: 1.5px solid rgba(255, 215, 0, .75); color: var(--bf-gold); text-decoration: none;
+  transition: background-color .25s ease, color .25s ease, transform .25s var(--bf-ease-out), box-shadow .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ty-icons a:hover { background: var(--bf-gold); color: var(--bf-black); transform: translateY(-3px); box-shadow: 0 0 22px rgba(255,215,0,.4); }
+.ty-icons svg { width: 46%; height: 46%; }
+.ty-i-fill { fill: currentColor; }
+.ty-i-line { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* =========================================================
+   3. RODAPÉ
+   ========================================================= */
+.bf-footer { position: relative; padding: 48px 0 calc(36px + env(safe-area-inset-bottom)); text-align: center; }
+.bf-footer::before { content: ''; position: absolute; top: 0; left: 50%; width: min(760px, 86%); height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, rgba(255,215,0,0), rgba(255,215,0,.45), rgba(255,215,0,0)); }
+.bf-footer img { width: 180px; margin: 0 auto 16px; }
+.bf-footer p { margin: 0; color: rgba(255,255,255,.5); font-size: 13px; letter-spacing: .04em; }
+.ty-back { display: inline-block; margin-top: 14px; padding: 6px 4px; color: rgba(255,255,255,.62); font-size: 13px; letter-spacing: .04em; text-decoration: underline; text-decoration-color: rgba(255,215,0,.45); text-underline-offset: 4px; transition: color .2s ease; }
+.ty-back:hover { color: var(--bf-gold); }
+
+/* =========================================================
+   TELAS MAIORES
+   ========================================================= */
+@media (min-width: 560px) {
+  .ty-actions { flex-direction: row; justify-content: center; width: min(420px, 100%); }
+  .ty-actions .bf-btn { flex: 1 1 0; min-width: 0; }   /* os dois botões com a mesma largura */
+  .ty-icons { gap: 18px; }
+}
+@media (min-width: 769px) {
+  :root { --ty-icon: 56px; }
+  .ty-check { width: 150px; }
+  .bf-btn { min-height: 48px; padding: 0 24px; }
+  .bf-footer img { width: 201px; }
+}
+</style>
+</head>
+<body>
+<main class="bf">
+  <div class="bf-watermark" aria-hidden="true"><img src="Assets/Selo-BlackFriday.webp" alt="" width="604" height="596" decoding="async"></div>
+
+  <!-- ===================== 1. CONFIRMAÇÃO ===================== -->
+  <section class="ty-hero" aria-labelledby="ty-title">
+    <div class="bf-wrap">
+      <div class="ty-check" aria-hidden="true"><img src="Assets/check-obrigado.webp" alt="" width="400" height="400" fetchpriority="high"></div>
+      <h1 class="ty-title ty-in" id="ty-title" style="--d:1">Cadastro Concluído</h1>
+      <p class="ty-text ty-in" style="--d:2">Seu cadastro foi concluído com sucesso. Fique atento aos <span class="ty-nw">e-mails</span> e acompanhe o WhatsApp para receber primeiro que todos o link de compra. Enquanto isso, faça parte do <strong>Grupo VIP do WhatsApp</strong> para garantir seu acesso antecipado.</p>
+
+      <div class="ty-actions ty-in" style="--d:3">
+        <!-- TROQUE O LINK: site do Pratagy -->
+        <a class="bf-btn" href="https://www.pratagy.com.br" target="_blank" rel="noopener"><span>Site</span></a>
+        <!-- TROQUE O LINK: convite do grupo VIP no WhatsApp -->
+        <a class="bf-btn bf-btn--wa" href="https://chat.whatsapp.com/XXXXXXXX" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.2 21.8l5.1-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.2.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></svg>
+          <span>Grupo VIP</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. REDES SOCIAIS ===================== -->
+  <section class="ty-social" aria-labelledby="ty-social-title">
+    <div class="bf-wrap">
+      <p class="bf-eyebrow ty-in" style="--d:5">Fique por dentro</p>
+      <h2 class="ty-h2 ty-in" id="ty-social-title" style="--d:5">Siga as Redes Sociais</h2>
+      <ul class="ty-icons ty-in" style="--d:6">
+        <!-- TROQUE O LINK: Facebook -->
+        <li><a href="https://facebook.com/pratagy" target="_blank" rel="noopener" aria-label="Facebook do Pratagy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ty-i-fill" d="M13.6 21.5v-8.2h2.8l.4-3.3h-3.2V7.9c0-.9.3-1.6 1.6-1.6h1.7V3.4a22 22 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3V10H7.4v3.3h2.8v8.2z"/></svg></a></li>
+        <!-- TROQUE O LINK: Instagram -->
+        <li><a href="https://instagram.com/pratagy" target="_blank" rel="noopener" aria-label="Instagram do Pratagy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ty-i-line" x="3" y="3" width="18" height="18" rx="5.2"/><circle class="ty-i-line" cx="12" cy="12" r="4.1"/><circle class="ty-i-fill" cx="17.4" cy="6.6" r="1.2"/></svg></a></li>
+        <!-- TROQUE O LINK: YouTube -->
+        <li><a href="https://youtube.com/@pratagy" target="_blank" rel="noopener" aria-label="YouTube do Pratagy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ty-i-fill" fill-rule="evenodd" d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8A27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15.1V8.9l5.3 3.1z"/></svg></a></li>
+        <!-- TROQUE O LINK: WhatsApp -->
+        <li><a href="https://wa.me/55XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp do Pratagy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ty-i-fill" d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.2 21.8l5.1-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.2.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></svg></a></li>
+        <!-- TROQUE O LINK: TikTok -->
+        <li><a href="https://tiktok.com/@pratagy" target="_blank" rel="noopener" aria-label="TikTok do Pratagy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ty-i-fill" d="M16.7 2.5h-3.3v12.9a2.8 2.8 0 1 1-2.8-2.8c.3 0 .6 0 .8.1V9.4a6.2 6.2 0 1 0 5.3 6.1V9a7.7 7.7 0 0 0 4.3 1.3V7A4.4 4.4 0 0 1 16.7 2.5z"/></svg></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== 3. RODAPÉ ===================== -->
+  <footer class="bf-footer ty-in" style="--d:7">
+    <div class="bf-wrap">
+      <img src="Assets/Marca-grupo-pratagy.webp" alt="Grupo Pratagy" width="201" height="58" decoding="async">
+      <p>© 2026 Grupo Pratagy. Todos os direitos reservados.</p>
+      <a class="ty-back" href="index.html">Voltar para a página inicial</a>
+    </div>
+  </footer>
+</main>
+</body>
+</html>
