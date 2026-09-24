@@ -208,7 +208,14 @@ body {
   background: linear-gradient(92deg, var(--bf-orange) 10%, var(--bf-gold) 90%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.bf-intro__text { margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; }
+/* Justificado com a última linha centralizada, sem hifenização (como na obrigado.html). As palavras
+   do data-split são inline-block com o espaço fora delas, então o justificado distribui o espaço entre elas. */
+.bf-intro__text {
+  margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6;
+  text-align: justify; text-align-last: center; -webkit-hyphens: none; hyphens: none;
+}
+/* Celular: centralizado, sem justificar — em coluna estreita o justificado abre espaços grandes entre as palavras */
+@media (max-width: 479px) { .bf-intro__text { text-align: center; text-align-last: auto; } }
 
 /* Contagem regressiva */
 .bf-countdown { position: relative; padding: 0 0 clamp(24px, 5vh, 64px); text-align: center; }
@@ -312,7 +319,13 @@ body {
 .bf-attr__info { order: 1; }
 .bf-attr__num { display: block; margin-bottom: 8px; color: var(--bf-gold); font-weight: 700; font-size: 13px; letter-spacing: .3em; }
 .bf-attr__title { margin: 0 0 10px; font-weight: 900; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.02; text-transform: uppercase; }
-.bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; }
+.bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; -webkit-hyphens: none; hyphens: none; }
+/* Texto ao lado do selo, a partir de 1200px (coluna larga o bastante): justificado, com a última linha do mesmo
+   lado do alinhamento do bloco. Entre 900 e 1199px a coluna é estreita demais e o texto segue sem justificar. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
+  .bf-attr[data-side="right"] .bf-attr__text { text-align: justify; text-align-last: right; }
+  .bf-attr[data-side="left"] .bf-attr__text { text-align: justify; text-align-last: left; }
+}
 .bf-attr__card {
   order: 2; position: relative; width: 100%; padding: 5px; border-radius: 22px;
   background: linear-gradient(145deg, #FFE45C, var(--bf-gold) 30%, #F2A900 65%, #C97A00);
@@ -361,7 +374,7 @@ body {
   }
   .bf-attr { max-width: none; grid-template-columns: 1fr auto 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: center; justify-items: stretch; }
   .bf-attr__hub { display: block; position: relative; grid-column: 2; grid-row: 1; }
-  .bf-attr__info { grid-row: 1; max-width: 360px; }
+  .bf-attr__info { grid-row: 1; max-width: 400px; }
   .bf-attr[data-side="right"] .bf-attr__info { grid-column: 1; justify-self: end; text-align: right; }
   .bf-attr[data-side="left"] .bf-attr__info { grid-column: 3; justify-self: start; text-align: left; }
   .bf-attr__seal { width: clamp(190px, 17vw, 250px); }
