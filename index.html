@@ -415,12 +415,18 @@ body {
    #sharpspring-form; por segurança do navegador, o CSS desta página não alcança os campos lá dentro.
    Cores e fontes dos campos ficam no CSS personalizado do formulário, no editor da SharpSpring.
    Aqui: largura total do card, fundo transparente (o laranja do card aparece) e aviso de carregamento. */
-/* Espaço reservado com a altura aproximada do formulário. Vale também depois que o iframe entra (ele
+/* Espaço reservado com a altura real do formulário. Vale também depois que o iframe entra (ele
    nasce com 200px até a SharpSpring informar a altura real), para a página não encolher e crescer de novo.
-   Quando a altura real chega, o form.js da SharpSpring fixa o min-height inline com o valor exato. */
-#sharpspring-form { width: 100%; min-height: 500px; margin: 0 auto; text-align: center; }
+   --ss-h: alturas medidas no Chrome em produção, com o CSS personalizado da SharpSpring aplicado. O formulário
+   cresce em degraus conforme a largura (os textos quebram em mais linhas); se o CSS da SharpSpring mudar, medir de novo.
+   !important: a SharpSpring avisa primeiro uma altura menor (antes de as fontes carregarem dentro do iframe) e o
+   form.js a aplica como min-height inline; a reserva segura o espaço até chegar a altura final. */
+.bf-card { --ss-h: 524.344px; }
+@media (max-width: 570.98px) { .bf-card { --ss-h: 544.641px; } }
+@media (max-width: 489.98px) { .bf-card { --ss-h: 562.828px; } }
+@media (max-width: 408.98px) { .bf-card { --ss-h: 583.125px; } }
+#sharpspring-form { width: 100%; min-height: var(--ss-h) !important; margin: 0 auto; text-align: center; }
 #sharpspring-form:empty { display: grid; place-items: center; }
-@media (max-width: 480px) { #sharpspring-form { min-height: 570px; } }
 #sharpspring-form:empty::before {
   content: "Carregando formulário..."; color: var(--bf-gold); opacity: .85;
   font: 600 14px/1.2 var(--bf-font); letter-spacing: .28em; text-transform: uppercase;
@@ -435,7 +441,7 @@ body {
    mantém a largura), pronto para voltar se o formulário chegar depois. */
 .bf-card.is-fallback #sharpspring-form { height: 0 !important; min-height: 0 !important; overflow: hidden; visibility: hidden; }
 .bf-ssf-fallback {
-  min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: var(--ss-h); display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 14px; text-align: center;
 }
 @media (max-width: 480px) { .bf-ssf-fallback { min-height: 0; padding: 12px 0 8px; } }
