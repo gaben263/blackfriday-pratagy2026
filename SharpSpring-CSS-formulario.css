@@ -13,9 +13,9 @@
    dentro do iframe e ela cai para Arial.
    ===================================================================== */
 
-@font-face { font-family: 'Fibra One'; src: url('https://SEU-DOMINIO/Fonte/Fibra-One-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'Fibra One'; src: url('https://SEU-DOMINIO/Fonte/Fibra-One-SemiBold.otf') format('opentype'); font-weight: 600; font-display: swap; }
-@font-face { font-family: 'Fibra One'; src: url('https://SEU-DOMINIO/Fonte/Fibra-One-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-SemiBold.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
 
 /* Fundo transparente: o laranja do card da landing page aparece por trás */
 html, body, form, .sharpspring_form, .form-container, fieldset {
