@@ -283,12 +283,23 @@ body {
   box-shadow: inset 0 2px 0 rgba(255,255,255,.55), inset 0 -4px 10px rgba(170,90,0,.35), 0 10px 22px rgba(110,15,0,.45);
 }
 .bf-btn--gold:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.6), inset 0 -4px 10px rgba(170,90,0,.35), 0 14px 28px rgba(110,15,0,.5), 0 0 26px rgba(255,215,0,.5); }
+/* Botão B2B (agentes de viagem): mesmo formato, paleta azul do céu do hero (#0B7FE0). Secundário: um pouco
+   menor que o "Cadastre-se agora" e sem o brilho animado, para não competir com o botão principal. */
+.bf-btn--b2b {
+  min-height: 56px; padding: 0 clamp(22px, 2.6vw, 36px); font-size: clamp(15px, 1.4vw, 19px);
+  color: var(--bf-white); text-shadow: 0 2px 0 rgba(4, 40, 90, .45);
+  background:
+    radial-gradient(120% 140% at 50% 0%, #4FB0FF 0%, #0B7FE0 45%, #0762B8 100%) padding-box,
+    linear-gradient(180deg, #BFE6FF 0%, #5DB6F5 40%, #0A5FAE 100%) border-box;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.3), inset 0 -5px 12px rgba(0,40,100,.35), 0 12px 24px rgba(0,0,0,.45);
+}
+.bf-btn--b2b:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.34), inset 0 -5px 12px rgba(0,40,100,.35), 0 16px 30px rgba(0,0,0,.5), 0 0 28px rgba(11,127,224,.6); }
 @keyframes bf-shine { 0%, 62% { transform: translateX(-160%) skewX(-18deg); } 100% { transform: translateX(520%) skewX(-18deg); } }
 
 /* Dock: fica preso no rodapé da tela durante as seções 3 e 4 e "pousa" no fim delas */
 .bf-dock {
   position: sticky; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40;
-  display: flex; justify-content: center; padding: 0 var(--bf-gutter);
+  display: flex; justify-content: center; align-items: center; gap: 16px; padding: 0 var(--bf-gutter);
   margin: clamp(28px, 6vh, 64px) 0 clamp(40px, 8vh, 96px); pointer-events: none;
 }
 .bf-dock .bf-btn { pointer-events: auto; }
@@ -496,6 +507,13 @@ body {
   .bf-hero__anchor { top: 11vh; top: 11svh; }
   .bf-hero__hint { font-size: 11px; letter-spacing: .24em; }
   .bf-btn { min-height: 58px; }
+  .bf-btn--b2b { min-height: 50px; }   /* secundário: um pouco mais baixo que o principal */
+}
+/* Dock no celular: lado a lado os dois botões precisam de ~515px, então abaixo de 600px eles empilham
+   (principal em cima), com a mesma largura */
+@media (max-width: 599.98px) {
+  .bf-dock { flex-direction: column; gap: 10px; }
+  .bf-dock .bf-btn { width: min(100%, 340px); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
@@ -669,6 +687,8 @@ body {
     <!-- Botão sticky (CSS puro — ref. Assets/botao-entre-para-o-grupo.webp) -->
     <div class="bf-dock">
       <a class="bf-btn bf-btn--cta" href="#cadastro" data-cta><span>Cadastre-se agora</span></a>
+      <!-- TROQUE O LINK: formulário B2B -->
+      <a class="bf-btn bf-btn--b2b" href="#b2b" target="_blank" rel="noopener"><span>Sou Agente de Viagens</span></a>
     </div>
   </div>
 
