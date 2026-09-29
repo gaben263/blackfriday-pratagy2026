@@ -215,7 +215,7 @@ body {
    do data-split são inline-block com o espaço fora delas, então o justificado distribui o espaço entre elas. */
 .bf-intro__text {
   margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6;
-  text-align: justify; text-align-last: center; -webkit-hyphens: none; hyphens: none;
+  text-align: justify; text-align-last: center; -webkit-hyphens: none; hyphens: none; text-wrap: pretty;   /* sem viúvas */
 }
 /* Celular: centralizado, sem justificar — em coluna estreita o justificado abre espaços grandes entre as palavras */
 @media (max-width: 479px) { .bf-intro__text { text-align: center; text-align-last: auto; } }
@@ -322,7 +322,8 @@ body {
 .bf-attr__info { order: 1; }
 .bf-attr__num { display: block; margin-bottom: 8px; color: var(--bf-gold); font-weight: 700; font-size: 13px; letter-spacing: .3em; }
 .bf-attr__title { margin: 0 0 10px; font-weight: 900; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.02; text-transform: uppercase; }
-.bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; -webkit-hyphens: none; hyphens: none; }
+/* text-wrap: pretty evita viúvas (uma palavra sozinha na última linha) */
+.bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; -webkit-hyphens: none; hyphens: none; text-wrap: pretty; }
 .bf-attr__card {
   order: 2; position: relative; width: 100%; padding: 5px; border-radius: 22px;
   background: linear-gradient(145deg, #FFE45C, var(--bf-gold) 30%, #F2A900 65%, #C97A00);
@@ -458,7 +459,7 @@ body {
 .bf-ssf-fallback__icon { width: 68px; height: 68px; display: grid; place-items: center; margin-bottom: 4px; border-radius: 50%; background: var(--bf-gold); box-shadow: 0 8px 22px rgba(110,15,0,.35); }
 .bf-ssf-fallback__icon svg { width: 34px; height: 34px; fill: none; stroke: #C92E07; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .bf-ssf-fallback__title { margin: 0; max-width: 22ch; color: var(--bf-gold); font-weight: 900; font-size: clamp(21px, 2.4vw, 28px); line-height: 1.1; text-transform: uppercase; }
-.bf-ssf-fallback__text { margin: 0; max-width: 40ch; color: var(--bf-white); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.5; }
+.bf-ssf-fallback__text { margin: 0; max-width: 40ch; color: var(--bf-white); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.5; text-wrap: pretty; }
 .bf-ssf-fallback .bf-btn { margin-top: 10px; }
 .bf-ssf-fallback__note { margin: 6px 0 0; max-width: 46ch; color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.45; }
 
