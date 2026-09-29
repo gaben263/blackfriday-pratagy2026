@@ -45,16 +45,35 @@
 /* =========================================================
    BASE
    ========================================================= */
-*, *::before, *::after { box-sizing: border-box; }
+/* Só o que precisa ser da página inteira fica em html/body: fundo preto (sem bordas brancas no
+   "puxar para atualizar" do celular), margem zero e rolagem suave dos links #. O resto vive em .bf. */
+:where(.bf, .bf-watermark, .bf-cursor-glow), :where(.bf, .bf-watermark) *, :where(.bf) *::before, :where(.bf) *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bf-black); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-body {
-  margin: 0; background: var(--bf-black); color: var(--bf-white);
-  font-family: var(--bf-font); font-weight: 400; line-height: 1.5;
+body { margin: 0; background: var(--bf-black); }
+.bf {
+  position: relative; z-index: 1; overflow-x: clip;
+  color: var(--bf-white); font-family: var(--bf-font); font-weight: 400; line-height: 1.5;
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
-.bf { position: relative; z-index: 1; overflow-x: clip; }
 :where(.bf) img { display: block; max-width: 100%; height: auto; }
+
+/* Blindagem contra o CSS da plataforma (SharpSpring Pages: tema Foundry + Bootstrap), que estiliza as tags
+   direto: section/footer com padding 70px e overflow hidden (quebra o sticky do hero), títulos cinza #292929
+   em Open Sans 300, margem de 24px em button, transição em todo link, cor azul em a:hover/a:focus.
+   :where(.bf) + tag empata com as regras do tema e vence por vir depois; as classes da página continuam
+   mandando. Aqui só se devolve o padrão do navegador. */
+:where(.bf) section, :where(.bf) footer { padding: 0; overflow: visible; }
+:where(.bf) :is(h1, h2, h3) { margin: 0; color: inherit; font-family: inherit; font-size: inherit; font-weight: 700; line-height: inherit; }
+:where(.bf) p { color: inherit; font-family: inherit; font-size: inherit; line-height: inherit; }
+:where(.bf) button { margin: 0; font: inherit; }
+:where(.bf) a { font-weight: inherit; transition: none; }
+.bf a:is(:link, :visited, :hover, :focus, :active) { text-decoration: none; }
+/* a:hover/a:focus do tema (0,1,1) passam por cima da cor de .bf-btn (0,1,0): a cor de cada link é repetida nos estados */
+.bf-hero__hint:is(:hover, :focus, :active, :visited) { color: #fff; }
+.bf-btn:is(:hover, :focus, :active, :visited) { color: var(--bf-gold); }
+.bf-btn--gold:is(:hover, :focus, :active, :visited) { color: #7A1A00; }
+.bf-btn--b2b:is(:hover, :focus, :active, :visited) { color: var(--bf-white); }
 .bf-wrap { width: min(1180px, 100% - var(--bf-gutter) * 2); margin-inline: auto; }
 .bf-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 .bf :focus-visible { outline: 3px solid var(--bf-gold); outline-offset: 4px; }
@@ -228,7 +247,8 @@ body {
 }
 .bf-cd__grid { display: flex; justify-content: center; align-items: flex-start; gap: clamp(8px, 2vw, 28px); }
 .bf-cd__unit { display: flex; flex-direction: column; align-items: center; min-width: clamp(72px, 11vw, 132px); }
-.bf-cd__num, .bf-cd__sep { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; font-weight: 700; }
+/* Tamanhos em px, não rem: a plataforma muda a base do rem (html { font-size: 62.5% } = 10px) */
+.bf-cd__num, .bf-cd__sep { font-size: clamp(40px, 6vw, 72px); line-height: 1; font-weight: 700; }
 .bf-cd__num { display: inline-flex; color: var(--bf-gold); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
 /* A Fibra One não traz algarismos tabulares (o "1" é bem mais estreito que o "0"): cada dígito ganha
    uma casa fixa da largura do mais largo, para os números não "pularem" quando mudam */
@@ -236,15 +256,15 @@ body {
 .bf-cd__sep { color: rgba(255, 215, 0, .4); }
 .bf-cd__label {
   margin-top: clamp(8px, 1.2vw, 14px); color: var(--bf-white); opacity: .85;
-  font-weight: 400; font-size: clamp(.7rem, 1.5vw, .9rem); letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 400; font-size: clamp(11.2px, 1.5vw, 14.4px); letter-spacing: 2px; text-transform: uppercase;
 }
 .bf-cd__done { margin: 0; color: var(--bf-gold); font-weight: 900; font-size: clamp(30px, 5.4vw, 64px); line-height: 1.05; text-transform: uppercase; }
 .bf-cd.is-done .bf-cd__title, .bf-cd.is-done .bf-cd__grid { display: none; }
 @media (max-width: 480px) {
   .bf-cd__grid { gap: 4px; }
   .bf-cd__unit { min-width: 0; flex: 1 1 0; }
-  .bf-cd__num, .bf-cd__sep { font-size: clamp(1.9rem, 10vw, 2.5rem); }
-  .bf-cd__label { font-size: .62rem; letter-spacing: 1px; }
+  .bf-cd__num, .bf-cd__sep { font-size: clamp(30.4px, 10vw, 40px); }
+  .bf-cd__label { font-size: 9.92px; letter-spacing: 1px; }
 }
 
 /* Botão — recriação em CSS do Assets/botao-entre-para-o-grupo.webp */
@@ -520,7 +540,7 @@ body {
   .bf-dock .bf-btn--b2b { min-height: 42px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  :where(.bf, .bf-watermark, .bf-cursor-glow), :where(.bf) *, :where(.bf) *::before, :where(.bf) *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
   .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after { animation: none !important; }
 }
 </style>

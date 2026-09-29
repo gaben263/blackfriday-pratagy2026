@@ -1,0 +1,543 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lista VIP Black Friday 2026 | Pratagy Resort</title>
+<meta name="description" content="Entre para a lista VIP da Black Friday Pratagy 2026 e tenha acesso antecipado ao preço especial de novembro. Faça seu cadastro.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lista VIP · Black Friday Pratagy 2026">
+<meta property="og:description" content="Cadastre-se, entre para o grupo VIP e receba o preço especial da Black Friday do Pratagy antes de todo mundo.">
+<link rel="icon" type="image/webp" href="https://blackfriday-pratagy2026.vercel.app/Assets/Selo-BlackFriday.webp">
+<link rel="preload" href="https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Heavy.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Regular.otf" as="font" type="font/otf" crossorigin>
+<script>document.documentElement.classList.add('bf-js');</script>
+<style>
+/* =========================================================
+   FONTES — Fibra One (arquivos locais em Fonte/)
+   ========================================================= */
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fibra One'; src: url('https://blackfriday-pratagy2026.vercel.app/Fonte/Fibra-One-Heavy.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+:root {
+  --bf-black: #0A0A0A;
+  --bf-orange: #FF4500;
+  --bf-orange-deep: #D8340A;
+  --bf-gold: #FFD700;
+  --bf-gold-deep: #E89B00;
+  --bf-white: #FFFFFF;
+  --bf-muted: rgba(255, 255, 255, .72);
+  --bf-font: 'Fibra One', 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --bf-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --bf-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --bf-gutter: clamp(16px, 5vw, 48px);
+  --bf-seal: min(80vw, 62vh, 580px);
+  --bf-seal: min(80vw, 62svh, 580px);
+  --bf-hero-h: 260vh;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+/* Só o que precisa ser da página inteira fica em html/body: fundo preto (sem bordas brancas no
+   "puxar para atualizar" do celular), margem zero e rolagem suave dos links #. O resto vive em .bf. */
+:where(.bf, .bf-watermark, .bf-cursor-glow), :where(.bf, .bf-watermark) *, :where(.bf) *::before, :where(.bf) *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bf-black); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--bf-black); }
+.bf {
+  position: relative; z-index: 1; overflow-x: clip;
+  color: var(--bf-white); font-family: var(--bf-font); font-weight: 400; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+:where(.bf) img { display: block; max-width: 100%; height: auto; }
+
+/* Blindagem contra o CSS da plataforma (SharpSpring Pages: tema Foundry + Bootstrap), que estiliza as tags
+   direto: section/footer com padding 70px e overflow hidden (quebra o sticky do hero), títulos cinza #292929
+   em Open Sans 300, margem de 24px em button, transição em todo link, cor azul em a:hover/a:focus.
+   :where(.bf) + tag empata com as regras do tema e vence por vir depois; as classes da página continuam
+   mandando. Aqui só se devolve o padrão do navegador. */
+:where(.bf) section, :where(.bf) footer { padding: 0; overflow: visible; }
+:where(.bf) :is(h1, h2, h3) { margin: 0; color: inherit; font-family: inherit; font-size: inherit; font-weight: 700; line-height: inherit; }
+:where(.bf) p { color: inherit; font-family: inherit; font-size: inherit; line-height: inherit; }
+:where(.bf) button { margin: 0; font: inherit; }
+:where(.bf) a { font-weight: inherit; transition: none; }
+.bf a:is(:link, :visited, :hover, :focus, :active) { text-decoration: none; }
+/* a:hover/a:focus do tema (0,1,1) passam por cima da cor de .bf-btn (0,1,0): a cor de cada link é repetida nos estados */
+.bf-hero__hint:is(:hover, :focus, :active, :visited) { color: #fff; }
+.bf-btn:is(:hover, :focus, :active, :visited) { color: var(--bf-gold); }
+.bf-btn--gold:is(:hover, :focus, :active, :visited) { color: #7A1A00; }
+.bf-btn--b2b:is(:hover, :focus, :active, :visited) { color: var(--bf-white); }
+.bf-wrap { width: min(1180px, 100% - var(--bf-gutter) * 2); margin-inline: auto; }
+.bf-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.bf :focus-visible { outline: 3px solid var(--bf-gold); outline-offset: 4px; }
+.bf [hidden] { display: none !important; }
+
+/* Selo gigante fixo no fundo (5%) — parallax via JS */
+.bf-watermark { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.bf-watermark img {
+  position: absolute; left: 50%; top: 50%;
+  width: max(125vmin, 720px); max-width: none; height: auto;
+  opacity: .05; transform: translate3d(-50%, -50%, 0); will-change: transform;
+}
+
+/* =========================================================
+   1. HERO (pin + bolha/eclipse)
+   ========================================================= */
+.bf-hero { position: relative; height: var(--bf-hero-h); }
+.bf-hero__pin { position: sticky; top: 0; height: 100vh; overflow: hidden; isolation: isolate; }
+.bf-hero__backdrop {
+  position: absolute; inset: 0; will-change: opacity;
+  background: linear-gradient(180deg, #0B7FE0 0%, #37A9F5 55%, #BFE6FF 100%);
+}
+.bf-hero__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; object-position: 50% 52%;
+  transform-origin: 50% 62%; will-change: transform;
+}
+.bf-js .bf-hero__photo { opacity: 0; transition: opacity .9s ease; }
+.bf-js .bf-hero__photo.is-loaded { opacity: 1; }
+.bf-hero__shade {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 42%, rgba(0,0,0,0) 55%, rgba(0,0,0,.32) 100%),
+    linear-gradient(180deg, rgba(10,10,10,.22) 0%, rgba(10,10,10,0) 20%, rgba(10,10,10,0) 68%, rgba(10,10,10,.5) 100%);
+}
+/* Bolha preta: clip-path circle() controlado pelo scroll */
+.bf-bubble { position: absolute; inset: 0; background: var(--bf-black); clip-path: circle(0px at 50% 150%); }
+/* Coroa de luz (eclipse) que acompanha a borda da bolha */
+.bf-bubble-glow {
+  position: absolute; left: 0; top: 0; width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgba(255,215,0,0) 75%, rgba(255,236,140,1) 79%, rgba(255,150,20,.8) 82.5%,
+    rgba(255,69,0,.32) 89%, rgba(255,69,0,0) 100%);
+  opacity: 0; will-change: transform, opacity; pointer-events: none;
+}
+.bf-hero__stage {
+  position: absolute; left: 0; right: 0; top: 0; height: 100vh; height: 100svh;
+  display: grid; place-items: center; pointer-events: none;
+}
+.bf-hero__anchor { position: relative; top: 6vh; top: 6svh; width: var(--bf-seal); aspect-ratio: 604 / 596; }
+/* Retroiluminação laranja do selo: destaca o arco contra o fundo preto */
+.bf-hero__halo {
+  position: absolute; inset: -22%; z-index: 1; border-radius: 50%; opacity: 0;
+  background: radial-gradient(closest-side,
+    rgba(255,140,40,.6) 0%, rgba(255,110,25,.55) 50%, rgba(255,80,10,.45) 62%,
+    rgba(255,69,0,.18) 74%, rgba(255,69,0,0) 88%);
+  animation: bf-breathe 4.5s ease-in-out infinite;
+}
+.bf-hero__seal { position: absolute; inset: 0; z-index: 3; margin: 0; perspective: 900px; will-change: transform; }
+.bf-hero__seal img { width: 100%; }
+.bf-par { will-change: transform; }
+
+.bf-js .bf-pop { opacity: 0; transform: scale(.55) rotate(-8deg); }
+.bf-ready .bf-pop { animation: bf-pop 1.2s var(--bf-spring) both; }
+.bf-float { animation: bf-float 6s ease-in-out infinite; }
+.bf-float--b { animation-duration: 7.5s; animation-direction: reverse; }
+
+.bf-hero__hint {
+  position: absolute; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); z-index: 5;
+  transform: translateX(-50%); pointer-events: auto;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: #fff; text-decoration: none; font-weight: 700; font-size: 12px;
+  letter-spacing: .28em; text-transform: uppercase; white-space: nowrap;
+  text-shadow: 0 2px 12px rgba(0,0,0,.55);
+}
+.bf-mouse { position: relative; width: 24px; height: 38px; border: 2px solid rgba(255,255,255,.92); border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,.3); }
+.bf-mouse::after {
+  content: ''; position: absolute; left: 50%; top: 7px; width: 4px; height: 8px; margin-left: -2px;
+  border-radius: 2px; background: var(--bf-gold); animation: bf-wheel 1.6s ease-in-out infinite;
+}
+
+@keyframes bf-pop { from { opacity: 0; transform: scale(.55) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes bf-float { 0%, 100% { transform: translate3d(0, 0, 0) rotate(0); } 50% { transform: translate3d(0, -10px, 0) rotate(-1.2deg); } }
+@keyframes bf-breathe { 0%, 100% { transform: scale(.94); } 50% { transform: scale(1.05); } }
+@keyframes bf-wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+
+/* Ícones de % nas laterais da página (parallax no scroll).
+   Começam com opacity 0 e surgem quando a bolha termina de cobrir a tela (.is-on via JS).
+   Ficam acima do hero e abaixo do conteúdo das seções, para não atrapalhar a leitura.
+   bottom: 0 dá a altura inicial; depois o JS trava essa altura em px (ver measure), para que conteúdo
+   carregado depois (ex.: o formulário da SharpSpring) não reposicione os ícones. O topo de cada ícone usa
+   a mesma régua travada (--pct-u = 1% dela), então eles também não se mexem quando a página encolhe
+   (ex.: plano B do formulário no celular). */
+.bf-pcts {
+  --pct-o: 1; --pct-k: 1.4; --pct-u: 1%;
+  position: absolute; left: 0; right: 0; top: calc(var(--bf-hero-h) - 100vh); bottom: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+/* Por ícone: --t topo (% da página) · --s tamanho base (px) · --x recuo da lateral (vw) ·
+   --xs recuo em frações do próprio ícone (negativo = parcialmente fora da tela) · --r rotação ·
+   --o opacidade da camada (perto/meio/longe) · --m atenuação automática (JS) quando o ícone
+   fica atrás da coluna de conteúdo, para nunca atrapalhar a leitura */
+.bf-pct {
+  position: absolute; top: calc(var(--t) * var(--pct-u)); width: calc(var(--s) * var(--pct-k) * 1px);
+  opacity: 0; transform: rotate(calc(var(--r) * 1deg)); will-change: transform, opacity;
+  transition: opacity .9s var(--bf-ease-out);
+}
+.bf-pct--l { left: calc(var(--x, 0) * 1vw + var(--xs, 0) * var(--s) * var(--pct-k) * 1px); }
+.bf-pct--r { right: calc(var(--x, 0) * 1vw + var(--xs, 0) * var(--s) * var(--pct-k) * 1px); }
+.bf-pct img { width: 100%; scale: .6; transition: scale 1.1s var(--bf-spring); }
+.bf-pct--far img { filter: blur(1.2px); }
+.bf-pcts:not(.is-on) .bf-pct img { animation-play-state: paused; }
+.bf-pcts.is-on .bf-pct { opacity: calc(var(--o, .8) * var(--pct-o) * var(--m, 1)); transition-delay: calc(var(--i) * 70ms); }
+.bf-pcts.is-on .bf-pct img { scale: 1; transition-delay: calc(var(--i) * 70ms); }
+@media (max-width: 1199px) { .bf-pcts { --pct-o: .9; --pct-k: 1.1; } }
+@media (max-width: 768px) {
+  .bf-pcts { --pct-o: .8; --pct-k: .75; }
+  .bf-pct--far img { filter: none; }
+}
+
+/* =========================================================
+   TIPOGRAFIA COMPARTILHADA
+   ========================================================= */
+.bf-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px; margin: 0 0 22px;
+  color: var(--bf-gold); font-weight: 700; font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: .32em; text-transform: uppercase;
+}
+.bf-eyebrow::before, .bf-eyebrow::after { content: ''; width: 34px; height: 2px; background: linear-gradient(90deg, rgba(255,69,0,0), var(--bf-orange)); }
+.bf-eyebrow::after { transform: scaleX(-1); }
+/* Títulos equilibrados: linhas de tamanho parecido, sem uma palavra sozinha na última.
+   "pretty" vem antes como reserva; onde "balance" é suportado, ele vence. */
+.bf-h2, .bf-intro__title { text-wrap: pretty; text-wrap: balance; }
+.bf-h2 { margin: 0 0 .35em; font-weight: 900; font-size: clamp(32px, 4.6vw, 64px); line-height: 1; text-transform: uppercase; }
+
+/* Palavras animadas pelo scroll (JS divide o texto e controla --p) */
+.bf-w { display: inline-block; opacity: var(--o, 1); transform: translate3d(0, calc((1 - var(--o, 1)) * .6em), 0); }
+.bf-split .bf-w { --o: clamp(0, (var(--p, 0) * (var(--n, 1) + 5) - var(--i, 0)) / 5, 1); }
+
+/* Revelação única (IntersectionObserver) */
+.bf-js .bf-reveal { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity .9s var(--bf-ease-out), transform 1.1s var(--bf-ease-out); }
+.bf-js .bf-reveal.is-in { opacity: 1; transform: none; }
+
+/* =========================================================
+   3. TEXTO + BOTÃO STICKY
+   ========================================================= */
+.bf-intro { position: relative; padding: clamp(32px, 6vh, 72px) 0 clamp(56px, 10vh, 120px); text-align: center; }
+.bf-intro__title {
+  margin: 0 auto .55em; max-width: 15ch;
+  font-weight: 900; font-size: clamp(38px, 6.4vw, 92px); line-height: .98; letter-spacing: -.01em; text-transform: uppercase;
+}
+.bf-intro__title em {
+  font-style: normal; color: var(--bf-orange);
+  background: linear-gradient(92deg, var(--bf-orange) 10%, var(--bf-gold) 90%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+/* Justificado com a última linha centralizada, sem hifenização (como na obrigado.html). As palavras
+   do data-split são inline-block com o espaço fora delas, então o justificado distribui o espaço entre elas. */
+.bf-intro__text {
+  margin: 0 auto 1.2em; max-width: 46ch; color: var(--bf-muted); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6;
+  text-align: justify; text-align-last: center; -webkit-hyphens: none; hyphens: none; text-wrap: pretty;   /* sem viúvas */
+}
+/* Celular: centralizado, sem justificar — em coluna estreita o justificado abre espaços grandes entre as palavras */
+@media (max-width: 479px) { .bf-intro__text { text-align: center; text-align-last: auto; } }
+
+/* Contagem regressiva */
+.bf-countdown { position: relative; padding: 0 0 clamp(24px, 5vh, 64px); text-align: center; }
+.bf-cd__title {
+  margin: 0 0 clamp(18px, 3vh, 30px); color: var(--bf-white); opacity: .85;
+  font-weight: 600; font-size: clamp(13px, 1.3vw, 16px); letter-spacing: .32em; text-transform: uppercase;
+}
+.bf-cd__grid { display: flex; justify-content: center; align-items: flex-start; gap: clamp(8px, 2vw, 28px); }
+.bf-cd__unit { display: flex; flex-direction: column; align-items: center; min-width: clamp(72px, 11vw, 132px); }
+/* Tamanhos em px, não rem: a plataforma muda a base do rem (html { font-size: 62.5% } = 10px) */
+.bf-cd__num, .bf-cd__sep { font-size: clamp(40px, 6vw, 72px); line-height: 1; font-weight: 700; }
+.bf-cd__num { display: inline-flex; color: var(--bf-gold); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+/* A Fibra One não traz algarismos tabulares (o "1" é bem mais estreito que o "0"): cada dígito ganha
+   uma casa fixa da largura do mais largo, para os números não "pularem" quando mudam */
+.bf-cd__num > span { display: inline-block; width: .77em; text-align: center; }
+.bf-cd__sep { color: rgba(255, 215, 0, .4); }
+.bf-cd__label {
+  margin-top: clamp(8px, 1.2vw, 14px); color: var(--bf-white); opacity: .85;
+  font-weight: 400; font-size: clamp(11.2px, 1.5vw, 14.4px); letter-spacing: 2px; text-transform: uppercase;
+}
+.bf-cd__done { margin: 0; color: var(--bf-gold); font-weight: 900; font-size: clamp(30px, 5.4vw, 64px); line-height: 1.05; text-transform: uppercase; }
+.bf-cd.is-done .bf-cd__title, .bf-cd.is-done .bf-cd__grid { display: none; }
+@media (max-width: 480px) {
+  .bf-cd__grid { gap: 4px; }
+  .bf-cd__unit { min-width: 0; flex: 1 1 0; }
+  .bf-cd__num, .bf-cd__sep { font-size: clamp(30.4px, 10vw, 40px); }
+  .bf-cd__label { font-size: 9.92px; letter-spacing: 1px; }
+}
+
+/* Botão — recriação em CSS do Assets/botao-entre-para-o-grupo.webp */
+.bf-btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6em;
+  min-height: 64px; padding: 0 clamp(26px, 3.2vw, 46px);
+  border: 3px solid transparent; border-radius: 14px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, #FF6A2E 0%, var(--bf-orange) 42%, var(--bf-orange-deep) 100%) padding-box,
+    linear-gradient(180deg, #FFE45C 0%, var(--bf-gold) 38%, var(--bf-gold-deep) 100%) border-box;
+  color: var(--bf-gold); font: 900 clamp(17px, 1.7vw, 23px)/1 var(--bf-font);
+  letter-spacing: .02em; text-transform: uppercase; text-decoration: none; white-space: nowrap;
+  text-shadow: 0 2px 0 rgba(122, 26, 0, .45);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 -5px 12px rgba(120,20,0,.35), 0 12px 24px rgba(0,0,0,.45);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .25s var(--bf-ease-out), box-shadow .25s ease, filter .25s ease;
+}
+.bf-btn::after {
+  content: ''; position: absolute; z-index: -1; top: -30%; bottom: -30%; left: -10%; width: 26%;
+  background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.5), rgba(255,255,255,0));
+  transform: translateX(-160%) skewX(-18deg); pointer-events: none;
+}
+.bf-btn:hover {
+  transform: translateY(-2px); filter: saturate(1.1);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.32), inset 0 -5px 12px rgba(120,20,0,.35), 0 16px 30px rgba(0,0,0,.5), 0 0 28px rgba(255,69,0,.55);
+}
+.bf-btn:hover::after { transform: translateX(520%) skewX(-18deg); transition: transform .85s var(--bf-ease-out); }
+.bf-btn:active { transform: translateY(1px); }
+.bf-btn--cta::after { animation: bf-shine 4.2s ease-in-out infinite; }
+.bf-btn--gold {
+  color: #7A1A00; text-shadow: 0 1px 0 rgba(255,255,255,.35);
+  background:
+    linear-gradient(180deg, #FFEF7A 0%, var(--bf-gold) 45%, #F2A900 100%) padding-box,
+    linear-gradient(180deg, #FFF6B0, #C98400) border-box;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55), inset 0 -4px 10px rgba(170,90,0,.35), 0 10px 22px rgba(110,15,0,.45);
+}
+.bf-btn--gold:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.6), inset 0 -4px 10px rgba(170,90,0,.35), 0 14px 28px rgba(110,15,0,.5), 0 0 26px rgba(255,215,0,.5); }
+/* Botão B2B (agentes de viagem): mesmo formato, paleta azul do céu do hero (#0B7FE0). Secundário: um pouco
+   menor que o "Cadastre-se agora" e sem o brilho animado, para não competir com o botão principal. */
+.bf-btn--b2b {
+  min-height: 56px; padding: 0 clamp(22px, 2.6vw, 36px); font-size: clamp(15px, 1.4vw, 19px);
+  color: var(--bf-white); text-shadow: 0 2px 0 rgba(4, 40, 90, .45);
+  background:
+    radial-gradient(120% 140% at 50% 0%, #4FB0FF 0%, #0B7FE0 45%, #0762B8 100%) padding-box,
+    linear-gradient(180deg, #BFE6FF 0%, #5DB6F5 40%, #0A5FAE 100%) border-box;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.3), inset 0 -5px 12px rgba(0,40,100,.35), 0 12px 24px rgba(0,0,0,.45);
+}
+.bf-btn--b2b:hover { box-shadow: inset 0 2px 0 rgba(255,255,255,.34), inset 0 -5px 12px rgba(0,40,100,.35), 0 16px 30px rgba(0,0,0,.5), 0 0 28px rgba(11,127,224,.6); }
+@keyframes bf-shine { 0%, 62% { transform: translateX(-160%) skewX(-18deg); } 100% { transform: translateX(520%) skewX(-18deg); } }
+
+/* Dock: fica preso no rodapé da tela durante as seções 3 e 4 e "pousa" no fim delas */
+.bf-dock {
+  position: sticky; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40;
+  display: flex; justify-content: center; align-items: center; gap: 16px; padding: 0 var(--bf-gutter);
+  margin: clamp(28px, 6vh, 64px) 0 clamp(40px, 8vh, 96px); pointer-events: none;
+}
+.bf-dock .bf-btn { pointer-events: auto; }
+
+/* =========================================================
+   4. ATRIBUTOS (selos + card com mini-carrossel)
+   Mobile/touch primeiro: cards sempre visíveis.
+   ========================================================= */
+.bf-attrs { position: relative; padding: clamp(40px, 8vh, 100px) 0 clamp(8px, 3vh, 40px); }
+.bf-attrs__head { text-align: center; margin-bottom: clamp(44px, 8vh, 96px); }
+.bf-attrs__hint { display: inline-flex; align-items: center; gap: 10px; margin: 0; color: var(--bf-muted); font-size: 15px; }
+.bf-attrs__hint::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--bf-orange); box-shadow: 0 0 0 0 rgba(255,69,0,.6); animation: bf-ping 1.8s ease-out infinite; }
+.bf-only-hover { display: none; }
+.bf-attrs__list { position: relative; display: grid; gap: clamp(64px, 10vh, 110px); }
+.bf-attrs__line { display: none; }
+.bf-attr { display: grid; justify-items: center; gap: 22px; width: 100%; max-width: 520px; margin: 0 auto; text-align: center; }
+.bf-attr__hub { display: contents; }
+.bf-attr__seal {
+  order: 0; position: relative; z-index: 2; width: clamp(160px, 42vw, 220px); aspect-ratio: 1;
+  display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .6s var(--bf-spring), scale .9s var(--bf-spring), rotate .9s var(--bf-spring), opacity .5s ease;
+}
+.bf-attr__seal img { width: 100%; transition: filter .6s ease; }
+.bf-attr__seal::before {
+  content: ''; position: absolute; inset: -16%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255,69,0,.55), rgba(255,69,0,0));
+  opacity: 0; transform: scale(.8); transition: opacity .5s ease, transform .6s var(--bf-ease-out);
+}
+.bf-js .bf-attr:not(.is-in) .bf-attr__seal { opacity: 0; scale: .4; rotate: -30deg; }
+.bf-attr__info { order: 1; }
+.bf-attr__num { display: block; margin-bottom: 8px; color: var(--bf-gold); font-weight: 700; font-size: 13px; letter-spacing: .3em; }
+.bf-attr__title { margin: 0 0 10px; font-weight: 900; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.02; text-transform: uppercase; }
+/* text-wrap: pretty evita viúvas (uma palavra sozinha na última linha) */
+.bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; -webkit-hyphens: none; hyphens: none; text-wrap: pretty; }
+.bf-attr__card {
+  order: 2; position: relative; width: 100%; padding: 5px; border-radius: 22px;
+  background: linear-gradient(145deg, #FFE45C, var(--bf-gold) 30%, #F2A900 65%, #C97A00);
+  box-shadow: 0 30px 60px rgba(0,0,0,.55), 0 0 60px rgba(255,69,0,.18);
+}
+
+/* Mini-carrossel */
+.bf-carousel {
+  position: relative; overflow: hidden; isolation: isolate; aspect-ratio: 4 / 3; border-radius: 17px; cursor: pointer;
+  background: #161616 linear-gradient(110deg, #161616 30%, #232323 50%, #161616 70%) 0 0 / 220% 100%;
+  animation: bf-shimmer 1.6s linear infinite;
+}
+.bf-carousel.is-loaded { animation: none; }
+.bf-carousel::after { content: ''; position: absolute; inset: auto 0 0 0; z-index: 2; height: 42%; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5)); pointer-events: none; }
+.bf-slide { position: absolute; inset: 0; width: 100%; height: 100% !important; max-width: none !important; object-fit: cover; transform: translate3d(100%, 0, 0); }
+.bf-slide:not([src]) { visibility: hidden; }
+.bf-slide.is-active { z-index: 1; transform: translate3d(0, 0, 0); transition: transform .8s var(--bf-ease-out); animation: bf-kenburns 2.4s var(--bf-ease-out) both; }
+.bf-slide.is-leaving { transform: translate3d(-100%, 0, 0); transition: transform .8s var(--bf-ease-out); }
+.bf-carousel__bars { position: absolute; z-index: 3; left: 12px; right: 12px; top: 12px; display: flex; gap: 6px; }
+.bf-carousel__bars i { flex: 1; height: 3px; overflow: hidden; border-radius: 3px; background: rgba(255,255,255,.35); }
+.bf-carousel__bars b { display: block; height: 100%; background: #fff; transform: scaleX(0); transform-origin: 0 50%; }
+.bf-carousel__bars i.is-done b { transform: scaleX(1); }
+.bf-carousel__tag {
+  position: absolute; z-index: 3; left: 12px; bottom: 12px; padding: 7px 12px; border-radius: 999px;
+  background: rgba(10,10,10,.72); color: var(--bf-gold); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+}
+
+@keyframes bf-kenburns { from { scale: 1.12; } to { scale: 1; } }
+@keyframes bf-shimmer { to { background-position: -220% 0; } }
+@keyframes bf-ping { 0% { box-shadow: 0 0 0 0 rgba(255,69,0,.6); } 100% { box-shadow: 0 0 0 12px rgba(255,69,0,0); } }
+@keyframes bf-ring { 0% { transform: scale(.95); opacity: .8; } 100% { transform: scale(1.35); opacity: 0; } }
+
+/* Desktop com mouse: selos no eixo central, card surge no hover */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .bf-only-hover { display: inline; }
+  .bf-only-touch { display: none; }
+  .bf-attrs__list { gap: clamp(80px, 13vh, 150px); }
+  .bf-attrs__line {
+    display: block; position: absolute; left: 50%; top: 0; width: 2px; height: 0; margin-left: -1px;
+    border-radius: 2px; background: rgba(255,255,255,.08); pointer-events: none;
+  }
+  .bf-attrs__line-fill {
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(180deg, var(--bf-orange), var(--bf-gold));
+    box-shadow: 0 0 14px rgba(255,69,0,.65); transform: scaleY(0); transform-origin: 50% 0; will-change: transform;
+  }
+  .bf-attr { max-width: none; grid-template-columns: 1fr auto 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: center; justify-items: stretch; }
+  .bf-attr__hub { display: block; position: relative; grid-column: 2; grid-row: 1; }
+  .bf-attr__info { grid-row: 1; max-width: 400px; }
+  .bf-attr[data-side="right"] .bf-attr__info { grid-column: 1; justify-self: end; text-align: right; }
+  .bf-attr[data-side="left"] .bf-attr__info { grid-column: 3; justify-self: start; text-align: left; }
+  .bf-attr__seal { width: clamp(190px, 17vw, 250px); }
+  .bf-attr__seal::after {
+    content: ''; position: absolute; inset: 3%; border-radius: 50%; border: 2px solid rgba(255,215,0,.55);
+    animation: bf-ring 2.4s ease-out infinite; pointer-events: none;
+  }
+  .bf-attrs.is-linked .bf-attr:not(.is-lit) .bf-attr__seal img { filter: grayscale(.85) brightness(.5); }
+  .bf-attrs.is-linked .bf-attr:not(.is-lit) .bf-attr__seal::after { opacity: 0; animation: none; }
+  .bf-attr.is-lit .bf-attr__seal::before { opacity: .55; transform: scale(1); }
+  .bf-attr__card {
+    position: absolute; top: 50%; z-index: 1; width: clamp(300px, 30vw, 440px);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .3s ease, transform .7s var(--bf-spring), visibility 0s linear .7s;
+  }
+  .bf-attr[data-side="right"] .bf-attr__card { left: calc(100% + clamp(24px, 3vw, 44px)); transform-origin: 0 50%; transform: translate3d(-55%, -50%, 0) scale(.5) rotate(-10deg); }
+  .bf-attr[data-side="left"] .bf-attr__card { right: calc(100% + clamp(24px, 3vw, 44px)); transform-origin: 100% 50%; transform: translate3d(55%, -50%, 0) scale(.5) rotate(10deg); }
+  /* "ponte" invisível entre selo e card para o hover não cair no vão */
+  .bf-attr__card::before { content: ''; position: absolute; top: 0; bottom: 0; width: clamp(40px, 4vw, 60px); }
+  .bf-attr[data-side="right"] .bf-attr__card::before { right: 100%; }
+  .bf-attr[data-side="left"] .bf-attr__card::before { left: 100%; }
+  .bf-attr.is-open .bf-attr__card { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .25s ease, transform .7s var(--bf-spring), visibility 0s; }
+  .bf-attr[data-side="right"].is-open .bf-attr__card { transform: translate3d(0, -50%, 0) rotate(-2deg); }
+  .bf-attr[data-side="left"].is-open .bf-attr__card { transform: translate3d(0, -50%, 0) rotate(2deg); }
+  .bf-attr.is-open .bf-attr__seal { transform: scale(1.08) rotate(-6deg); }
+  .bf-attr.is-open .bf-attr__seal img { filter: none; }
+  .bf-attr.is-open .bf-attr__seal::before { opacity: 1; transform: scale(1.05); }
+}
+
+/* =========================================================
+   5. FORMULÁRIO (card laranja — ref. Assets/Cadastro-box.webp)
+   ========================================================= */
+.bf-form { position: relative; padding: 0 0 clamp(40px, 8vh, 96px); scroll-margin-top: 3vh; }
+.bf-form__rise { max-width: 840px; margin: 0 auto; }
+/* Card plano: mesma linguagem do botão "Cadastre-se agora" com as cores invertidas —
+   fundo laranja escuro/translúcido + borda dourada fina, sem sombras nem relevo */
+.bf-card {
+  position: relative; border: 2px solid var(--bf-gold); border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255,69,0,.58) 0%, rgba(255,69,0,.38) 100%), var(--bf-black);
+  transform-origin: 50% 100%; will-change: transform, opacity;
+}
+.bf-card__inner {
+  position: relative; overflow: hidden; border-radius: 22px;
+  padding: clamp(28px, 4.5vw, 52px) clamp(20px, 5vw, 64px) clamp(28px, 4vw, 44px);
+}
+.bf-card__title {
+  margin: 0 0 clamp(24px, 3.4vw, 36px); text-align: center; color: var(--bf-gold);
+  font-weight: 900; font-size: clamp(26px, 3.4vw, 40px); line-height: 1; text-transform: uppercase;
+}
+/* Formulário oficial da SharpSpring. O form.js injeta um <iframe> de outro domínio dentro de
+   #sharpspring-form; por segurança do navegador, o CSS desta página não alcança os campos lá dentro.
+   Cores e fontes dos campos ficam no CSS personalizado do formulário, no editor da SharpSpring.
+   Aqui: largura total do card, fundo transparente (o laranja do card aparece) e aviso de carregamento. */
+/* Espaço reservado com a altura real do formulário. Vale também depois que o iframe entra (ele
+   nasce com 200px até a SharpSpring informar a altura real), para a página não encolher e crescer de novo.
+   --ss-h: alturas medidas no Chrome em produção, com o CSS personalizado da SharpSpring aplicado. O formulário
+   cresce em degraus conforme a largura (os textos quebram em mais linhas); se o CSS da SharpSpring mudar, medir de novo.
+   !important: a SharpSpring avisa primeiro uma altura menor (antes de as fontes carregarem dentro do iframe) e o
+   form.js a aplica como min-height inline; a reserva segura o espaço até chegar a altura final. */
+.bf-card { --ss-h: 524.344px; }
+@media (max-width: 570.98px) { .bf-card { --ss-h: 544.641px; } }
+@media (max-width: 489.98px) { .bf-card { --ss-h: 562.828px; } }
+@media (max-width: 408.98px) { .bf-card { --ss-h: 583.125px; } }
+#sharpspring-form { width: 100%; min-height: var(--ss-h) !important; margin: 0 auto; text-align: center; }
+#sharpspring-form:empty { display: grid; place-items: center; }
+#sharpspring-form:empty::before {
+  content: "Carregando formulário..."; color: var(--bf-gold); opacity: .85;
+  font: 600 14px/1.2 var(--bf-font); letter-spacing: .28em; text-transform: uppercase;
+}
+#sharpspring-form iframe {
+  display: block; width: 100% !important; max-width: 100%; margin: 0 auto;
+  border: 0 !important; background: transparent !important; color-scheme: normal;
+}
+/* Plano B: se o formulário não aparecer em até 3 s (bloqueador de anúncios, rede muito lenta), o card mostra
+   o link direto para o grupo VIP. No desktop ocupa o mesmo espaço reservado, então nada na página pula; no
+   celular fica só com a altura do conteúdo, sem sobra de laranja no card. O iframe fica com altura 0 (mas
+   mantém a largura), pronto para voltar se o formulário chegar depois. */
+.bf-card.is-fallback #sharpspring-form { height: 0 !important; min-height: 0 !important; overflow: hidden; visibility: hidden; }
+.bf-ssf-fallback {
+  min-height: var(--ss-h); display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; text-align: center;
+}
+@media (max-width: 480px) { .bf-ssf-fallback { min-height: 0; padding: 12px 0 8px; } }
+.bf-ssf-fallback__icon { width: 68px; height: 68px; display: grid; place-items: center; margin-bottom: 4px; border-radius: 50%; background: var(--bf-gold); box-shadow: 0 8px 22px rgba(110,15,0,.35); }
+.bf-ssf-fallback__icon svg { width: 34px; height: 34px; fill: none; stroke: #C92E07; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bf-ssf-fallback__title { margin: 0; max-width: 22ch; color: var(--bf-gold); font-weight: 900; font-size: clamp(21px, 2.4vw, 28px); line-height: 1.1; text-transform: uppercase; }
+.bf-ssf-fallback__text { margin: 0; max-width: 40ch; color: var(--bf-white); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.5; text-wrap: pretty; }
+.bf-ssf-fallback .bf-btn { margin-top: 10px; }
+.bf-ssf-fallback__note { margin: 6px 0 0; max-width: 46ch; color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.45; }
+
+/* Texto final + rodapé */
+.bf-final { max-width: 760px; margin: clamp(56px, 10vh, 110px) auto 0; text-align: center; }
+.bf-final__lead { margin: 0 0 .6em; font-weight: 900; font-size: clamp(24px, 3vw, 38px); line-height: 1.1; text-transform: uppercase; }
+.bf-final__lead span { color: var(--bf-gold); }
+.bf-final__text { margin: 0; color: var(--bf-muted); font-size: clamp(16px, 1.4vw, 19px); }
+.bf-footer { position: relative; padding: 56px 0 calc(40px + env(safe-area-inset-bottom)); text-align: center; }
+.bf-footer::before { content: ''; position: absolute; top: 0; left: 50%; width: min(760px, 86%); height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, rgba(255,215,0,0), rgba(255,215,0,.45), rgba(255,215,0,0)); }
+.bf-footer img { width: 201px; margin: 0 auto 18px; }
+.bf-footer p { margin: 0; color: rgba(255,255,255,.5); font-size: 13px; letter-spacing: .04em; }
+
+/* =========================================================
+   6. GLOW AMARELO QUE SEGUE O CURSOR (somente desktop com mouse)
+   ========================================================= */
+.bf-cursor-glow {
+  --glow: 320px;
+  position: fixed; left: 0; top: 0; z-index: 2147483000;
+  width: var(--glow); height: var(--glow); margin: calc(var(--glow) / -2) 0 0 calc(var(--glow) / -2);
+  border-radius: 50%; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgba(255,215,0,.15), rgba(255,215,0,.06) 45%, rgba(255,215,0,0) 100%);
+  mix-blend-mode: screen; will-change: transform;
+  transition: opacity .4s ease;
+}
+.bf-cursor-glow.is-visible { opacity: 1; }
+@media (max-width: 768px), (hover: none), (pointer: coarse) { .bf-cursor-glow { display: none !important; } }
+
+/* =========================================================
+   RESPONSIVO + MOVIMENTO REDUZIDO
+   ========================================================= */
+@media (max-width: 768px) {
+  :root { --bf-hero-h: 220vh; }
+  .bf-hero__anchor { top: 11vh; top: 11svh; }
+  .bf-hero__hint { font-size: 11px; letter-spacing: .24em; }
+  .bf-btn { min-height: 58px; }
+  .bf-btn--b2b { min-height: 50px; }   /* secundário: um pouco mais baixo que o principal */
+}
+/* Dock no celular: lado a lado os dois botões precisam de ~515px, então abaixo de 600px eles empilham
+   (principal em cima), com a mesma largura. Compacto para ocupar pouco do rodapé da tela durante a leitura. */
+@media (max-width: 599.98px) {
+  .bf-dock {
+    flex-direction: column; gap: 8px; bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    margin: 20px 0 32px;
+  }
+  .bf-dock .bf-btn { width: min(100%, 340px); min-height: 48px; padding: 10px 18px; border-radius: 10px; font-size: 15px; }
+  .bf-dock .bf-btn--b2b { min-height: 42px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.bf, .bf-watermark, .bf-cursor-glow), :where(.bf) *, :where(.bf) *::before, :where(.bf) *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  .bf-float, .bf-hero__halo, .bf-btn--cta::after, .bf-attrs__hint::before, .bf-mouse::after, .bf-attr__seal::after { animation: none !important; }
+}
+</style>
