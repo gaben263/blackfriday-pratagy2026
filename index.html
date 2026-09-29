@@ -185,6 +185,9 @@ body {
 }
 .bf-eyebrow::before, .bf-eyebrow::after { content: ''; width: 34px; height: 2px; background: linear-gradient(90deg, rgba(255,69,0,0), var(--bf-orange)); }
 .bf-eyebrow::after { transform: scaleX(-1); }
+/* Títulos equilibrados: linhas de tamanho parecido, sem uma palavra sozinha na última.
+   "pretty" vem antes como reserva; onde "balance" é suportado, ele vence. */
+.bf-h2, .bf-intro__title { text-wrap: pretty; text-wrap: balance; }
 .bf-h2 { margin: 0 0 .35em; font-weight: 900; font-size: clamp(32px, 4.6vw, 64px); line-height: 1; text-transform: uppercase; }
 
 /* Palavras animadas pelo scroll (JS divide o texto e controla --p) */
@@ -320,12 +323,6 @@ body {
 .bf-attr__num { display: block; margin-bottom: 8px; color: var(--bf-gold); font-weight: 700; font-size: 13px; letter-spacing: .3em; }
 .bf-attr__title { margin: 0 0 10px; font-weight: 900; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.02; text-transform: uppercase; }
 .bf-attr__text { margin: 0; color: var(--bf-muted); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; -webkit-hyphens: none; hyphens: none; }
-/* Texto ao lado do selo, a partir de 1200px (coluna larga o bastante): justificado, com a última linha do mesmo
-   lado do alinhamento do bloco. Entre 900 e 1199px a coluna é estreita demais e o texto segue sem justificar. */
-@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
-  .bf-attr[data-side="right"] .bf-attr__text { text-align: justify; text-align-last: right; }
-  .bf-attr[data-side="left"] .bf-attr__text { text-align: justify; text-align-last: left; }
-}
 .bf-attr__card {
   order: 2; position: relative; width: 100%; padding: 5px; border-radius: 22px;
   background: linear-gradient(145deg, #FFE45C, var(--bf-gold) 30%, #F2A900 65%, #C97A00);
@@ -563,8 +560,8 @@ body {
       <div class="bf-wrap">
         <p class="bf-eyebrow"><span data-split>novembro de 2026</span></p>
         <h2 class="bf-intro__title" data-split>Seja <em>VIP</em> na Black Friday do Pratagy</h2>
-        <p class="bf-intro__text" data-split>Em novembro de 2026, o Pratagy abre a maior Black Friday do ano — e você pode sair na frente. Cadastre-se na lista VIP e receba em primeira mão o preço especial, com parcelamento facilitado e benefícios únicos para viver o paraíso de Maceió.</p>
-        <p class="bf-intro__text" data-split>Quem está no grupo VIP recebe a oferta antes de todo mundo e aproveita primeiro tudo o que o Pratagy tem de melhor: gastronomia premiada, praias paradisíacas, Acqua Park e uma estrutura completa para toda a família. As vagas são limitadas — e o paraíso não espera.</p>
+        <p class="bf-intro__text" data-split>A Black Friday vem aí! E no Pratagy é assim: quem se antecipa pode sair na frente. Cadastre-se em nossa lista VIP e receba em primeira mão nossa oferta especial, com parcelamento facilitado e benefícios incríveis para viver Maceió.</p>
+        <p class="bf-intro__text" data-split>Seja VIP e garanta as melhores datas com descontos inacreditáveis! Depois é só viver dias inesquecíveis com tudo o que o Pratagy tem de melhor: all inclusive 24h, praia semi privativa, entradas para o Pratagy Acqua Park e uma estrutura completa para toda a família.</p>
       </div>
     </section>
 
@@ -592,7 +589,7 @@ body {
       <div class="bf-wrap">
         <header class="bf-attrs__head bf-reveal">
           <p class="bf-eyebrow">Vantagens</p>
-          <h2 class="bf-h2" id="bf-attrs-title">Tudo incluso para você só aproveitar</h2>
+          <h2 class="bf-h2" id="bf-attrs-title">Tudo incluído para você só aproveitar!</h2>
           <p class="bf-attrs__hint"><span class="bf-only-hover">Passe o mouse sobre os selos</span><span class="bf-only-touch">Toque nas fotos para avançar</span></p>
         </header>
 
@@ -603,7 +600,7 @@ body {
             <div class="bf-attr__info bf-reveal">
               <span class="bf-attr__num">01</span>
               <h3 class="bf-attr__title">All Inclusive</h3>
-              <p class="bf-attr__text">Refeições, petiscos e bebidas à vontade, do café da manhã ao jantar. Sem se preocupar com a conta no final, você aproveita cada momento com quem ama.</p>
+              <p class="bf-attr__text">Todas as refeições, drinks, petiscos e bebidas à vontade, o dia inteiro, sem preocupações. Afinal, o mais importante é criar memórias ao lado de quem você ama!</p>
             </div>
             <div class="bf-attr__hub">
               <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-1" aria-label="Ver fotos: All Inclusive">
@@ -625,7 +622,7 @@ body {
             <div class="bf-attr__info bf-reveal">
               <span class="bf-attr__num">02</span>
               <h3 class="bf-attr__title">2 crianças grátis de até 15 anos</h3>
-              <p class="bf-attr__text">Leve a família toda e garanta o melhor para quem você ama. Crianças de até 15 anos ficam grátis, com recreação, cardápio kids e toda a estrutura pensada para elas.</p>
+              <p class="bf-attr__text">Nossa estrutura conta com muita diversão para toda a família! Por isso, crianças de até 15 anos são nossas convidadas: até 2 crianças por família se hospedam gratuitamente, acompanhadas de responsáveis pagantes.</p>
             </div>
             <div class="bf-attr__hub">
               <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-2" aria-label="Ver fotos: 2 crianças grátis de até 15 anos">
@@ -647,7 +644,7 @@ body {
             <div class="bf-attr__info bf-reveal">
               <span class="bf-attr__num">03</span>
               <h3 class="bf-attr__title">Entrada Acqua Park inclusa</h3>
-              <p class="bf-attr__text">Um dos maiores parques aquáticos do Brasil já está incluso na sua reserva. Toboáguas, piscinas de ondas e muita diversão para todas as idades, sem pagar nada a mais por isso.</p>
+              <p class="bf-attr__text">Que tal mergulhar na diversão? As entradas para toda família já estão inclusas na sua reserva. Toboáguas, tobogãs, Acqua Spray e muita diversão para todas as idades, sem pagar nada a mais por isso.</p>
             </div>
             <div class="bf-attr__hub">
               <button class="bf-attr__seal" type="button" aria-expanded="false" aria-controls="bf-card-3" aria-label="Ver fotos: Entrada Acqua Park inclusa">
