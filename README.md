@@ -159,8 +159,12 @@ Consequências:
   a versão anterior até o cache do navegador vencer. Por isso, publique correções o quanto antes e espere até
   1 hora antes de concluir que "ainda tem gente vendo o erro".
 
-Para saber **quando** a versão no ar foi salva, veja o cabeçalho `x-goog-generation`. Ele traz o horário da gravação
-em microssegundos desde 1970:
+Para saber **quando** a versão no ar foi salva, olhe o resultado da conferência: logo no começo aparece uma linha
+como `versão no ar salva em 02/10/2026, 09:32:24 (horário de Brasília), há 15 min`. Se esse horário for
+anterior à sua publicação, a versão nova ainda não entrou no ar. Espere alguns minutos e rode a conferência de novo.
+
+Esse horário vem do cabeçalho `x-goog-generation`, que traz o momento da gravação em microssegundos desde 1970.
+Sem a ferramenta, dá para ler o mesmo cabeçalho com:
 
 ```
 curl -sI https://blackfriday.pratagy.com.br/listavip2026/ | grep -i x-goog-generation
