@@ -26,18 +26,28 @@ const normJs = s => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"\\])\/\/
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
-  let html = await (await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 conferir-omnibees' } })).text();
+  const get = async u => { const r = await fetch(u, { headers: { 'User-Agent': 'Mozilla/5.0 conferir-omnibees' } }); return { html: await r.text(), gen: r.headers.get('x-goog-generation') }; };
+  let { html, gen } = await get(url);
   // A Omnibees redireciona endereços antigos com <meta http-equiv="refresh">: segue até a página de verdade
   for (let i = 0; i < 3; i++) {
     const m = html.length < 3000 && html.match(/http-equiv=["']refresh["'][^>]*url=([^"'>]+)/i);
     if (!m) break;
     console.log(`(este endereço redireciona para ${m[1].trim()})`);
-    html = await (await fetch(new URL(m[1].trim(), url), { headers: { 'User-Agent': 'Mozilla/5.0 conferir-omnibees' } })).text();
+    ({ html, gen } = await get(new URL(m[1].trim(), url)));
   }
   const kind = process.argv[3] || (html.includes('ty-check') ? 'obrigado' : 'landing');
   if (!PAGES[kind]) { console.log('Página desconhecida: ' + kind + ' (use landing ou obrigado)'); process.exit(2); }
   const head = fs.readFileSync(path.join(DIR, PAGES[kind].head), 'utf8'), body = fs.readFileSync(path.join(DIR, PAGES[kind].body), 'utf8');
-  console.log(`Conferindo ${url}\n  contra ${PAGES[kind].head} + ${PAGES[kind].body} (página: ${kind})\n`);
+  console.log(`Conferindo ${url}\n  contra ${PAGES[kind].head} + ${PAGES[kind].body} (página: ${kind})`);
+  // Horário em que a versão no ar foi salva: a Omnibees guarda as páginas no Google Cloud Storage, e o cabeçalho
+  // x-goog-generation traz esse momento em microssegundos. Se for anterior à sua publicação, a nova ainda não entrou.
+  if (gen && /^\d{13,}$/.test(gen)) {
+    const t = new Date(Number(gen.slice(0, 13))), min = Math.round((Date.now() - t) / 60000);
+    const quando = t.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const ha = min < 1 ? 'menos de 1 minuto' : min < 120 ? `${min} min` : min < 2880 ? `${Math.round(min / 60)} h` : `${Math.round(min / 1440)} dias`;
+    console.log(`  versão no ar salva em ${quando} (horário de Brasília), há ${ha}`);
+  } else console.log('  (o servidor não informou o horário da publicação: sem cabeçalho x-goog-generation)');
+  console.log('');
   let falhas = 0;
   const pubCss = ourStyle(html), locCss = ourStyle(head);
   if (!pubCss) { console.log('✗ CSS: o nosso <style> não foi encontrado na página publicada (o head foi colado?)'); falhas++; }
