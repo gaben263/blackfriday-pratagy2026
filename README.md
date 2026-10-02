@@ -4,8 +4,13 @@ Página de captação da Black Friday 2026 do Pratagy Beach Resort. O visitante 
 SharpSpring e entra na lista VIP, que recebe a oferta de novembro antes de todo mundo.
 
 - **Produção (Vercel):** https://blackfriday-pratagy2026.vercel.app (obrigado: `/obrigado.html`)
-- **Landing na Omnibees / SharpSpring Pages:** http://blackfriday.pratagy.com.br.pages.services/bfp-26-lp-captao/
-  (só `http`: o endereço `https` da plataforma dá erro de certificado)
+- **Landing na Omnibees / SharpSpring Pages (oficial):** https://blackfriday.pratagy.com.br/listavip2026/
+  (o endereço antigo, `http://blackfriday.pratagy.com.br.pages.services/bfp-26-lp-captao/`, só redireciona para este)
+
+O endereço antigo não é uma cópia da página: a Omnibees criou ali um aviso de redirecionamento
+(`<meta http-equiv="refresh">`) quando a página mudou de endereço. Ele não tem o nosso código e não precisa ser
+atualizado. **Recomendação: manter.** Quem tiver o link antigo (mensagens, anúncios, QR codes) continua chegando
+à página certa. Só remova esse redirecionamento se tiver certeza de que o link antigo não circula mais.
 
 ## Arquivos
 
@@ -18,6 +23,7 @@ SharpSpring e entra na lista VIP, que recebe a oferta de novembro antes de todo 
 | `SharpSpring-CSS-formulario.css` | CSS personalizado do formulário, colado no editor da SharpSpring. Não é carregado pela página. |
 | `Assets/`, `Fotos/`, `Fonte/` | Imagens (.webp) e fontes Fibra One. A versão da Omnibees carrega tudo daqui, pela Vercel. |
 | `ferramentas/gerar-omnibees.js` | Script que gera os arquivos da Omnibees de todas as páginas. |
+| `ferramentas/conferir-omnibees.js` | Script que confere uma página publicada na Omnibees contra os arquivos gerados. |
 
 ## Deploy na Vercel
 
@@ -36,7 +42,7 @@ O editor da Omnibees (SharpSpring Pages) tem áreas separadas para o conteúdo d
 2. Copie **todo** o conteúdo de `head.html` para a área do **head**. Ele vai do `<meta charset>` ao `</style>`.
 3. Copie **todo** o conteúdo de `body.html` para a área do **body**. Ele vai do `<div class="bf-watermark">`
    ao `</script>`.
-4. Publique e confira a página, no desktop e no celular.
+4. Publique e rode a conferência (veja "Conferir a página publicada"). Depois, olhe a página no desktop e no celular.
 
 Os dois arquivos já trazem os caminhos absolutos da Vercel (`https://blackfriday-pratagy2026.vercel.app/Assets/...`).
 
@@ -52,16 +58,17 @@ Mesmo processo da landing, numa página separada da Omnibees:
 2. Copie **todo** o conteúdo de `obrigado-head.html` para a área do **head**. Ele vai do `<meta charset>` ao `</style>`.
    A página não tem JavaScript.
 3. Copie **todo** o conteúdo de `obrigado-body.html` para a área do **body**. Ele vai do `<main class="bf">` ao `</main>`.
-4. Publique e confira: check com pulso verde, título dourado, botões SITE e GRUPO VIP, redes sociais e rodapé.
+4. Publique e rode a conferência (veja "Conferir a página publicada"). Depois, olhe a página: check com pulso verde,
+   título dourado, botões SITE e GRUPO VIP, redes sociais e rodapé.
 5. Nas configurações da página, defina o título "Cadastro Concluído | Black Friday Pratagy 2026" e, se houver a opção,
    deixe a página fora dos buscadores (noindex). O nosso `<meta name="robots">` já pede isso.
 6. **Depois de publicar, atualize o redirecionamento da SharpSpring** para a URL pública da página de obrigado na
    Omnibees, não para a da Vercel. Fica em **SharpSpring → Forms → BFP 26 → Configurações → Página de Obrigado**.
    Depois, faça um cadastro de teste e confira se o redirecionamento abre a página certa.
 
-O link "Voltar para a página inicial" aponta para a landing na Omnibees
-(`http://blackfriday.pratagy.com.br.pages.services/bfp-26-lp-captao/`). Se a URL da landing mudar, atualize
-esse link no `obrigado.html`.
+O link "Voltar para a página inicial" aponta para a landing oficial na Omnibees
+(`https://blackfriday.pratagy.com.br/listavip2026/`). Se a URL da landing mudar, atualize esse link no
+`obrigado.html` e gere os arquivos de novo.
 
 ## CSS da plataforma
 
@@ -80,7 +87,14 @@ padrão do navegador dentro de `.bf`. Na Vercel esse bloco não muda nada.
 Ao criar coisas novas numa das páginas:
 - dê cor explícita, ou `inherit` pela blindagem, a títulos e links, inclusive em `:hover`, `:focus` e `:visited`;
 - use `px` em vez de `rem`;
-- se aparecer uma tag nova (`input`, `table`, `ol`...), inclua-a na blindagem, porque o tema também estiliza essas tags.
+- se aparecer uma tag nova (`input`, `table`, `ol`...), inclua-a na blindagem, porque o tema também estiliza essas tags;
+- **nunca deixe espaço antes de `:` num seletor**.
+
+O editor da Omnibees reformata o código colado (uma propriedade por linha) e, nisso, apaga o espaço antes de `:`.
+Em seletores como `.bf :focus-visible` ou `:where(.bf) :is(h1)`, esse espaço significa "dentro de". Sem ele, o
+seletor passa a pegar só o próprio `.bf`, e a regra deixa de funcionar. Foi o que deixou os títulos cinza.
+- Para isso, escreva `.bf *:focus-visible`, ou repita a tag: `:where(.bf) h1, :where(.bf) h2`.
+- O gerador recusa esse padrão: ele avisa e não grava os arquivos.
 
 ## Regenerar os arquivos da Omnibees
 
@@ -97,12 +111,31 @@ O script:
 - troca `Assets/`, `Fotos/` e `Fonte/` pelas URLs da Vercel;
 - mostra linhas e tamanho de cada arquivo;
 - lista as menções que sobraram em comentários;
-- se ainda houver algum `src`, `href` ou `url()` relativo, avisa e termina com erro.
+- se ainda houver algum `src`, `href` ou `url()` relativo, ou algum seletor com espaço antes de `:`, avisa,
+  **não grava** os arquivos daquela página e termina com erro.
 
 Para publicar uma página nova na Omnibees, acrescente uma linha na lista `PAGES`, no topo do script.
 
 Depois, faça o commit da fonte e dos arquivos gerados juntos, dê push, espere o deploy da Vercel e cole os
 arquivos novos na Omnibees.
+
+## Conferir a página publicada
+
+Depois de colar e publicar na Omnibees, rode na raiz do repositório (requer Node.js 22+ e Chrome ou Edge):
+
+```
+node ferramentas/conferir-omnibees.js https://blackfriday.pratagy.com.br/listavip2026/
+node ferramentas/conferir-omnibees.js <url-da-página-de-obrigado> obrigado
+```
+
+O script confere três coisas:
+- **CSS:** compara, regra por regra, o CSS publicado com o do arquivo gerado, do jeito que o navegador entende.
+  Quebras de linha e espaços que a Omnibees acrescenta não contam; um seletor que mudou de sentido conta.
+- **JavaScript:** compara o JS publicado com o do `body.html`, ignorando espaços e comentários.
+- **Tela:** abre a página e confere se os títulos estão na Fibra One e fora do cinza do tema.
+
+Ele também segue o redirecionamento de endereços antigos. Termina com "Tudo certo" (código 0) ou lista o que
+está diferente (código 1). O navegador pode ser indicado na variável `CHROME`.
 
 ## Formulário (SharpSpring)
 

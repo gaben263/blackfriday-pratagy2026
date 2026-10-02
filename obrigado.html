@@ -62,9 +62,12 @@ body { margin: 0; min-height: 100vh; min-height: 100svh; background: var(--bf-bl
    O tema estiliza as tags direto: section/footer com padding e overflow hidden, títulos cinza #292929 em
    Open Sans 300, margem de 24px em p/ul, peso 600 e transição em todo link, cor azul e sublinhado trocado
    em a:hover/a:focus/a:visited. :where(.bf) + tag empata com as regras do tema e vence por vir depois; as
-   classes da página continuam mandando. Aqui só se devolve o padrão do navegador. */
+   classes da página continuam mandando. Aqui só se devolve o padrão do navegador.
+   NUNCA deixe espaço antes de ":" num seletor (ex.: ".bf :focus-visible", ":where(.bf) :is(h1)"): o editor da
+   Omnibees reformata o código, apaga esse espaço e o seletor muda de sentido. Escreva ".bf *:focus-visible" ou
+   repita a tag. O gerador (ferramentas/gerar-omnibees.js) recusa esse padrão. */
 :where(.bf) section, :where(.bf) footer { position: static; padding: 0; overflow: visible; }
-:where(.bf) :is(h1, h2, h3) { margin: 0; color: inherit; font-family: inherit; font-size: inherit; font-weight: 700; line-height: inherit; }
+:where(.bf) h1, :where(.bf) h2, :where(.bf) h3 { margin: 0; color: inherit; font-family: inherit; font-size: inherit; font-weight: 700; line-height: inherit; }
 :where(.bf) p { color: inherit; font-family: inherit; font-size: inherit; line-height: inherit; }
 :where(.bf) ul { margin: 1em 0; padding: 0 0 0 40px; list-style: disc; }
 :where(.bf) li { margin: 0; padding: 0; }
@@ -79,7 +82,7 @@ body { margin: 0; min-height: 100vh; min-height: 100svh; background: var(--bf-bl
 .bf .ty-back:is(:link, :visited, :hover, :focus, :active) { text-decoration-line: underline; text-decoration-color: rgba(255,215,0,.45); }
 .bf-wrap { width: min(760px, 100% - var(--bf-gutter) * 2); margin-inline: auto; }
 .bf-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
-.bf :focus-visible { outline: 3px solid var(--bf-gold); outline-offset: 4px; }
+.bf *:focus-visible { outline: 3px solid var(--bf-gold); outline-offset: 4px; }
 
 /* Selo gigante fixo no fundo (5%), como na landing — aqui parado, sem parallax */
 .bf-watermark { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
@@ -261,7 +264,7 @@ body { margin: 0; min-height: 100vh; min-height: 100svh; background: var(--bf-bl
     <div class="bf-wrap">
       <img src="Assets/Marca-grupo-pratagy.webp" alt="Grupo Pratagy" width="201" height="58" decoding="async">
       <p>© 2026 Grupo Pratagy. Todos os direitos reservados.</p>
-      <a class="ty-back" href="http://blackfriday.pratagy.com.br.pages.services/bfp-26-lp-captao/">Voltar para a página inicial</a>
+      <a class="ty-back" href="https://blackfriday.pratagy.com.br/listavip2026/">Voltar para a página inicial</a>
     </div>
   </footer>
 </main>
