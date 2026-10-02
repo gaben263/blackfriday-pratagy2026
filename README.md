@@ -173,6 +173,39 @@ curl -sI https://blackfriday.pratagy.com.br/listavip2026/ | grep -i x-goog-gener
 Os 10 primeiros dígitos são os segundos. Converta com `date -u -d @<10 dígitos>`, ou num conversor de
 "Unix timestamp".
 
+## Limitação conhecida: dock no Safari do iPhone
+
+**O que é:** no Safari do iPhone, o dock com os botões "Cadastre-se agora" e B2B (`.bf-dock`) pode dar uma
+tremida sutil enquanto a página rola. A tremida acontece quando o dock está preso no rodapé da tela, nas seções 3 e 4.
+Ela não aparece no desktop nem no Android, e os botões continuam funcionando normalmente.
+
+**Por que acontece:** o dock usa `position: sticky` com `bottom`. No iPhone, dois comportamentos do Safari se somam:
+- **Barra dinâmica:** durante a rolagem, a barra de endereço e a barra de baixo aparecem e somem. A altura visível da
+  tela muda o tempo todo, e o ponto onde o dock "gruda" muda junto.
+- **Composição do sticky:** o Safari calcula a posição de um elemento sticky na rolagem acelerada e só depois
+  sincroniza a página. Quando os dois ficam fora de compasso por um quadro, o dock aparece um pouco fora do lugar e
+  volta. Isso é do motor do navegador e não depende do nosso código.
+
+**O que foi tentado:**
+1. **Camada própria (`transform: translateZ(0)`), só em telas de toque.** Não resolveu no iPhone e foi removida.
+2. **Distância fixa (`bottom: 16px` no celular)** no lugar de `env(safe-area-inset-bottom)`. No iPhone, esse valor
+   muda durante a rolagem (0 com a barra de baixo visível, cerca de 34px com ela recolhida), e o dock dava um pulo
+   a cada vez que a barra aparecia ou sumia. **Essa correção fica:** o pulo sumiu e não houve efeito colateral
+   (desktop e tablet idênticos, CLS 0). Sobrou só a tremida sutil.
+3. **Teste com "Reduzir Movimento" ligado** (Ajustes → Acessibilidade → Movimento). Com ele, a página desliga a
+   suavização da rolagem, os efeitos de rolagem e as animações. A tremida continuou, então o nosso JavaScript não é
+   a causa.
+
+**Por que foi aceita como limitação:**
+- A tremida é sutil e não atrapalha a leitura nem o clique.
+- A alternativa seria trocar o sticky por `position: fixed`, controlado por JavaScript (IntersectionObserver), para
+  o dock aparecer e "pousar" no fim das seções. Isso exige reescrever o comportamento do dock e testar de novo em
+  todos os aparelhos. Também arrisca quebrar o que hoje funciona bem no desktop e no Android: o dock surgindo e
+  pousando no lugar certo, sem pulo de layout. O custo é alto para um ganho pequeno, que só aparece no iPhone.
+
+Se um dia for preciso eliminar a tremida, o caminho é essa troca para `position: fixed`. Antes de mexer, teste no
+iPhone de verdade, porque o Chrome do Windows, mesmo emulando um celular, não reproduz o problema.
+
 ## Formulário (SharpSpring)
 
 - O formulário "BFP 26 - Formulário de Captação" é injetado como iframe pelo `form.js` da SharpSpring,
