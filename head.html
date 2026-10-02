@@ -322,6 +322,9 @@ body { margin: 0; background: var(--bf-black); }
   display: flex; justify-content: center; align-items: center; gap: 16px; padding: 0 var(--bf-gutter);
   margin: clamp(28px, 6vh, 64px) 0 clamp(40px, 8vh, 96px); pointer-events: none;
 }
+/* Telas de toque: camada própria para o dock, que reduz a tremida do sticky no Safari do iPhone. Só no toque para
+   não arriscar a suavização ClearType do texto dos botões no Chrome/Edge do Windows. */
+@media (hover: none) and (pointer: coarse) { .bf-dock { transform: translateZ(0); } }
 .bf-dock .bf-btn { pointer-events: auto; }
 
 /* =========================================================
