@@ -328,9 +328,6 @@ body { margin: 0; background: var(--bf-black); }
   display: flex; justify-content: center; align-items: center; gap: 16px; padding: 0 var(--bf-gutter);
   margin: clamp(28px, 6vh, 64px) 0 clamp(40px, 8vh, 96px); pointer-events: none;
 }
-/* Telas de toque: camada própria para o dock, que reduz a tremida do sticky no Safari do iPhone. Só no toque para
-   não arriscar a suavização ClearType do texto dos botões no Chrome/Edge do Windows. */
-@media (hover: none) and (pointer: coarse) { .bf-dock { transform: translateZ(0); } }
 .bf-dock .bf-btn { pointer-events: auto; }
 
 /* =========================================================
@@ -539,10 +536,13 @@ body { margin: 0; background: var(--bf-black); }
   .bf-btn--b2b { min-height: 50px; }   /* secundário: um pouco mais baixo que o principal */
 }
 /* Dock no celular: lado a lado os dois botões precisam de ~515px, então abaixo de 600px eles empilham
-   (principal em cima), com a mesma largura. Compacto para ocupar pouco do rodapé da tela durante a leitura. */
+   (principal em cima), com a mesma largura. Compacto para ocupar pouco do rodapé da tela durante a leitura.
+   bottom FIXO de propósito: não use env(safe-area-inset-bottom) aqui. No Safari do iPhone esse valor muda durante
+   a rolagem (0 com a barra de baixo visível, ~34px com ela recolhida), e o dock "tremia" a cada vez que a barra
+   aparecia/sumia. Uma camada própria (transform: translateZ(0)) foi testada no iPhone e não resolveu. */
 @media (max-width: 599.98px) {
   .bf-dock {
-    flex-direction: column; gap: 8px; bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    flex-direction: column; gap: 8px; bottom: 16px;
     margin: 20px 0 32px;
   }
   .bf-dock .bf-btn { width: min(100%, 340px); min-height: 48px; padding: 10px 18px; border-radius: 10px; font-size: 15px; }
