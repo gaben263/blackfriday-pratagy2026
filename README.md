@@ -6,6 +6,8 @@ SharpSpring e entra na lista VIP, que recebe a oferta de novembro antes de todo 
 - **Produção (Vercel):** https://blackfriday-pratagy2026.vercel.app (obrigado: `/obrigado.html`)
 - **Landing na Omnibees / SharpSpring Pages (oficial):** https://blackfriday.pratagy.com.br/listavip2026/
   (o endereço antigo, `http://blackfriday.pratagy.com.br.pages.services/bfp-26-lp-captao/`, só redireciona para este)
+- **Obrigado na Omnibees (oficial):** https://blackfriday.pratagy.com.br/listavip2026/cadastro-concluido.html
+  (é para esta URL, sem o `?ts=`, que o formulário da SharpSpring deve redirecionar)
 
 O endereço antigo não é uma cópia da página: a Omnibees criou ali um aviso de redirecionamento
 (`<meta http-equiv="refresh">`) quando a página mudou de endereço. Ele não tem o nosso código e não precisa ser
@@ -63,7 +65,8 @@ Mesmo processo da landing, numa página separada da Omnibees:
 5. Nas configurações da página, defina o título "Cadastro Concluído | Black Friday Pratagy 2026" e, se houver a opção,
    deixe a página fora dos buscadores (noindex). O nosso `<meta name="robots">` já pede isso.
 6. **Depois de publicar, atualize o redirecionamento da SharpSpring** para a URL pública da página de obrigado na
-   Omnibees, não para a da Vercel. Fica em **SharpSpring → Forms → BFP 26 → Configurações → Página de Obrigado**.
+   Omnibees, `https://blackfriday.pratagy.com.br/listavip2026/cadastro-concluido.html`, e não para a da Vercel.
+   Fica em **SharpSpring → Forms → BFP 26 → Configurações → Página de Obrigado**.
    Depois, faça um cadastro de teste e confira se o redirecionamento abre a página certa.
 
 O link "Voltar para a página inicial" aponta para a landing oficial na Omnibees
@@ -136,6 +139,35 @@ O script confere três coisas:
 
 Ele também segue o redirecionamento de endereços antigos. Termina com "Tudo certo" (código 0) ou lista o que
 está diferente (código 1). O navegador pode ser indicado na variável `CHROME`.
+
+### Cache da Omnibees (1 hora)
+
+A Omnibees entrega as páginas com `Cache-Control: public, max-age=3600`. Isso autoriza o **navegador** de quem já
+visitou a página a reaproveitar a cópia guardada por até 1 hora. O servidor em si não fica com a versão antiga:
+a página fica guardada no Google Cloud Storage, e cada requisição já recebe a versão salva mais recente.
+
+Consequências:
+- **A conferência não sofre com o cache.** O script baixa a página direto do servidor e abre um navegador sem
+  histórico, então ele sempre vê a versão publicada mais recente. Se ele mostrar o código antigo, a publicação ainda
+  não terminou ou não foi salva. Confira no editor e rode de novo depois de alguns minutos.
+- **No seu navegador**, a versão antiga pode aparecer por até 1 hora. Para ver a nova na hora, use uma das opções:
+  - recarregamento forçado: `Ctrl+Shift+R`, ou `Cmd+Shift+R` no Mac;
+  - uma janela anônima;
+  - um parâmetro qualquer no fim da URL, como `?v=2`. O `?ts=` dos links de pré-visualização da Omnibees faz
+    exatamente isso. Como o navegador trata URL com parâmetro como outro endereço, ele baixa de novo.
+- **Para os visitantes não há como forçar** a atualização. Quem abriu a página na última hora pode continuar vendo
+  a versão anterior até o cache do navegador vencer. Por isso, publique correções o quanto antes e espere até
+  1 hora antes de concluir que "ainda tem gente vendo o erro".
+
+Para saber **quando** a versão no ar foi salva, veja o cabeçalho `x-goog-generation`. Ele traz o horário da gravação
+em microssegundos desde 1970:
+
+```
+curl -sI https://blackfriday.pratagy.com.br/listavip2026/ | grep -i x-goog-generation
+```
+
+Os 10 primeiros dígitos são os segundos. Converta com `date -u -d @<10 dígitos>`, ou num conversor de
+"Unix timestamp".
 
 ## Formulário (SharpSpring)
 
